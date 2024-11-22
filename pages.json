@@ -5,13 +5,66 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path" : "pages/master/master",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/record/record",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/pet/pet",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
+	 "tabBar": {
+	    "color": "#7A7E83",                  // 未选中时文字和图标颜色
+	    "selectedColor": "#3cc51f",          // 选中时文字和图标颜色
+	    "backgroundColor": "#ffffff",        // Tab栏背景色
+	    "borderStyle": "black",              // Tab栏顶部边框颜色，可选值："black" | "white"
+	    "list": [
+	      {
+	        "pagePath": "pages/index/index",
+	        "text": "首页",
+	        "iconPath": "static/tabbar/home1.png",
+	        "selectedIconPath": "static/tabbar/home2.png"
+	      },
+	      {
+	        "pagePath": "pages/pet/pet",
+	        "text": "宠物圈",
+	        "iconPath": "static/tabbar/pet1.png",
+	        "selectedIconPath": "static/tabbar/pet2.png"
+	      },
+	      {
+	        "pagePath": "pages/record/record",
+	        "text": "记录",
+	        "iconPath": "static/tabbar/record.png",
+	        "selectedIconPath": "static/tabbar/record2.png"
+	      },
+		  {
+		    "pagePath": "pages/master/master",
+		    "text": "铲屎官",
+		    "iconPath": "static/tabbar/master1.png",
+		    "selectedIconPath": "static/tabbar/master2.png"
+		  }
+	    ]
+	  },
 	"uniIdRouter": {}
 }

@@ -1,26 +1,39 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+
 	</view>
 </template>
 
 <script>
+	// 根据实际路径引入
+	import api from "../../src/api/homeApi.js"
 	export default {
 		data() {
 			return {
-				title: 'Hello'
-			}
+				title: 'Hello',
+				petDetail: null
+			};
 		},
 		onLoad() {
-
+			this.fetchPetDetail();
 		},
 		methods: {
-
+			fetchPetDetail() {
+				api.getPetDetail()
+					.then(data => {
+						console.log(data, '000000000000');
+						this.petDetail = data; // 将获取到的数据赋值给 petDetail
+					})
+					.catch(err => {
+						console.error('请求失败', err);
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none',
+						});
+					});
+			},
 		}
-	}
+	};
 </script>
 
 <style>
@@ -29,24 +42,5 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
 	}
 </style>
