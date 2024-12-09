@@ -21,7 +21,31 @@
   "libVersion": "3.6.5",
   "appid": "wx4a828b6b16b51e9b",
   "projectname": "PetDaily",
-  "condition": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 0,
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/firstPage/firstPage",
+          "pathName": "pages/firstPage/firstPage",
+          "query": ""
+        }
+      ]
+    }
+  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

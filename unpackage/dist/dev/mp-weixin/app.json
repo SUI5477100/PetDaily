@@ -3,25 +3,27 @@
     "pages/index/index",
     "pages/master/master",
     "pages/record/record",
-    "pages/pet/pet"
+    "pages/pet/pet",
+    "pages/firstPage/firstPage",
+    "pages/index/components/petInfo"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#ffd94f",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
+    "fontSize": "50rpx",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/tabbar/home1.png",
+        "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home2.png"
       },
       {

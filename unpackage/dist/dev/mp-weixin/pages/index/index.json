@@ -1,4 +1,7 @@
 {
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "pet-info": "/pages/index/components/petInfo"
+  }
 }
