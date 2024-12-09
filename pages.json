@@ -1,5 +1,10 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [{
+			"path": "pages/record/record",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -14,12 +19,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/record/record",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
+
 		{
 			"path": "pages/pet/pet",
 			"style": {
@@ -37,6 +37,13 @@
 			"path": "pages/index/components/petInfo",
 			"style": {
 				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path" : "pages/record/components/circle/circle",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
 			}
 		}
 	],

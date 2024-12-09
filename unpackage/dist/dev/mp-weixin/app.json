@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/record/record",
     "pages/index/index",
     "pages/master/master",
-    "pages/record/record",
     "pages/pet/pet",
     "pages/firstPage/firstPage",
-    "pages/index/components/petInfo"
+    "pages/index/components/petInfo",
+    "pages/record/components/circle/circle"
   ],
   "subPackages": [],
   "window": {

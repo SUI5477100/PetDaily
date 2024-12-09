@@ -1,0 +1,22 @@
+
+.content.data-v-649f144b {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: #000 4rpx solid;
+}
+.content.active.data-v-649f144b {
+  background-color: #ffeb3b; /* 激活时的背景颜色 */
+}
+.circle.data-v-649f144b {
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 100rpx;
+  background-color: #fff1b4;
+  border: #000 4rpx solid;
+}
+

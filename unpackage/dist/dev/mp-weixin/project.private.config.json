@@ -3,23 +3,5 @@
   "projectname": "PetDaily",
   "setting": {
     "compileHotReLoad": true
-  },
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/index/components/petInfo",
-          "pathName": "pages/index/components/petInfo",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/firstPage/firstPage",
-          "pathName": "pages/firstPage/firstPage",
-          "query": ""
-        }
-      ]
-    }
   }
 }

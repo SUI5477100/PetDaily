@@ -1,4 +1,6 @@
 {
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "circle": "/pages/record/components/circle/circle"
+  }
 }
