@@ -6,12 +6,13 @@
 				<view class="record">
 					<circle :active="activeSlot===1" @click="setActive(1)">提醒</circle>
 				</view>
-
 				<view class="record">
 					<circle :active="activeSlot===2" @click="setActive(2)">记录</circle>
 				</view>
 			</view>
+			<view class="rili">
 
+			</view>
 		</view>
 
 
@@ -61,9 +62,11 @@
 
 	.main {
 		display: flex;
+		flex-direction: column;
 		width: 90%;
-		height: 10vh;
-		justify-content: center;
+		height: 100vh;
+		align-items: center;
+		/* justify-content: center; */
 		/* background-color: salmon; */
 	}
 
@@ -72,6 +75,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 90%;
+		height: 10vh;
 		/* background-color: #fff; */
 	}
 
@@ -80,5 +84,13 @@
 		width: 40%;
 		border-radius: 100rpx;
 		height: 50%;
+	}
+
+	.rili {
+		width: 90%;
+		height: 40vh;
+		border: #000 4rpx solid;
+		border-radius: 25rpx;
+		background-color: #fff;
 	}
 </style>

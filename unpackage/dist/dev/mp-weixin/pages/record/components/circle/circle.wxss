@@ -1,22 +1,59 @@
 
 .content.data-v-649f144b {
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  border-radius: 100rpx;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: #000 4rpx solid;
+	position: relative;
+	background-color: #fff;
+	width: 100%;
+	height: 100%;
+	border-radius: 100rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: #000 4rpx solid;
 }
 .content.active.data-v-649f144b {
-  background-color: #ffeb3b; /* 激活时的背景颜色 */
+	background-color: #ffeb3b;
+	/* 激活时的背景颜色 */
 }
-.circle.data-v-649f144b {
-  width: 15rpx;
-  height: 15rpx;
-  border-radius: 100rpx;
-  background-color: #fff1b4;
-  border: #000 4rpx solid;
+.circle1.data-v-649f144b {
+	position: absolute;
+	top: 30%;
+	left: 8%;
+	width: 18rpx;
+	height: 18rpx;
+	border-radius: 100rpx;
+	background-color: #fff1b4;
+	border: #000 4rpx solid;
+}
+.circle2.data-v-649f144b {
+	position: absolute;
+	top: 30%;
+	right: 8%;
+	width: 18rpx;
+	height: 18rpx;
+	border-radius: 100rpx;
+	background-color: #fff1b4;
+	border: #000 4rpx solid;
+}
+.rectangle1.data-v-649f144b {
+	position: absolute;
+	top: 28%;
+	border-radius: 30rpx;
+	left: 10%;
+	width: 4px;
+	height: 110rpx;
+	background-color: #fff1b4;
+	border: #000 4rpx solid;
+	margin-top: 10rpx;
+}
+.rectangle2.data-v-649f144b {
+	position: absolute;
+	top: 28%;
+	border-radius: 30rpx;
+	right: 10%;
+	width: 4px;
+	height: 110rpx;
+	background-color: #fff1b4;
+	border: #000 4rpx solid;
+	margin-top: 10rpx;
 }
 
