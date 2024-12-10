@@ -1,0 +1,44 @@
+.record-items.data-v-c797d76a {
+  width: 100%;
+  height: 100rpx;
+  border: #000 4rpx solid;
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 15rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.record-items.data-v-c797d76a:active {
+  background-color: #f4f4f4;
+}
+.items-left.data-v-c797d76a {
+  display: flex;
+  align-items: center;
+}
+.icon.data-v-c797d76a {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.right-icon.data-v-c797d76a {
+  margin-right: 25rpx;
+}
+.record-book.data-v-c797d76a {
+  width: 100%;
+  height: 100rpx;
+  margin-top: 30rpx;
+  border: #000 4rpx solid;
+  background-color: #ffd553;
+  border-radius: 100rpx;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 34rpx;
+  align-items: center;
+}
+.record-book.data-v-c797d76a:active {
+  background-color: #eac34c;
+}
+

@@ -63,7 +63,7 @@
 	};
 </script>
 
-<style less scoped>
+<style scoped lang="less">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -75,15 +75,15 @@
 
 
 	.introduce {
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  width: 100%;
-	  height: 20vh;
-	  background-color: #fff;
-	  border-radius: 15px;
-	  border: #000 4rpx solid;
-	  box-shadow: 5rpx 8rpx 15rpx -5rpx #ffeb3b;  
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 20vh;
+		background-color: #fff;
+		border-radius: 15px;
+		border: #000 4rpx solid;
+		box-shadow: 5rpx 8rpx 15rpx -5rpx #ffeb3b;
 	}
 
 
@@ -133,6 +133,12 @@
 		justify-content: center;
 		align-items: center;
 	}
+
+	.edit:active {
+		box-shadow: 0 0 10rpx 5rpx #d8d8d8;
+		/* 水平偏移0，垂直偏移0，模糊半径10rpx，扩展半径5rpx，*/
+	}
+
 
 	.pet-detail {
 		height: 70%;

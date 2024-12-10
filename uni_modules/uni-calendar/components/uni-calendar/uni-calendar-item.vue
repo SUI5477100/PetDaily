@@ -6,8 +6,7 @@
 		'uni-calendar-item--before-checked':weeks.beforeMultiple,
 		'uni-calendar-item--multiple': weeks.multiple,
 		'uni-calendar-item--after-checked':weeks.afterMultiple,
-		}"
-	 @click="choiceDate(weeks)">
+		}" @click="choiceDate(weeks)">
 		<view class="uni-calendar-item__weeks-box-item">
 			<text v-if="selected&&weeks.extraInfo" class="uni-calendar-item__weeks-box-circle"></text>
 			<text class="uni-calendar-item__weeks-box-text" :class="{
@@ -51,12 +50,16 @@
 </template>
 
 <script>
-	import { initVueI18n } from '@dcloudio/uni-i18n'
+	import {
+		initVueI18n
+	} from '@dcloudio/uni-i18n'
 	import i18nMessages from './i18n/index.js'
-	const {	t	} = initVueI18n(i18nMessages)
+	const {
+		t
+	} = initVueI18n(i18nMessages)
 
 	export default {
-		emits:['change'],
+		emits: ['change'],
 		props: {
 			weeks: {
 				type: Object,
@@ -83,7 +86,7 @@
 		},
 		computed: {
 			todayText() {
-				return t("uni-calender.today")
+				// return t("uni-calender.today")
 			},
 		},
 		methods: {
@@ -95,13 +98,14 @@
 </script>
 
 <style lang="scss" scoped>
-	$uni-font-size-base:14px;
-	$uni-text-color:#333;
-	$uni-font-size-sm:12px;
+	$uni-font-size-base: 14px;
+	$uni-text-color: #333;
+	$uni-font-size-sm: 12px;
 	$uni-color-error: #e43d33;
 	$uni-opacity-disabled: 0.3;
-	$uni-text-color-disable:#c0c0c0;
-	$uni-primary: #2979ff !default;
+	$uni-text-color-disable: #c0c0c0;
+	$uni-primary: #ffca28 !default;
+
 	.uni-calendar-item__weeks-box {
 		flex: 1;
 		/* #ifndef APP-NVUE */
@@ -130,8 +134,9 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 100rpx;
-		height: 100rpx;
+		// border-radius: 15rpx;
+		width: 80rpx;
+		height: 80rpx;
 	}
 
 	.uni-calendar-item__weeks-box-circle {
@@ -157,6 +162,7 @@
 	.uni-calendar-item--isDay {
 		background-color: $uni-primary;
 		opacity: 0.8;
+		border-radius: 15rpx;
 		color: #fff;
 	}
 
@@ -167,6 +173,7 @@
 
 	.uni-calendar-item--checked {
 		background-color: $uni-primary;
+		border-radius: 15rpx;
 		color: #fff;
 		opacity: 0.8;
 	}
@@ -176,10 +183,12 @@
 		color: #fff;
 		opacity: 0.8;
 	}
+
 	.uni-calendar-item--before-checked {
 		background-color: #ff5a5f;
 		color: #fff;
 	}
+
 	.uni-calendar-item--after-checked {
 		background-color: #ff5a5f;
 		color: #fff;

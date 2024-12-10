@@ -101,7 +101,7 @@
 	};
 </script>
 
-<style less scoped>
+<style scoped lang="less">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -242,14 +242,12 @@
 	.knowledge-detail {
 		margin-left: 20rpx;
 		width: 56%;
-		/* background-color: #f4f4f4; */
 		height: 60%;
 		font-size: 28rpx;
 	}
 
 	.knowledge-img {
 		position: absolute;
-		/* background-color: #f4f4f4; */
 		right: -5%;
 		bottom: -5%;
 		width: 40%;
@@ -258,7 +256,6 @@
 	}
 	.knowledge-img-sun{
 		position: absolute;
-		/* background-color: #f4f4f4; */
 		border-radius: 100rpx;
 		right: -8%;
 		top: 6%;

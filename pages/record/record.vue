@@ -4,48 +4,70 @@
 		<view class="main">
 			<view class="button">
 				<view class="record">
-					<circle :active="activeSlot===1" @click="setActive(1)">提醒</circle>
+					<circle :active="activeSlot===1" @click="setActive(1)">记录</circle>
 				</view>
 				<view class="record">
-					<circle :active="activeSlot===2" @click="setActive(2)">记录</circle>
+					<circle :active="activeSlot===2" @click="setActive(2)">提醒</circle>
 				</view>
 			</view>
 			<view class="rili">
-
+				<uni-calendar class="uni-calendar--hook" :selected="info.selected" :showMonth="false" @change="change"
+					@monthSwitch="monthSwitch" />
+			</view>
+			<view v-show="activeSlot===1" class="record-items">
+				<recordItems></recordItems>
+			</view>
+			<view v-show="activeSlot===2" class="tips-items">
+				<tipsItems></tipsItems>
 			</view>
 		</view>
-
-
-
 	</view>
 </template>
 
 <script>
-	import circle from './components/circle/circle.vue'
+	import circle from './components/circle.vue'
+	import recordItems from './components/recordItems.vue'
+	import tipsItems from './components/tipsItems.vue'
 	export default {
 		components: {
-			circle
+			circle,
+			recordItems,
+			tipsItems
 		},
 		data() {
 			return {
-				activeSlot: 1 // 用于记录当前激活的插槽
+				activeSlot: 1,
+				info: {
+					selected: []
+				}
 			}
 		},
 		methods: {
-
 			setActive(slot) {
 				// 切换激活插槽，保证不能同时激活两个插槽
 				if (this.activeSlot === slot) {
-					this.activeSlot = null; // 如果点击同一个插槽，取消激活
+					this.activeSlot = this.activeSlot;
 				} else {
 					this.activeSlot = slot;
 				}
+			},
+			change(e) {
+				console.log('change 返回:', e)
+				// 模拟动态打卡
+				if (this.info.selected.length > 5) return
+				this.info.selected.push({
+					date: e.fulldate,
+					// info: '打卡'
+				})
+			},
+			monthSwitch(e) {
+				console.log('monthSwitchs 返回:', e)
 			}
 		}
 	}
 </script>
 
-<style less scoped>
+<style scoped lang="less">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -54,9 +76,10 @@
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
+		background-color: #fffce0;
 		padding-top: 15%;
 		width: 100%;
-		height: 100vh;
+		height: 140vh;
 
 	}
 
@@ -66,8 +89,6 @@
 		width: 90%;
 		height: 100vh;
 		align-items: center;
-		/* justify-content: center; */
-		/* background-color: salmon; */
 	}
 
 	.button {
@@ -75,22 +96,21 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 90%;
-		height: 10vh;
-		/* background-color: #fff; */
 	}
 
 	.record {
-		/* background-color: #30fcff; */
 		width: 40%;
 		border-radius: 100rpx;
-		height: 50%;
+		height: 5vh;
+		margin-bottom: 2vh;
 	}
 
 	.rili {
-		width: 90%;
-		height: 40vh;
-		border: #000 4rpx solid;
-		border-radius: 25rpx;
-		background-color: #fff;
+		width: 100%;
+		margin-bottom: 20rpx;
+	}
+
+	.record-items {
+		width: 100%;
 	}
 </style>

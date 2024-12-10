@@ -6,7 +6,9 @@
     "pages/pet/pet",
     "pages/firstPage/firstPage",
     "pages/index/components/petInfo",
-    "pages/record/components/circle/circle"
+    "pages/record/components/circle",
+    "pages/record/components/recordItems",
+    "pages/record/components/tipsItems"
   ],
   "subPackages": [],
   "window": {
@@ -16,10 +18,9 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#ffd94f",
+    "selectedColor": "#ffa15e",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
-    "fontSize": "50rpx",
     "list": [
       {
         "pagePath": "pages/index/index",

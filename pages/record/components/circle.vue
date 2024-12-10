@@ -2,15 +2,21 @@
 	<view class="content" :class="{ active: active }" @click="handleClick">
 		<slot></slot>
 		<view class="circle">
-			<view class="circle1"></view>
-			<view class="circle2"></view>
+			<view class="circleActive circle1"></view>
+			<view class="circleActive circle2"></view>
 		</view>
-		<view class="bc">
+
+		<view class="bc" v-if="active">
 			<view class="rectangle1"></view>
 			<view class="rectangle2"></view>
 		</view>
+		<view class="circle" v-if="active">
+			<view class="circleActive circle3"></view>
+			<view class="circleActive circle4"></view>
+		</view>
 	</view>
 </template>
+
 <script>
 	export default {
 		props: {
@@ -21,14 +27,14 @@
 		},
 		methods: {
 			handleClick() {
-				// 触发父组件的事件，通知父组件切换插槽
+				// 触发父组件的事件，通知父组件切换 active 状态
 				this.$emit('click');
 			}
 		}
 	};
 </script>
 
-<style scoped>
+<style scoped lang="less">
 	.content {
 		position: relative;
 		background-color: #fff;
@@ -39,57 +45,87 @@
 		justify-content: center;
 		align-items: center;
 		border: #000 4rpx solid;
+		transition: background-color 0.5s ease;
 	}
 
 	.content.active {
 		background-color: #ffeb3b;
-		/* 激活时的背景颜色 */
+	}
+
+	.circleActive {
+		position: absolute;
+		width: 18rpx;
+		height: 18rpx;
+		border-radius: 100rpx;
+		background-color: #fff1b4;
+		border: #000 4rpx solid;
 	}
 
 	.circle1 {
-		position: absolute;
 		top: 30%;
 		left: 8%;
-		width: 18rpx;
-		height: 18rpx;
-		border-radius: 100rpx;
-		background-color: #fff1b4;
-		border: #000 4rpx solid;
 	}
 
-
 	.circle2 {
-		position: absolute;
 		top: 30%;
 		right: 8%;
-		width: 18rpx;
-		height: 18rpx;
-		border-radius: 100rpx;
+	}
+
+	.bc {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.rectangle1,
+	.rectangle2 {
+		width: 4px;
+		height: 105rpx;
 		background-color: #fff1b4;
 		border: #000 4rpx solid;
+		border-radius: 30rpx;
+		margin-top: 10rpx;
+		
+	}
+
+	.bc {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.rectangle1,
+	.rectangle2 {
+		width: 4px;
+		height: 7vh;
+		background-color: #fff1b4;
+		border: #000 4rpx solid;
+		border-radius: 30rpx;
+		margin-top: 10rpx;
+		z-index: 10;
+		
+	}
+
+	.circle3 {
+		top: calc(30% + 7vh);
+		left: 8%;
+
+	}
+
+	.circle4 {
+		top: calc(30% + 7vh);
+		right: 8%;
 	}
 
 	.rectangle1 {
 		position: absolute;
 		top: 28%;
-		border-radius: 30rpx;
 		left: 10%;
-		width: 4px;
-		height: 110rpx;
-		background-color: #fff1b4;
-		border: #000 4rpx solid;
-		margin-top: 10rpx;
 	}
 
 	.rectangle2 {
 		position: absolute;
 		top: 28%;
-		border-radius: 30rpx;
 		right: 10%;
-		width: 4px;
-		height: 110rpx;
-		background-color: #fff1b4;
-		border: #000 4rpx solid;
-		margin-top: 10rpx;
 	}
 </style>

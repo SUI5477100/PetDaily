@@ -422,6 +422,11 @@
 	}
 
 	.uni-calendar__content {
+		border: #000000 4rpx solid;
+		// margin: 20rpx;
+		padding-bottom: 20rpx;
+		padding-top: 20rpx;
+		border-radius: 20rpx;
 		background-color: #fff;
 	}
 
@@ -431,6 +436,8 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
+		margin-top: 20rpx;
+		
 		justify-content: center;
 		align-items: center;
 		height: 50px;
@@ -457,7 +464,7 @@
 	.uni-calendar__backtoday {
 		position: absolute;
 		right: 0;
-		top: 25rpx;
+		top: 30rpx;
 		padding: 0 5px;
 		padding-left: 10px;
 		height: 25px;
@@ -517,6 +524,10 @@
 
 	.uni-calendar__weeks-item {
 		flex: 1;
+		// // margin: 15rpx;
+		padding: 5rpx;
+		width: 80rpx;
+		height: 80rpx;
 	}
 
 	.uni-calendar__weeks-day {
