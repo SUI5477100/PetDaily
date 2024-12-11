@@ -1,6 +1,6 @@
 <template>
-	<view>
-		
+	<view class="content">
+
 	</view>
 </template>
 
@@ -8,15 +8,28 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		methods: {
-			
+
 		}
 	}
 </script>
 
-<style>
+<style scoped lang="less">
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-image: url('../../static/background.png');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-color: #fffce0;
+		padding-top: 15%;
+		width: 100%;
+		// height: 140vh;
 
+	}
 </style>

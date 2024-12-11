@@ -1,6 +1,5 @@
 {
   "navigationStyle": "custom",
-  "backgroundColor": "#fffce0",
   "usingComponents": {
     "uni-calendar": "/uni_modules/uni-calendar/components/uni-calendar/uni-calendar",
     "circle": "/pages/record/components/circle",

@@ -1,6 +1,7 @@
 <template>
 	<view class="content">
 		<!-- 记录 -->
+		<!-- 当activeSlot=1的时候联调记录的接口，当activeSlot=2的时候联调提醒的接口，就可以做到切换日历 -->
 		<view class="main">
 			<view class="button">
 				<view class="record">
@@ -17,7 +18,7 @@
 			<view v-show="activeSlot===1" class="record-items">
 				<recordItems></recordItems>
 			</view>
-			<view v-show="activeSlot===2" class="tips-items">
+			<view v-show="activeSlot===2" class="record-items">
 				<tipsItems></tipsItems>
 			</view>
 		</view>
@@ -79,7 +80,7 @@
 		background-color: #fffce0;
 		padding-top: 15%;
 		width: 100%;
-		height: 140vh;
+		// height: 140vh;
 
 	}
 
@@ -87,7 +88,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 90%;
-		height: 100vh;
+		// height: 100vh;
 		align-items: center;
 	}
 

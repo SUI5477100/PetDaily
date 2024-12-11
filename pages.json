@@ -1,9 +1,14 @@
 {
 	"pages": [{
+			"path": "pages/master/master",
+			"style": {
+
+				"navigationStyle": "custom"
+			}
+		}, {
 			"path": "pages/record/record",
 			"style": {
-				"navigationStyle": "custom",
-				"backgroundColor": "#fffce0"
+				"navigationStyle": "custom"
 			}
 		}, //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
@@ -13,13 +18,7 @@
 				"disableScroll": true
 			}
 		},
-		{
-			"path": "pages/master/master",
-			"style": {
 
-				"navigationStyle": "custom"
-			}
-		},
 
 		{
 			"path": "pages/pet/pet",
@@ -41,24 +40,21 @@
 			}
 		},
 		{
-			"path" : "pages/record/components/circle",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/components/circle",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/components/recordItems",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/components/recordItems",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/components/tipsItems",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/components/tipsItems",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
 	],
@@ -66,7 +62,7 @@
 		"navigationBarTextStyle": "black",
 
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#fffce0"
 	},
 	"tabBar": {
 		"color": "#7A7E83", // 未选中时文字和图标颜色
