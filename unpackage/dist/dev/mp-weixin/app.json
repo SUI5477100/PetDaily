@@ -8,7 +8,9 @@
     "pages/index/components/petInfo",
     "pages/record/components/circle",
     "pages/record/components/recordItems",
-    "pages/record/components/tipsItems"
+    "pages/record/components/tipsItems",
+    "pages/record/components/textPost",
+    "pages/record/components/picturesTextPost"
   ],
   "subPackages": [],
   "window": {
