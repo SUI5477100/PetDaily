@@ -1,6 +1,6 @@
 <template>
   <view>
-    <image src="../../static/firstPage.png" mode="aspectFill" class="background-image"></image>
+    <image src="https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/firstPage.png" mode="aspectFill" class="background-image"></image>
   </view>
 </template>
 

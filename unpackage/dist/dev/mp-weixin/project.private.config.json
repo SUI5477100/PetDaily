@@ -3,5 +3,18 @@
   "projectname": "PetDaily",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/record/components/textPost",
+          "pathName": "pages/record/components/textPost",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

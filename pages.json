@@ -61,7 +61,8 @@
 			"path" : "pages/record/components/textPost",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "添加提醒",
+				"navigationBarBackgroundColor": "#ffea9c"
 			}
 		},
 		{

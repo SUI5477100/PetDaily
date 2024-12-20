@@ -1,0 +1,81 @@
+.content.data-v-0c959a7e {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fffce0;
+  padding-top: 5%;
+  width: 100%;
+  height: 100vh;
+}
+.img.data-v-0c959a7e {
+  position: absolute;
+  height: 40vh;
+  bottom: 20%;
+  left: -20%;
+}
+.img2.data-v-0c959a7e {
+  position: absolute;
+  height: 40vh;
+  right: -20%;
+  z-index: 10000;
+}
+.data-v-0c959a7e .is-input-border {
+  width: 90%;
+  margin: 5%;
+  border: #000 4rpx solid !important;
+  height: 20vh;
+  border-radius: 20rpx;
+}
+.data-v-0c959a7e .uni-easyinput__content-textarea {
+  height: 17vh;
+}
+.data-v-0c959a7e .uni-easyinput {
+  flex: 0;
+}
+.button-text.data-v-0c959a7e {
+  border-radius: 20rpx;
+  background-color: #fff;
+  display: flex;
+  margin-bottom: 30rpx;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  border: #000 4rpx solid;
+  height: 8vh;
+}
+.button-text.data-v-0c959a7e:active {
+  background-color: #f1f1f1;
+}
+.button-add.data-v-0c959a7e {
+  border-radius: 50rpx;
+  background-color: #fff;
+  display: flex;
+  margin-bottom: 30rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffeb3b;
+  width: 80%;
+  border: #000 4rpx solid;
+  height: 6vh;
+  z-index: 10;
+}
+.data-v-0c959a7e .popup-content {
+  position: relative;
+  padding-top: 40rpx;
+  height: 35vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.center.data-v-0c959a7e {
+  margin-right: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
