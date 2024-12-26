@@ -8,8 +8,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/record/components/textPost",
-          "pathName": "pages/record/components/textPost",
+          "name": "pages/record/components/picturesTextPost",
+          "pathName": "pages/record/components/picturesTextPost",
           "query": "",
           "launchMode": "default",
           "scene": null

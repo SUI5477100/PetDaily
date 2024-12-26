@@ -101,19 +101,22 @@ var components
 try {
   components = {
     uniEasyinput: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 140))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 142))
     },
     uniPopup: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 147))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 149))
     },
     uniSection: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-section/components/uni-section/uni-section */ "uni_modules/uni-section/components/uni-section/uni-section").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-section/components/uni-section/uni-section.vue */ 154))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-section/components/uni-section/uni-section */ "uni_modules/uni-section/components/uni-section/uni-section").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-section/components/uni-section/uni-section.vue */ 156))
     },
     uniList: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list/uni-list */ "uni_modules/uni-list/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list/uni-list.vue */ 161))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list/uni-list */ "uni_modules/uni-list/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list/uni-list.vue */ 163))
     },
     uniListItem: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list-item/uni-list-item */ "uni_modules/uni-list/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue */ 168))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list-item/uni-list-item */ "uni_modules/uni-list/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue */ 170))
+    },
+    uniIndexedList: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list */ "uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list.vue */ 177))
     },
   }
 } catch (e) {
@@ -228,20 +231,86 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
-      record: ''
+      record: '',
+      remind: '',
+      time: '12:01',
+      minTime: '09:01',
+      maxTime: "21:01",
+      list: [{
+        letter: '',
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }],
+      selectedDays: [] // 用于存储选中的天数
     };
   },
+
   methods: {
+    picker3: function picker3(e) {
+      this.time = e.detail.value;
+    },
     toggle: function toggle(type) {
       this.type = type;
-      // open 方法传入参数 等同在 uni-popup 组件上绑定 type属性
       this.$refs.popup.open(type);
     },
+    toggleRemind: function toggleRemind(type) {
+      this.type = type;
+      this.$refs.popupRemind.open(type);
+    },
+    bindClick: function bindClick(e) {
+      console.log('点击item，返回数据' + JSON.stringify(e));
+      var day = e.item.name; // 获取点击的天数
+      var index = this.selectedDays.indexOf(day);
+      console.log(this.selectedDays, e.item, '8888');
+      if (index === -1) {
+        this.selectedDays.push(day); // 如果没有选中，则添加
+      } else {
+        this.selectedDays.splice(index, 1); // 如果已经选中，则移除
+      }
+
+      // 判断是否选中了所有的星期
+      if (this.selectedDays.length === 7) {
+        this.remind = '每天'; // 如果选中了所有的星期，显示'每天'
+      } else {
+        // console.log(this.selectedDays, '9999')
+        this.remind = this.selectedDays.join(', '); // 否则显示选中的天数
+        // console.log(this.remind, '0000')
+      }
+    },
+    closePopup: function closePopup() {
+      this.$refs.popupRemind.close();
+    },
     change: function change(e) {
-      console.log('当前模式：' + e.type + ',状态：' + e.show);
+      console.log('当前模式(重复)：' + e.type + ',状态：' + e.show);
     },
     onClick: function onClick(e) {
       console.log('执行click事件', e);

@@ -130,7 +130,8 @@
 						'border-width': width,
 						'border-style': (border && border.style) || 'solid',
 						'border-color': (border && border.color) || '#eee',
-						'border-radius': radius
+						'border-radius': radius,
+						'background-color': '#fff',
 					}
 				}
 				let classles = ''
