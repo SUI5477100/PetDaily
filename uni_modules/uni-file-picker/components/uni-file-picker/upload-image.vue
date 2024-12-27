@@ -132,8 +132,8 @@
 						'border-color': (border && border.color) || '#eee',
 						'border-radius': radius,
 						'background-color': '#fff',
-					}
-				}
+					}  
+				} 
 				let classles = ''
 				for(let i in obj){
 					classles+= `${i}:${obj[i]};`
@@ -208,7 +208,7 @@
 		bottom: 0;
 		left: 0;
 		margin: 5px;
-		border: 1px #eee solid;
+		border: 1px #fffce0 solid;
 		border-radius: 5px;
 		overflow: hidden;
 	}

@@ -12,5 +12,9 @@
     "axios": "^1.7.7",
     "mockjs": "^1.1.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.83.0",
+    "sass-loader": "^16.0.4"
+  }
 }

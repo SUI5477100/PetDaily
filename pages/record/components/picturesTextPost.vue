@@ -1,11 +1,16 @@
 <template>
 	<view class="content">
 		<img src="../../../static/cat.png" alt="" class="img" />
-		<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容" class="input"
-			placeholderStyle="font-size: 32rpx"></uni-easyinput>
 		<view class="button-text w90">
-			<uni-file-picker :key="fileKey" ref="imageContainer" :image-styles="imageStyles"
-				mode="grid"></uni-file-picker>
+			<view style="margin: 30rpx;font-size: 36rpx;font-weight: 600;">
+				描述
+			</view>
+			<uni-easyinput type="textarea" v-model="value" placeholder="记录小宠的生活吧~"
+				placeholderStyle="font-size: 32rpx"></uni-easyinput>
+			<view class="button-text m10">
+				<uni-file-picker :key="fileKey":image-styles="imageStyles"
+					mode="grid"></uni-file-picker>
+			</view>
 		</view>
 		<view class="button-add">
 			保存
@@ -18,27 +23,19 @@
 		data() {
 			return {
 				fileKey: 0,
-				// imageStyles: {
-				// 	border: {
-				// 		color: "#000",
-				// 		width: 2,
-				// 		radius: '20rpx',
+				imageStyles: {
+					border: {
+						color: "#f1f1f1",
+						width: 2,
+						radius: '20rpx',
 
-				// 	},
-				// }
+					},
+				}
 
 			}
 		},
 		methods: {
-			removeImage() {
-			 // 获取需要重绘的元素
-			    const element = this.$refs.imageContainer;
-			    
-			    // 强制触发浏览器的重绘
-			    element.style.display = 'none';
-			    element.offsetHeight; // 读取属性强制重绘
-			    element.style.display = ''; // 恢复显示
-			}
+			
 		}
 	}
 </script>
@@ -67,10 +64,14 @@
 		left: -20%;
 	}
 
+	.m10 {
+		margin: 20rpx;
+	}
+
 	/deep/.is-input-border {
-		width: 90%;
-		margin: 5%;
-		border: #000 4rpx solid !important;
+		width: 100%;
+		// margin: 5%;
+		border: #fff 2rpx solid !important;
 		height: 20vh;
 		border-radius: 20rpx;
 	}
@@ -85,9 +86,11 @@
 
 	.button-text {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
+		flex-direction: column;
+		// justify-content: space-between;
+		// align-items: center;
+		border-radius: 40rpx;
+		background-color: #fff
 	}
 
 	.w90 {
