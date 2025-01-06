@@ -35,8 +35,29 @@
       "list": []
     },
     "miniprogram": {
-      "current": -1,
-      "list": []
+      "current": 0,
+      "list": [
+        {
+          "name": "首页",
+          "id": 0,
+          "pathName": "pages/index/index"
+        },
+        {
+          "name": "宠物圈",
+          "id": 1,
+          "pathName": "pages/pet/pet"
+        },
+        {
+          "name": "记录",
+          "id": 2,
+          "pathName": "pages/record/record"
+        },
+        {
+          "name": "铲屎官",
+          "id": 3,
+          "pathName": "pages/master/master"
+        }
+      ]
     }
   },
   "editorSetting": {

@@ -10,7 +10,11 @@
     "pages/record/components/recordItems",
     "pages/record/components/tipsItems",
     "pages/record/components/textPost",
-    "pages/record/components/picturesTextPost"
+    "pages/record/components/picturesTextPost",
+    "pages/petInfo/petInfo",
+    "pages/record/recordItems/diet",
+    "pages/record/recordItems/logbook",
+    "pages/record/recordItems/addRecord"
   ],
   "subPackages": [],
   "window": {

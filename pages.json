@@ -2,8 +2,10 @@
 	"pages": [{
 			"path": "pages/master/master",
 			"style": {
-
-				"navigationStyle": "custom"
+				"navigationBarBackgroundColor": "#ffeeac",
+				"disableScroll": true
+				// "navigationBarTitleText": "铲屎官"
+				// "navigationStyle": "custom"
 			}
 		}, {
 			"path": "pages/record/record",
@@ -58,18 +60,47 @@
 			}
 		},
 		{
-			"path" : "pages/record/components/textPost",
-			"style" : 
-			{
-				"navigationBarTitleText" : "添加提醒",
+			"path": "pages/record/components/textPost",
+			"style": {
+				"navigationBarTitleText": "添加提醒",
 				"navigationBarBackgroundColor": "#ffea9c"
 			}
 		},
 		{
-			"path" : "pages/record/components/picturesTextPost",
+			"path": "pages/record/components/picturesTextPost",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/petInfo/petInfo",
+			"style": {
+				"navigationBarBackgroundColor": "#ffeb9e",
+				"disableScroll": true
+			}
+		},
+		{
+			"path" : "pages/record/recordItems/diet",
 			"style" : 
 			{
 				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/record/recordItems/logbook",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationBarBackgroundColor": "#ffeb9e"
+			}
+		},
+		{
+			"path" : "pages/record/recordItems/addRecord",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationBarBackgroundColor": "#ffeb9e"
+					// "navigationStyle": "custom"
 			}
 		}
 	],
