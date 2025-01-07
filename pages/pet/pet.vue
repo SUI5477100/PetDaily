@@ -243,7 +243,7 @@
 		margin-left: 10rpx;
 	}
 	.fixed {
-		background-image: url('../../static/add.png');
+		background-image: url('https://www.serverzhu.com/petImg/add.png');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -255,6 +255,6 @@
 	}
 	
 	.fixed:active {
-		background-image: url('../../static/add2.png');
+		background-image: url('https://www.serverzhu.com/petImg/add2.png');
 	}
 </style>

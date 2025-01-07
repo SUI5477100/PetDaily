@@ -2,6 +2,16 @@
   "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#ffeb9e",
   "usingComponents": {
-    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup"
+    "uni-easyinput": "/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "u-datetime-picker": "/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker",
+    "diet": "/pages/record/recordItems/diet",
+    "drink": "/pages/record/recordItems/drink",
+    "weight": "/pages/record/recordItems/weight",
+    "cleansing": "/pages/record/recordItems/cleansing",
+    "stool": "/pages/record/recordItems/stool",
+    "notes": "/pages/record/recordItems/notes",
+    "abnormal": "/pages/record/recordItems/abnormal",
+    "medication": "/pages/record/recordItems/medication"
   }
 }

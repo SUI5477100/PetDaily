@@ -1,0 +1,27 @@
+.border-box.data-v-24a027ed {
+  background-color: #fff;
+  height: 15vh;
+  border-radius: 30rpx;
+  border: 4rpx solid #000;
+}
+.select-box.data-v-24a027ed {
+  flex: 1;
+  height: 50%;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.select-title.data-v-24a027ed {
+  margin: 40rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.m40.data-v-24a027ed {
+  display: flex;
+  margin: 40rpx;
+}
+.m30.data-v-24a027ed {
+  margin: 0 30rpx;
+}
+

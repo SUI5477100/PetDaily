@@ -1,0 +1,7 @@
+.border-box.data-v-6fb0a67d {
+  background-color: #fff;
+  height: 15vh;
+  border-radius: 30rpx;
+  border: 4rpx solid #000;
+}
+

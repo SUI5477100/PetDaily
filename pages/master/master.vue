@@ -88,7 +88,7 @@
 			<view class="addpet">
 				<view class="addpet-btn">
 					<view class="btn-content">
-						<img src="../../static/add.png" style="width: 18%;height: 80%;margin-right: 10rpx;" /> 添加宠物
+						<img src="https://www.serverzhu.com/petImg/add.png" style="width: 18%;height: 80%;margin-right: 10rpx;" /> 添加宠物
 					</view>
 				</view>
 			</view>

@@ -14,7 +14,14 @@
     "pages/petInfo/petInfo",
     "pages/record/recordItems/diet",
     "pages/record/recordItems/logbook",
-    "pages/record/recordItems/addRecord"
+    "pages/record/recordItems/addRecord",
+    "pages/record/recordItems/drink",
+    "pages/record/recordItems/weight",
+    "pages/record/recordItems/cleansing",
+    "pages/record/recordItems/stool",
+    "pages/record/recordItems/notes",
+    "pages/record/recordItems/abnormal",
+    "pages/record/recordItems/medication"
   ],
   "subPackages": [],
   "window": {

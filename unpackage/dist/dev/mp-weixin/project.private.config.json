@@ -8,29 +8,15 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/record/components/textPost",
+          "pathName": "pages/record/components/textPost",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/record/recordItems/addRecord",
           "pathName": "pages/record/recordItems/addRecord",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "发帖页面",
-          "pathName": "pages/record/components/picturesTextPost",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "宠物信息",
-          "pathName": "pages/petInfo/petInfo",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "添加提醒",
-          "pathName": "pages/record/components/textPost",
           "query": "",
           "launchMode": "default",
           "scene": null

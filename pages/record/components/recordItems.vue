@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="record-items" v-for="(items, index) in iconList" :key="index">
+		<view class="record-items" v-for="(items, index) in iconList" :key="index" @click="onclick(items.value)">
 			<view class="items-left">
 				<img :src="items.src" alt="" class="icon" />
 				<view class="text">{{ items.text }}</view>
@@ -21,40 +21,52 @@
 			return {
 				iconList: [{
 						src: "../../../static/record/eat.png",
-						text: '饮食'
+						text: '饮食',
+						value: 'diet'
 					},
 					{
 						src: "../../../static/record/drink.png",
-						text: '喝水'
+						text: '喝水',
+						value: 'drink'
 					},
 					{
 						src: "../../../static/record/weight.png",
-						text: '体重'
+						text: '体重',
+						value: 'weight'
 					},
 					{
 						src: "../../../static/record/bath.png",
-						text: '洗护'
+						text: '洗护',
+						value: 'cleansing'
 					},
 					{
 						src: "../../../static/record/shit.png",
-						text: '尿便'
+						text: '尿便',
+						value: 'stool'
 					},
 					{
 						src: "../../../static/record/note.png",
-						text: '记事'
+						text: '记事',
+						value: 'notes'
 					},
 					{
 						src: "../../../static/record/warn.png",
-						text: '异常'
+						text: '异常',
+						value: 'abnormal'
 					},
 					{
 						src: "../../../static/record/medication.png",
-						text: '用药'
+						text: '用药',
+						value: 'medication'
 					}
 				]
 			}
 		},
-		methods: {}
+		methods: {
+			onclick(value) {
+				console.log(value)
+			}
+		}
 	}
 </script>
 
@@ -90,7 +102,8 @@
 	.right-icon {
 		margin-right: 25rpx;
 	}
-	.record-book{
+
+	.record-book {
 		width: 100%;
 		height: 100rpx;
 		margin-top: 30rpx;
@@ -98,12 +111,13 @@
 		background-color: #ffd553;
 		border-radius: 100rpx;
 		display: flex;
-		justify-content:center;
+		justify-content: center;
 		font-weight: 600;
 		font-size: 34rpx;
 		align-items: center;
 	}
-	.record-book:active{
-		background-color:  #eac34c;
+
+	.record-book:active {
+		background-color: #eac34c;
 	}
 </style>

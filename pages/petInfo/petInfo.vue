@@ -87,23 +87,21 @@
 			</view>
 			<view class="bottom">
 				<uni-forms-item label="遇见:">
-					<view v-if="isEditing===true" class="day-css">
-						<picker style="flex: 1;" mode="date" :value="baseFormData.date" :start="startDate" :end="endDate"
-							@change="bindDateChange">
-							<view style="margin-left: 20rpx;">{{baseFormData.date}}</view>
-						</picker>
+					<view v-if="isEditing===true" class="day-css" @click="show = true">
+						<view style="margin-left: 20rpx;">{{formattedTime}}</view>
+						<u-datetime-picker :show="show" v-model="baseFormData.date" mode="date" @confirm="confirmTime"
+							@cancel="closeBtn"></u-datetime-picker>
 					</view>
-					<view v-else style="margin-left: 20rpx;">{{baseFormData.date}}</view>
+					<view v-else style="margin-left: 20rpx;">{{formattedTime}}</view>
 				</uni-forms-item>
 
 				<uni-forms-item label="生日:">
-					<view v-if="isEditing===true" class="day-css">
-						<picker style="flex: 1;" mode="date" :value="baseFormData.dateBirthday" :start="startDate" :end="endDate"
-							@change="bindDateChangeBirthday">
-							<view style="margin-left: 20rpx;">{{baseFormData.dateBirthday}}</view>
-						</picker>
+					<view v-if="isEditing===true" class="day-css" @click="show = true">
+						<view style="margin-left: 20rpx;">{{formattedBirthTime}}</view>
+						<u-datetime-picker :show="show2" v-model="baseFormData.dateBirthday" @confirm="confirmBitrhTime"
+							@cancel="closeBtn" mode="date"></u-datetime-picker>
 					</view>
-					<view v-else style="margin-left: 20rpx;">{{baseFormData.dateBirthday}}</view>
+					<view v-else style="margin-left: 20rpx;">{{formattedBirthTime}}</view>
 				</uni-forms-item>
 			</view>
 		</view>
@@ -113,15 +111,13 @@
 <script>
 	export default {
 		data() {
-			const currentDate = this.getDate({
-				format: true
-			})
+
 			return {
 				imageValue: [],
 				petCharacter: '',
 				isEditing: false,
-
-
+				show: false,
+				show2: false,
 				imageStyles: {
 					width: 150,
 					height: 200,
@@ -136,8 +132,8 @@
 					character: [],
 					age: '12个月',
 					weight: '',
-					date: currentDate,
-					dateBirthday: currentDate,
+					date: Number(new Date()),
+					dateBirthday: Number(new Date()),
 					introduction: '三联疫苗',
 					sex: 1,
 					sterilization: 1,
@@ -169,37 +165,17 @@
 			petSterilization() {
 				return this.baseFormData.sterilization ? '已绝育' : '未绝育';
 			},
-			startDate() {
-				return this.getDate('start');
+
+			// 计算属性，用于格式化时间戳
+			formattedTime() {
+				return this.formatTimestamp(this.baseFormData.date);
 			},
-			endDate() {
-				return this.getDate('end');
+			formattedBirthTime() {
+				return this.formatTimestamp(this.baseFormData.dateBirthday);
 			}
 		},
 		methods: {
-			// 选择相遇
-			bindDateChange(e) {
-				this.baseFormData.date = e.detail.value
-			},
-			// 选择生日
-			bindDateChangeBirthday(e) {
-				this.baseFormData.dateBirthday = e.detail.value
-			},
-			getDate(type) {
-				const date = new Date();
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
 
-				if (type === 'start') {
-					year = year - 60;
-				} else if (type === 'end') {
-					year = year + 2;
-				}
-				month = month > 9 ? month : '0' + month;
-				day = day > 9 ? day : '0' + day;
-				return `${year}-${month}-${day}`;
-			},
 			// 添加标签
 			addTag() {
 				const character = this.petCharacter
@@ -213,6 +189,36 @@
 			removeTag(index) {
 				this.baseFormData.character.splice(index, 1);
 				console.log(this.baseFormData, '88888888f')
+			},
+
+			toggleEdit() {
+				this.isEditing = !this.isEditing;
+				// 只有当按钮是编辑的时候更新数据
+				if (this.isEditing === false) {
+					this.baseFormData.date = this.formattedTime;
+					this.baseFormData.dateBirthday = this.formattedBirthTime;
+					console.log('Formatted Date:', this.baseFormData.date);
+				}
+			},
+			// 格式化时间戳
+			formatTimestamp(timestamp) {
+				const date = new Date(timestamp);
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0');
+				const day = String(date.getDate()).padStart(2, '0');
+				return `${year}-${month}-${day}`;
+				this.baseFormData.date = `${year}-${month}-${day}`;
+				this.baseFormData.dateBirthday = `${year}-${month}-${day}`;
+			},
+			confirmTime() {
+				this.show = false
+			},
+			confirmBitrhTime() {
+				this.show = false
+			},
+			closeBtn() {
+				this.show = false
+				this.show2 = false
 			},
 			// 文件上传相关
 			change(e) {
@@ -236,9 +242,6 @@
 			fail(e) {
 				console.log('上传失败：', e)
 			},
-			toggleEdit() {
-				this.isEditing = !this.isEditing;
-			}
 		}
 	}
 </script>

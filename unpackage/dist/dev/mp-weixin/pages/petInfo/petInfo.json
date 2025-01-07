@@ -8,6 +8,7 @@
     "uni-easyinput": "/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
     "uni-data-checkbox": "/uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox",
     "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
-    "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag"
+    "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag",
+    "u-datetime-picker": "/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker"
   }
 }

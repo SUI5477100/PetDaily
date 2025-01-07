@@ -2,8 +2,26 @@
 	<!--记录页面 -->
 	<view class="content">
 		<img src="../../../static/cat.png" alt="" class="img" />
-		<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容" class="input"
-			placeholderStyle="font-size: 32rpx"></uni-easyinput>
+		<view class="" style="width: 90% ; background-color: #fff; border-radius: 20rpx; border: 4rpx solid #000 ;margin-bottom: 30rpx;">
+			<view class="" style="margin: 20rpx;font-size: 36rpx;font-weight: 600;">
+				描述
+			</view>
+			<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容" class="input"
+				placeholderStyle="font-size: 32rpx"></uni-easyinput>
+		</view>
+
+
+
+		<view class="button-text w90" @click="togglePet('bottom')">
+			<view style="margin-left: 20rpx;">记录宠物</view>
+			<view class="center">
+				<view style="margin-right: 20rpx;">
+					{{ selectPet.join(', ') }}
+				</view>
+				>
+			</view>
+		</view>
+
 		<view class="button-text w90" @click="toggle('bottom')">
 			<view style="margin-left: 20rpx;">类型</view>
 			<view class="center">
@@ -37,10 +55,12 @@
 		<view class="button-add">
 			保存
 		</view>
+
+
 		<!-- 类型弹窗 -->
 		<uni-popup ref="popup" background-color="#fff" @change="change" :show="show">
 			<view class="popup-content">
-				<img src="https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/dailyLife.png" class="img2" />
+
 				<uni-section title="类型" type="line"></uni-section>
 				<uni-list>
 					<uni-list-item title="日常提醒" clickable @click="onClick('日常提醒')" />
@@ -50,10 +70,11 @@
 				</uni-list>
 			</view>
 		</uni-popup>
+
+
 		<!-- 提醒弹框 -->
 		<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
 			<view class="popup-content">
-				<img src="https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/dailyLife.png" class="img2" />
 				<view style="display: flex;justify-content: space-between; align-items: center;">
 					<uni-section title="重复" type="line"></uni-section>
 					<view class="uploadBtn" @click="closePopup">
@@ -64,6 +85,25 @@
 			</view>
 		</uni-popup>
 
+
+		<!-- 选择宠物弹框 -->
+		<uni-popup ref="popupSelectPet" background-color="#fff" @change="changePet">
+			<view class="select-pet">
+				选择宠物
+			</view>
+			<view class="uni-list">
+				<checkbox-group @change="checkboxChange">
+					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.index">
+						<checkbox color="#FFCC33" :value="item.name" />
+						<img :src="item.img" class="pet-img" />
+						<view>{{item.name}}</view>
+					</label>
+				</checkbox-group>
+			</view>
+			<view class="saveBtn" @click="closeSelectPet">
+				保存
+			</view>
+		</uni-popup>
 
 	</view>
 </template>
@@ -78,7 +118,6 @@
 				minTime: '09:01',
 				maxTime: "21:01",
 				list: [{
-					letter: '',
 					data: [
 						'周一',
 						'周二',
@@ -89,24 +128,36 @@
 						'周日'
 					]
 				}],
-				selectedDays: [] // 用于存储选中的天数
+				selectedDays: [], // 用于存储选中的天数
+				selectPet: [],
+				items: [{
+						// value: 'USA',
+						name: '暹罗',
+						img: 'https://www.serverzhu.com/mimi1.jpg'
+					},
+					{
+						// value: 'CHN',
+						name: '梨花',
+						img: 'https://www.serverzhu.com/mimi2.png'
+					},
+				]
 			}
 		},
 		methods: {
 			picker3(e) {
 				this.time = e.detail.value;
 			},
-
+			// 类型弹框
 			toggle(type) {
 				this.type = type
 				this.$refs.popup.open(type)
 			},
-
+			// 重复弹框
 			toggleRemind(type) {
 				this.type = type
 				this.$refs.popupRemind.open(type)
 			},
-
+			// 重复天数转换
 			bindClick(e) {
 				console.log('点击item，返回数据' + JSON.stringify(e));
 				const day = e.item.name; // 获取点击的天数
@@ -127,13 +178,14 @@
 					// console.log(this.remind, '0000')
 				}
 			},
+			// 关闭重复弹框
 			closePopup() {
 				this.$refs.popupRemind.close()
 			},
 			change(e) {
 				console.log('当前模式(重复)：' + e.type + ',状态：' + e.show);
 			},
-
+			// 保存类型
 			onClick(e) {
 				console.log('执行click事件', e);
 				this.record = e;
@@ -142,7 +194,35 @@
 					title: '保存成功',
 				});
 				this.$refs.popup.close();
-			}
+			},
+			// 打开选择宠物弹框
+			togglePet(type) {
+				this.type = type
+				this.$refs.popupSelectPet.open(type)
+			},
+			// 关闭选择宠物弹框
+			closeSelectPet() {
+				this.$refs.popupSelectPet.close()
+			},
+			// 切换宠物弹框模式
+			changePet(e) {
+				console.log('当前模式：' + e.type + ',状态：' + e.show);
+			},
+			// 选择宠物操作
+			checkboxChange: function(e) {
+				var items = this.items,
+					values = e.detail.value;
+				this.selectPet = values
+				// console.log(values, '0000000000')
+				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					if (values.includes(item.value)) {
+						this.$set(item, 'checked', true)
+					} else {
+						this.$set(item, 'checked', false)
+					}
+				}
+			},
 		}
 	}
 </script>
@@ -181,9 +261,9 @@
 	}
 
 	/deep/.is-input-border {
-		width: 90%;
-		margin: 5%;
-		border: #000 4rpx solid !important;
+		width: 96%;
+		margin: 2%;
+		border: #fff 4rpx solid !important;
 		height: 20vh;
 		border-radius: 20rpx;
 	}
@@ -194,6 +274,10 @@
 
 	/deep/ .uni-easyinput {
 		flex: 0;
+	}
+
+	/deep/.input-padding {
+		padding-left: 0rpx;
 	}
 
 	.button-text {
@@ -247,6 +331,14 @@
 		background-repeat: no-repeat;
 	}
 
+	/deep/.uni-indexed-list__item-container {
+		padding: 0rpx !important;
+		margin-left: 30rpx;
+	}
+
+	/deep/.uni-indexed-list__menu {
+		width: 30rpx !important;
+	}
 
 	/deep/.uni-indexed-list {
 		top: 20% !important;
@@ -281,5 +373,58 @@
 
 	.uploadBtn:active {
 		color: #1d5dbc;
+	}
+
+	.line {
+		border-bottom: 2rpx solid #dcdfe6;
+		flex: 1;
+		width: 80%;
+		margin: auto;
+	}
+
+
+
+	/deep/.uni-indexed-list__menu {
+		width: 30rpx !important;
+	}
+
+	/deep/.uni-indexed-list__title-wrapper {
+		height: 0rpx;
+		background-color: #fff !important;
+	}
+
+	/deep/.uni-indexed-list__list {
+		border-top-width: 0px !important;
+	}
+
+	/deep/.uni-list-cell {
+		display: flex;
+		margin: 30rpx;
+		align-items: center;
+	}
+
+	.select-pet {
+		font-weight: 600;
+		font-size: 36rpx;
+		margin: 30rpx;
+	}
+
+	.pet-img {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50rpx;
+		margin: 30rpx;
+	}
+
+	.saveBtn {
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 90%;
+		background-color: #ffeb3b;
+		height: 100rpx;
+		border-radius: 50rpx;
+		border: 4rpx solid #000;
 	}
 </style>

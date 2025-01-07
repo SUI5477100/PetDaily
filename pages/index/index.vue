@@ -21,7 +21,7 @@
 				<view class="record">
 					<view class="record-left">
 						<view class="record-title">
-							记录
+							记录本
 						</view>
 						<view class="record-text">
 							见证小宠的成长

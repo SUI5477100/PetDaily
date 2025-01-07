@@ -8,7 +8,7 @@
 				<view class="pet-img"></view>
 				<view class="pet-info">
 					<view class="edit">
-						编辑
+						管理 
 					</view>
 					<view class="pet-detail">
 						<!-- 名字 -->
