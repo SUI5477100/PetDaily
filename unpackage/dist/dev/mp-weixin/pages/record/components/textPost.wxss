@@ -143,6 +143,9 @@
   margin: 30rpx;
   align-items: center;
 }
+.data-v-0c959a7e .uni-indexed-list__item-border {
+  border-bottom-color: #fff !important;
+}
 .select-pet.data-v-0c959a7e {
   font-weight: 600;
   font-size: 36rpx;

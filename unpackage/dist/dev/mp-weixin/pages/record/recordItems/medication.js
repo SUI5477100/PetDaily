@@ -77,10 +77,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show3 = true
+    }
+    _vm.e3 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e4 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e5 = function (value) {
+      return _vm.onPickerChangeCommon(value, "medicationMethod")
+    }
+    _vm.e6 = function ($event) {
+      _vm.show3 = false
+    }
+    _vm.e7 = function (value) {
+      return _vm.onPickerChangeCommon(value, "medicationUnit")
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -126,11 +175,129 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      show2: false,
+      show3: false,
+      columns: [['驱虫', '治疗性药物', '缓解症状药物', '消化系统用药', '内分泌和代谢类药物', '心血管系统用药', '抗过敏药物', '外用药物', '神经系统药物'], ['体内驱虫', '体外驱虫', '内外同驱']],
+      columnData: [['体内驱虫', '体外驱虫', '内外同驱'], ['抗生素', '抗真菌药', '抗病毒药'], ['止痛药', '抗炎药', '退烧药', '止咳药'], ['胃肠保护剂', '益生菌'], ['胰岛素', '甲状腺激素', '肾上腺皮质激素'], ['利尿剂', '心脏药物', '抗凝血药物'], ['抗组胺药', '皮质类固醇'], ['抗菌药膏', '抗真菌药膏', '止痒药膏'], ['抗焦虑药', '镇静药']],
+      columnsMethod: [['口服给药', '外用给药', '皮下注射', '肌肉注射', '静脉注射', '注射疫苗', '局部给药', '鼻腔给药', '局部贴剂', '食物药物']],
+      columnsType: [['g', 'mg', 'μg', 'ml', 'U', 'g/kg', 'mg/kg', '片/颗/粒', '次', '袋', '滴', '胶囊']],
+      inputValue: '',
+      medicationUnit: 'g',
+      selectedValue: {
+        medicationType: '',
+        medicationDetail: '',
+        medicationMethod: '',
+        medicationAmount: ''
+      }
+    };
   },
-  methods: {}
+  watch: {
+    // 监听 inputValue 或 medicationUnit 变化时计算并更新 medicationAmount
+    inputValue: function inputValue() {
+      this.updatemedicationAmount();
+    },
+    medicationUnit: function medicationUnit() {
+      this.updatemedicationAmount();
+    }
+  },
+  methods: {
+    changeHandler: function changeHandler(e) {
+      var columnIndex = e.columnIndex,
+        value = e.value,
+        values = e.values,
+        index = e.index,
+        _e$picker = e.picker,
+        picker = _e$picker === void 0 ? this.$refs.uPicker : _e$picker;
+      console.log(columnIndex, value, values, index);
+      // 当第一列值发生变化时，变化第二列(后一列)对应的选项
+      if (columnIndex === 0) {
+        // picker为选择器this实例，变化第二列对应的选项
+        picker.setColumnValues(1, this.columnData[index]);
+      }
+    },
+    // 回调参数为包含columnIndex、value、values
+    confirm: function confirm(e) {
+      console.log('confirm', e.value);
+      this.selectedValue.medicationType = e.value[0];
+      this.selectedValue.medicationDetail = e.value[1];
+      this.show1 = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+    },
+    // 更新排泄量
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      if (type === 'medicationMethod') {
+        this.selectedValue.medicationMethod = value.value[0];
+      } else if (type === 'medicationUnit') {
+        this.medicationUnit = value.value[0];
+      }
+
+      // 关闭弹框
+      if (type === 'medicationMethod') {
+        this.show2 = false;
+      } else if (type === 'medicationUnit') {
+        this.show3 = false;
+      }
+
+      // 打印选择的值
+      console.log(value.value);
+      this.updatemedicationAmount();
+    },
+    updatemedicationAmount: function updatemedicationAmount() {
+      var medicationAmount = "".concat(this.inputValue).concat(this.medicationUnit);
+      this.selectedValue.medicationAmount = medicationAmount;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

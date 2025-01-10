@@ -77,10 +77,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -126,11 +157,58 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show: false,
+      columns: [['体重异常', '皮肤异常', '呼吸异常', '消化异常', '尿便异常', '骨骼异常', '口腔异常', '眼睛异常', '耳朵异常', '精神异常'], ['增重过速', '减重过速', '食欲不振', '过度进食']],
+      columnData: [['增重过速', '减重过速', '食欲不振', '过度进食'], ['皮肤发炎', '脱毛、斑秃', '瘙痒、抓挠', '皮肤感染'], ['咳嗽', '呼吸困难', '喘息异常'], ['呕吐', '腹泻', '便秘', '口臭'], ['血尿', '频繁排泄', '排泄困难', '尿便异味'], ['骨折', '步态异常', '关节疼痛', '关节肿胀、变形'], ['口炎', '牙结石', '牙龈出血', '口腔溃疡'], ['流泪过多', '眼屎增多', '眼睛突出', '眼睛干涩', '眼睛发红、肿胀'], ['耳朵异味', '耳朵发炎', '分泌物增多', '抓耳频繁'], ['昏迷', '嗜睡', '焦虑', '害怕', '攻击性', '反应迟钝', '过度兴奋']],
+      selectedValue: {
+        abnormalType: '',
+        abnormalDetail: ''
+      }
+    };
   },
-  methods: {}
+  watch: {},
+  methods: {
+    changeHandler: function changeHandler(e) {
+      var columnIndex = e.columnIndex,
+        value = e.value,
+        values = e.values,
+        index = e.index,
+        _e$picker = e.picker,
+        picker = _e$picker === void 0 ? this.$refs.uPicker : _e$picker;
+      console.log(columnIndex, value, values, index);
+      // 当第一列值发生变化时，变化第二列(后一列)对应的选项
+      if (columnIndex === 0) {
+        // picker为选择器this实例，变化第二列对应的选项
+        picker.setColumnValues(1, this.columnData[index]);
+      }
+    },
+    // 回调参数为包含columnIndex、value、values
+    confirm: function confirm(e) {
+      console.log('confirm', e.value);
+      this.selectedValue.abnormalType = e.value[0];
+      this.selectedValue.abnormalDetail = e.value[1];
+      this.show = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

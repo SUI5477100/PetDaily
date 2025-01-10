@@ -77,10 +77,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -126,11 +157,69 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show2: false,
+      columnsType: [['ml', 'L', '杯', '瓶', '碗', '勺']],
+      inputValue: '',
+      drinkUnit: 'ml',
+      // 存储饮水量单位
+      selectedValue: {
+        drinkAmount: '' // 存储计算后的饮水量
+      }
+    };
   },
-  methods: {}
+
+  watch: {
+    // 监听 inputValue 或 drinkUnit 变化时计算并更新 drinkAmount
+    inputValue: function inputValue() {
+      this.updatedrinkAmount();
+    },
+    drinkUnit: function drinkUnit() {
+      this.updatedrinkAmount();
+    }
+  },
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.drinkUnit = value.value[0];
+      this.show2 = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新饮水量
+      this.updatedrinkAmount();
+    },
+    // 更新饮水量
+    updatedrinkAmount: function updatedrinkAmount() {
+      var drinkAmount = "".concat(this.inputValue).concat(this.drinkUnit);
+      this.selectedValue.drinkAmount = drinkAmount;
+      console.log(drinkAmount);
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

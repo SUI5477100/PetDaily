@@ -22,21 +22,34 @@
   "appid": "wxe93f33a155dfe6a0",
   "projectname": "PetDaily",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "current": -1,
-      "list": []
-    },
     "miniprogram": {
-      "current": -1,
-      "list": []
+      "list": [
+        {
+          "name": "1.开屏页",
+          "pathName": "pages/firstPage/firstPage",
+          "query": ""
+        },
+        {
+          "name": "2.添加宠物生活记录",
+          "pathName": "pages/record/recordItems/addRecord",
+          "query": ""
+        },
+        {
+          "name": "3.编辑宠物信息",
+          "pathName": "pages/petInfo/petInfo",
+          "query": ""
+        },
+        {
+          "name": "4.添加日常提醒",
+          "pathName": "pages/record/components/textPost",
+          "query": ""
+        },
+        {
+          "name": "5.发帖",
+          "pathName": "pages/record/components/picturesTextPost",
+          "query": ""
+        }
+      ]
     }
   },
   "editorSetting": {

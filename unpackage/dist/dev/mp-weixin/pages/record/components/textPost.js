@@ -115,8 +115,11 @@ try {
     uniListItem: function () {
       return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list-item/uni-list-item */ "uni_modules/uni-list/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue */ 381))
     },
+    uDatetimePicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker.vue */ 388))
+    },
     uniIndexedList: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list */ "uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list.vue */ 388))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list */ "uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-indexed-list/components/uni-indexed-list/uni-indexed-list.vue */ 397))
     },
   }
 } catch (e) {
@@ -142,6 +145,11 @@ var render = function () {
   var _c = _vm._self._c || _h
   var m0 = __webpack_require__(/*! ../../../static/cat.png */ 241)
   var g0 = _vm.selectPet.join(", ")
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show = true
+    }
+  }
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -300,14 +308,33 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
       record: '',
       remind: '',
-      time: '12:01',
-      minTime: '09:01',
-      maxTime: "21:01",
+      show: false,
+      time: this.formatTimestamp(Number(new Date())),
       list: [{
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       }],
@@ -315,19 +342,29 @@ var _default = {
       // 用于存储选中的天数
       selectPet: [],
       items: [{
-        // value: 'USA',
         name: '暹罗',
         img: 'https://www.serverzhu.com/mimi1.jpg'
       }, {
-        // value: 'CHN',
         name: '梨花',
         img: 'https://www.serverzhu.com/mimi2.png'
       }]
     };
   },
+  computed: {},
   methods: {
-    picker3: function picker3(e) {
-      this.time = e.detail.value;
+    // 格式化时间戳
+    formatTimestamp: function formatTimestamp(timestamp) {
+      var date = new Date(timestamp);
+      // 提取年份、月份、日期、小时、分钟、秒
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var day = String(date.getDate()).padStart(2, '0');
+      var hours = String(date.getHours()).padStart(2, '0');
+      var minutes = String(date.getMinutes()).padStart(2, '0');
+      var seconds = String(date.getSeconds()).padStart(2, '0');
+
+      // 返回格式化的日期字符串
+      return "".concat(hours, ":").concat(minutes);
     },
     // 类型弹框
     toggle: function toggle(type) {

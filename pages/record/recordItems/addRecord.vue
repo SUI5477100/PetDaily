@@ -31,21 +31,23 @@
 
 
 		<!-- 饮食 -->
-		<diet class="w90"></diet>
+		<!-- <diet class="w90" @update:selectedValue="handleSelectedValue"></diet> -->
 		<!-- 喝水 -->
-		<!-- <drink class="w90"></drink> -->
+		<!-- <drink class="w90"  @update:selectedValue="handleSelectedValue"></drink> -->
 		<!-- 体重 -->
-		<!-- <weight class="w90"></weight> -->
+		<!-- <weight class="w90" @update:selectedValue="handleSelectedValue"></weight> -->
 		<!-- 洗护 -->
-		<!-- <cleansing class="w90"></cleansing> -->
+		<!-- <cleansing class="w90"  @update:selectedValue="handleSelectedValue"></cleansing> -->
 		<!-- 尿便 -->
-		<!-- <stool class="w90"></stool> -->
+		<!-- <stool class="w90"  @update:selectedValue="handleSelectedValue"></stool> -->
 		<!-- 记事 -->
-		<!-- <notes class="w90"></notes> -->
+		<!-- <notes class="w90" @update:selectedValue="handleSelectedValue"></notes> -->
 		<!-- 异常 -->
-		<!-- <abnormal class="w90"></abnormal> -->
+		<!-- <abnormal class="w90" @update:selectedValue="handleSelectedValue"></abnormal> -->
 		<!-- 用药 -->
-		<!-- <medication class="w90"></medication> -->
+		<medication class="w90" @update:selectedValue="handleSelectedValue"></medication>
+
+
 
 		<view class="input-box">
 			<view class=" input-title">
@@ -169,12 +171,19 @@
 			},
 			closeBtn() {
 				this.show = false
+			},
+			handleSelectedValue(updatedValue) {
+				console.log(updatedValue, '0000000000000'); // 这里可以接收到传递过来的 selectedValue
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
+	// * {
+	// 	background-color: #fffce0;
+	// }
+
 	.content {
 		display: flex;
 		flex-direction: column;

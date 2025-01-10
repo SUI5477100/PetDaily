@@ -20514,14 +20514,467 @@ module.exports = JSON.parse("{\"uni-calender.ok\":\"確定\",\"uni-calender.canc
 /* 390 */,
 /* 391 */,
 /* 392 */,
-/* 393 */,
-/* 394 */,
+/* 393 */
+/*!***********************************************************************************************!*\
+  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否打开组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.datetimePicker.show
+    },
+    // 是否展示顶部的操作栏
+    showToolbar: {
+      type: Boolean,
+      default: uni.$u.props.datetimePicker.showToolbar
+    },
+    // 绑定值
+    value: {
+      type: [String, Number],
+      default: uni.$u.props.datetimePicker.value
+    },
+    // 顶部标题
+    title: {
+      type: String,
+      default: uni.$u.props.datetimePicker.title
+    },
+    // 展示格式，mode=date为日期选择，mode=time为时间选择，mode=year-month为年月选择，mode=datetime为日期时间选择
+    mode: {
+      type: String,
+      default: uni.$u.props.datetimePicker.mode
+    },
+    // 可选的最大时间
+    maxDate: {
+      type: Number,
+      // 最大默认值为后10年
+      default: uni.$u.props.datetimePicker.maxDate
+    },
+    // 可选的最小时间
+    minDate: {
+      type: Number,
+      // 最小默认值为前10年
+      default: uni.$u.props.datetimePicker.minDate
+    },
+    // 可选的最小小时，仅mode=time有效
+    minHour: {
+      type: Number,
+      default: uni.$u.props.datetimePicker.minHour
+    },
+    // 可选的最大小时，仅mode=time有效
+    maxHour: {
+      type: Number,
+      default: uni.$u.props.datetimePicker.maxHour
+    },
+    // 可选的最小分钟，仅mode=time有效
+    minMinute: {
+      type: Number,
+      default: uni.$u.props.datetimePicker.minMinute
+    },
+    // 可选的最大分钟，仅mode=time有效
+    maxMinute: {
+      type: Number,
+      default: uni.$u.props.datetimePicker.maxMinute
+    },
+    // 选项过滤函数
+    filter: {
+      type: [Function, null],
+      default: uni.$u.props.datetimePicker.filter
+    },
+    // 选项格式化函数
+    formatter: {
+      type: [Function, null],
+      default: uni.$u.props.datetimePicker.formatter
+    },
+    // 是否显示加载中状态
+    loading: {
+      type: Boolean,
+      default: uni.$u.props.datetimePicker.loading
+    },
+    // 各列中，单个选项的高度
+    itemHeight: {
+      type: [String, Number],
+      default: uni.$u.props.datetimePicker.itemHeight
+    },
+    // 取消按钮的文字
+    cancelText: {
+      type: String,
+      default: uni.$u.props.datetimePicker.cancelText
+    },
+    // 确认按钮的文字
+    confirmText: {
+      type: String,
+      default: uni.$u.props.datetimePicker.confirmText
+    },
+    // 取消按钮的颜色
+    cancelColor: {
+      type: String,
+      default: uni.$u.props.datetimePicker.cancelColor
+    },
+    // 确认按钮的颜色
+    confirmColor: {
+      type: String,
+      default: uni.$u.props.datetimePicker.confirmColor
+    },
+    // 每列中可见选项的数量
+    visibleItemCount: {
+      type: [String, Number],
+      default: uni.$u.props.datetimePicker.visibleItemCount
+    },
+    // 是否允许点击遮罩关闭选择器
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: uni.$u.props.datetimePicker.closeOnClickOverlay
+    },
+    // 各列的默认索引
+    defaultIndex: {
+      type: Array,
+      default: uni.$u.props.datetimePicker.defaultIndex
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 394 */
+/*!****************************************************************************!*\
+  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/libs/util/dayjs.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+!function (t, e) {
+  ( false ? undefined : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = e() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
+}(this, function () {
+  'use strict';
+
+  var t = 'millisecond';
+  var e = 'second';
+  var n = 'minute';
+  var r = 'hour';
+  var i = 'day';
+  var s = 'week';
+  var u = 'month';
+  var a = 'quarter';
+  var o = 'year';
+  var f = 'date';
+  var h = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/;
+  var c = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
+  var d = {
+    name: 'en',
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+  };
+  var $ = function $(t, e, n) {
+    var r = String(t);
+    return !r || r.length >= e ? t : "".concat(Array(e + 1 - r.length).join(n)).concat(t);
+  };
+  var l = {
+    s: $,
+    z: function z(t) {
+      var e = -t.utcOffset();
+      var n = Math.abs(e);
+      var r = Math.floor(n / 60);
+      var i = n % 60;
+      return "".concat((e <= 0 ? '+' : '-') + $(r, 2, '0'), ":").concat($(i, 2, '0'));
+    },
+    m: function t(e, n) {
+      if (e.date() < n.date()) return -t(n, e);
+      var r = 12 * (n.year() - e.year()) + (n.month() - e.month());
+      var i = e.clone().add(r, u);
+      var s = n - i < 0;
+      var a = e.clone().add(r + (s ? -1 : 1), u);
+      return +(-(r + (n - i) / (s ? i - a : a - i)) || 0);
+    },
+    a: function a(t) {
+      return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);
+    },
+    p: function p(h) {
+      return {
+        M: u,
+        y: o,
+        w: s,
+        d: i,
+        D: f,
+        h: r,
+        m: n,
+        s: e,
+        ms: t,
+        Q: a
+      }[h] || String(h || '').toLowerCase().replace(/s$/, '');
+    },
+    u: function u(t) {
+      return void 0 === t;
+    }
+  };
+  var y = 'en';
+  var M = {};
+  M[y] = d;
+  var m = function m(t) {
+    return t instanceof S;
+  };
+  var D = function D(t, e, n) {
+    var r;
+    if (!t) return y;
+    if (typeof t === 'string') M[t] && (r = t), e && (M[t] = e, r = t);else {
+      var _i = t.name;
+      M[_i] = t, r = _i;
+    }
+    return !n && r && (y = r), r || !n && y;
+  };
+  var v = function v(t, e) {
+    if (m(t)) return t.clone();
+    var n = _typeof(e) === 'object' ? e : {};
+    return n.date = t, n.args = arguments, new S(n);
+  };
+  var g = l;
+  g.l = D, g.i = m, g.w = function (t, e) {
+    return v(t, {
+      locale: e.$L,
+      utc: e.$u,
+      x: e.$x,
+      $offset: e.$offset
+    });
+  };
+  var S = function () {
+    function d(t) {
+      this.$L = D(t.locale, null, !0), this.parse(t);
+    }
+    var $ = d.prototype;
+    return $.parse = function (t) {
+      this.$d = function (t) {
+        var e = t.date;
+        var n = t.utc;
+        if (e === null) return new Date(NaN);
+        if (g.u(e)) return new Date();
+        if (e instanceof Date) return new Date(e);
+        if (typeof e === 'string' && !/Z$/i.test(e)) {
+          var _r = e.match(h);
+          if (_r) {
+            var _i2 = _r[2] - 1 || 0;
+            var _s = (_r[7] || '0').substring(0, 3);
+            return n ? new Date(Date.UTC(_r[1], _i2, _r[3] || 1, _r[4] || 0, _r[5] || 0, _r[6] || 0, _s)) : new Date(_r[1], _i2, _r[3] || 1, _r[4] || 0, _r[5] || 0, _r[6] || 0, _s);
+          }
+        }
+        return new Date(e);
+      }(t), this.$x = t.x || {}, this.init();
+    }, $.init = function () {
+      var t = this.$d;
+      this.$y = t.getFullYear(), this.$M = t.getMonth(), this.$D = t.getDate(), this.$W = t.getDay(), this.$H = t.getHours(), this.$m = t.getMinutes(), this.$s = t.getSeconds(), this.$ms = t.getMilliseconds();
+    }, $.$utils = function () {
+      return g;
+    }, $.isValid = function () {
+      return !(this.$d.toString() === 'Invalid Date');
+    }, $.isSame = function (t, e) {
+      var n = v(t);
+      return this.startOf(e) <= n && n <= this.endOf(e);
+    }, $.isAfter = function (t, e) {
+      return v(t) < this.startOf(e);
+    }, $.isBefore = function (t, e) {
+      return this.endOf(e) < v(t);
+    }, $.$g = function (t, e, n) {
+      return g.u(t) ? this[e] : this.set(n, t);
+    }, $.unix = function () {
+      return Math.floor(this.valueOf() / 1e3);
+    }, $.valueOf = function () {
+      return this.$d.getTime();
+    }, $.startOf = function (t, a) {
+      var h = this;
+      var c = !!g.u(a) || a;
+      var d = g.p(t);
+      var $ = function $(t, e) {
+        var n = g.w(h.$u ? Date.UTC(h.$y, e, t) : new Date(h.$y, e, t), h);
+        return c ? n : n.endOf(i);
+      };
+      var l = function l(t, e) {
+        return g.w(h.toDate()[t].apply(h.toDate('s'), (c ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e)), h);
+      };
+      var y = this.$W;
+      var M = this.$M;
+      var m = this.$D;
+      var D = "set".concat(this.$u ? 'UTC' : '');
+      switch (d) {
+        case o:
+          return c ? $(1, 0) : $(31, 11);
+        case u:
+          return c ? $(1, M) : $(0, M + 1);
+        case s:
+          var v = this.$locale().weekStart || 0;
+          var S = (y < v ? y + 7 : y) - v;
+          return $(c ? m - S : m + (6 - S), M);
+        case i:
+        case f:
+          return l("".concat(D, "Hours"), 0);
+        case r:
+          return l("".concat(D, "Minutes"), 1);
+        case n:
+          return l("".concat(D, "Seconds"), 2);
+        case e:
+          return l("".concat(D, "Milliseconds"), 3);
+        default:
+          return this.clone();
+      }
+    }, $.endOf = function (t) {
+      return this.startOf(t, !1);
+    }, $.$set = function (s, a) {
+      var h;
+      var c = g.p(s);
+      var d = "set".concat(this.$u ? 'UTC' : '');
+      var $ = (h = {}, h[i] = "".concat(d, "Date"), h[f] = "".concat(d, "Date"), h[u] = "".concat(d, "Month"), h[o] = "".concat(d, "FullYear"), h[r] = "".concat(d, "Hours"), h[n] = "".concat(d, "Minutes"), h[e] = "".concat(d, "Seconds"), h[t] = "".concat(d, "Milliseconds"), h)[c];
+      var l = c === i ? this.$D + (a - this.$W) : a;
+      if (c === u || c === o) {
+        var _y = this.clone().set(f, 1);
+        _y.$d[$](l), _y.init(), this.$d = _y.set(f, Math.min(this.$D, _y.daysInMonth())).$d;
+      } else $ && this.$d[$](l);
+      return this.init(), this;
+    }, $.set = function (t, e) {
+      return this.clone().$set(t, e);
+    }, $.get = function (t) {
+      return this[g.p(t)]();
+    }, $.add = function (t, a) {
+      var f;
+      var h = this;
+      t = Number(t);
+      var c = g.p(a);
+      var d = function d(e) {
+        var n = v(h);
+        return g.w(n.date(n.date() + Math.round(e * t)), h);
+      };
+      if (c === u) return this.set(u, this.$M + t);
+      if (c === o) return this.set(o, this.$y + t);
+      if (c === i) return d(1);
+      if (c === s) return d(7);
+      var $ = (f = {}, f[n] = 6e4, f[r] = 36e5, f[e] = 1e3, f)[c] || 1;
+      var l = this.$d.getTime() + t * $;
+      return g.w(l, this);
+    }, $.subtract = function (t, e) {
+      return this.add(-1 * t, e);
+    }, $.format = function (t) {
+      var e = this;
+      if (!this.isValid()) return 'Invalid Date';
+      var n = t || 'YYYY-MM-DDTHH:mm:ssZ';
+      var r = g.z(this);
+      var i = this.$locale();
+      var s = this.$H;
+      var u = this.$m;
+      var a = this.$M;
+      var o = i.weekdays;
+      var f = i.months;
+      var h = function h(t, r, i, s) {
+        return t && (t[r] || t(e, n)) || i[r].substr(0, s);
+      };
+      var d = function d(t) {
+        return g.s(s % 12 || 12, t, '0');
+      };
+      var $ = i.meridiem || function (t, e, n) {
+        var r = t < 12 ? 'AM' : 'PM';
+        return n ? r.toLowerCase() : r;
+      };
+      var l = {
+        YY: String(this.$y).slice(-2),
+        YYYY: this.$y,
+        M: a + 1,
+        MM: g.s(a + 1, 2, '0'),
+        MMM: h(i.monthsShort, a, f, 3),
+        MMMM: h(f, a),
+        D: this.$D,
+        DD: g.s(this.$D, 2, '0'),
+        d: String(this.$W),
+        dd: h(i.weekdaysMin, this.$W, o, 2),
+        ddd: h(i.weekdaysShort, this.$W, o, 3),
+        dddd: o[this.$W],
+        H: String(s),
+        HH: g.s(s, 2, '0'),
+        h: d(1),
+        hh: d(2),
+        a: $(s, u, !0),
+        A: $(s, u, !1),
+        m: String(u),
+        mm: g.s(u, 2, '0'),
+        s: String(this.$s),
+        ss: g.s(this.$s, 2, '0'),
+        SSS: g.s(this.$ms, 3, '0'),
+        Z: r
+      };
+      return n.replace(c, function (t, e) {
+        return e || l[t] || r.replace(':', '');
+      });
+    }, $.utcOffset = function () {
+      return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+    }, $.diff = function (t, f, h) {
+      var c;
+      var d = g.p(f);
+      var $ = v(t);
+      var l = 6e4 * ($.utcOffset() - this.utcOffset());
+      var y = this - $;
+      var M = g.m(this, $);
+      return M = (c = {}, c[o] = M / 12, c[u] = M, c[a] = M / 3, c[s] = (y - l) / 6048e5, c[i] = (y - l) / 864e5, c[r] = y / 36e5, c[n] = y / 6e4, c[e] = y / 1e3, c)[d] || y, h ? M : g.a(M);
+    }, $.daysInMonth = function () {
+      return this.endOf(u).$D;
+    }, $.$locale = function () {
+      return M[this.$L];
+    }, $.locale = function (t, e) {
+      if (!t) return this.$L;
+      var n = this.clone();
+      var r = D(t, e, !0);
+      return r && (n.$L = r), n;
+    }, $.clone = function () {
+      return g.w(this.$d, this);
+    }, $.toDate = function () {
+      return new Date(this.valueOf());
+    }, $.toJSON = function () {
+      return this.isValid() ? this.toISOString() : null;
+    }, $.toISOString = function () {
+      return this.$d.toISOString();
+    }, $.toString = function () {
+      return this.$d.toUTCString();
+    }, d;
+  }();
+  var p = S.prototype;
+  return v.prototype = p, [['$ms', t], ['$s', e], ['$m', n], ['$H', r], ['$W', i], ['$M', u], ['$y', o], ['$D', f]].forEach(function (t) {
+    p[t[1]] = function (e) {
+      return this.$g(e, t[0], t[1]);
+    };
+  }), v.extend = function (t, e) {
+    return t.$i || (t(e, S, v), t.$i = !0), v;
+  }, v.locale = D, v.isDayjs = m, v.unix = function (t) {
+    return v(1e3 * t);
+  }, v.en = M[y], v.Ls = M, v.p = {}, v;
+});
+
+/***/ }),
 /* 395 */,
 /* 396 */,
 /* 397 */,
 /* 398 */,
 /* 399 */,
-/* 400 */
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -20537,19 +20990,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.uniCloud = exports.default = exports.UniCloudError = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 401));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 410));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 402));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 403));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 404));
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 405));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 411));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 412));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 413));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 414));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 407));
+var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 416));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e33) { throw _e33; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e34) { didErr = true; err = _e34; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
@@ -21002,7 +21455,7 @@ var S = "development" === "development",
   x = true;
 var O = "";
 try {
-  O = (__webpack_require__(/*! uni-stat-config */ 408).default || __webpack_require__(/*! uni-stat-config */ 408)).appid;
+  O = (__webpack_require__(/*! uni-stat-config */ 417).default || __webpack_require__(/*! uni-stat-config */ 417)).appid;
 } catch (e) {}
 var E = {};
 function L(e) {
@@ -28568,7 +29021,7 @@ exports.default = Ys;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 401 */
+/* 410 */
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -28584,7 +29037,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 402 */
+/* 411 */
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -28611,7 +29064,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 403 */
+/* 412 */
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -28619,7 +29072,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 401);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 410);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -28631,7 +29084,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 404 */
+/* 413 */
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -28647,16 +29100,16 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 405 */
+/* 414 */
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 404);
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 413);
 var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 406);
+var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 415);
 var construct = __webpack_require__(/*! ./construct.js */ 15);
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -28687,7 +29140,7 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 406 */
+/* 415 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -28704,7 +29157,7 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 407 */
+/* 416 */
 /*!****************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/pages.json?{"type":"origin-pages-json"} ***!
   \****************************************************************************/
@@ -28775,6 +29228,7 @@ var _default = {
   }, {
     "path": "pages/record/components/picturesTextPost",
     "style": {
+      "navigationBarBackgroundColor": "#ffea9c",
       "navigationBarTitleText": ""
     }
   }, {
@@ -28868,12 +29322,36 @@ var _default = {
       "selectedIconPath": "static/tabbar/master2.png"
     }]
   },
-  "uniIdRouter": {}
+  "uniIdRouter": {},
+  "condition": {
+    "current": 0,
+    "list": [{
+      "name": "1.开屏页",
+      "path": "pages/firstPage/firstPage",
+      "query": ""
+    }, {
+      "name": "2.添加宠物生活记录",
+      "path": "pages/record/recordItems/addRecord",
+      "query": ""
+    }, {
+      "name": "3.编辑宠物信息",
+      "path": "pages/petInfo/petInfo",
+      "query": ""
+    }, {
+      "name": "4.添加日常提醒",
+      "path": "pages/record/components/textPost",
+      "query": ""
+    }, {
+      "name": "5.发帖",
+      "path": "pages/record/components/picturesTextPost",
+      "query": ""
+    }]
+  }
 };
 exports.default = _default;
 
 /***/ }),
-/* 408 */
+/* 417 */
 /*!***************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/pages.json?{"type":"stat"} ***!
   \***************************************************************/
@@ -28893,7 +29371,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 409 */
+/* 418 */
 /*!*********************************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-file-picker/components/uni-file-picker/choose-and-upload-file.js ***!
   \*********************************************************************************************************************/
@@ -29113,10 +29591,10 @@ function chooseAndUploadFile() {
   }
   return uploadFiles(chooseAll(opts), opts);
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 400)["uniCloud"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 409)["uniCloud"]))
 
 /***/ }),
-/* 410 */
+/* 419 */
 /*!****************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-file-picker/components/uni-file-picker/utils.js ***!
   \****************************************************************************************************/
@@ -29280,14 +29758,14 @@ exports.get_file_data = get_file_data;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 411 */,
-/* 412 */,
-/* 413 */,
-/* 414 */,
-/* 415 */,
-/* 416 */,
-/* 417 */,
-/* 418 */
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */
 /*!*******************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \*******************************************************************************************/
@@ -29303,9 +29781,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 402));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 403));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 404));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 411));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 412));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 413));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -29978,7 +30456,7 @@ var _default = SchemaValidator;
 exports.default = _default;
 
 /***/ }),
-/* 419 */
+/* 428 */
 /*!****************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \****************************************************************************************/
@@ -30313,15 +30791,6 @@ var isEqual = function isEqual(a, b) {
 exports.isEqual = isEqual;
 
 /***/ }),
-/* 420 */,
-/* 421 */,
-/* 422 */,
-/* 423 */,
-/* 424 */,
-/* 425 */,
-/* 426 */,
-/* 427 */,
-/* 428 */,
 /* 429 */,
 /* 430 */,
 /* 431 */,
@@ -30341,7 +30810,16 @@ exports.isEqual = isEqual;
 /* 445 */,
 /* 446 */,
 /* 447 */,
-/* 448 */
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */
 /*!***********************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-tag/props.js ***!
   \***********************************************************************************/
@@ -30443,17 +30921,17 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 449 */,
-/* 450 */,
-/* 451 */,
-/* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-datetime-picker/props.js ***!
-  \***********************************************************************************************/
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-picker/props.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30466,117 +30944,80 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   props: {
-    // 是否打开组件
+    // 是否展示picker弹窗
     show: {
       type: Boolean,
-      default: uni.$u.props.datetimePicker.show
+      default: uni.$u.props.picker.show
     },
     // 是否展示顶部的操作栏
     showToolbar: {
       type: Boolean,
-      default: uni.$u.props.datetimePicker.showToolbar
-    },
-    // 绑定值
-    value: {
-      type: [String, Number],
-      default: uni.$u.props.datetimePicker.value
+      default: uni.$u.props.picker.showToolbar
     },
     // 顶部标题
     title: {
       type: String,
-      default: uni.$u.props.datetimePicker.title
+      default: uni.$u.props.picker.title
     },
-    // 展示格式，mode=date为日期选择，mode=time为时间选择，mode=year-month为年月选择，mode=datetime为日期时间选择
-    mode: {
-      type: String,
-      default: uni.$u.props.datetimePicker.mode
-    },
-    // 可选的最大时间
-    maxDate: {
-      type: Number,
-      // 最大默认值为后10年
-      default: uni.$u.props.datetimePicker.maxDate
-    },
-    // 可选的最小时间
-    minDate: {
-      type: Number,
-      // 最小默认值为前10年
-      default: uni.$u.props.datetimePicker.minDate
-    },
-    // 可选的最小小时，仅mode=time有效
-    minHour: {
-      type: Number,
-      default: uni.$u.props.datetimePicker.minHour
-    },
-    // 可选的最大小时，仅mode=time有效
-    maxHour: {
-      type: Number,
-      default: uni.$u.props.datetimePicker.maxHour
-    },
-    // 可选的最小分钟，仅mode=time有效
-    minMinute: {
-      type: Number,
-      default: uni.$u.props.datetimePicker.minMinute
-    },
-    // 可选的最大分钟，仅mode=time有效
-    maxMinute: {
-      type: Number,
-      default: uni.$u.props.datetimePicker.maxMinute
-    },
-    // 选项过滤函数
-    filter: {
-      type: [Function, null],
-      default: uni.$u.props.datetimePicker.filter
-    },
-    // 选项格式化函数
-    formatter: {
-      type: [Function, null],
-      default: uni.$u.props.datetimePicker.formatter
+    // 对象数组，设置每一列的数据
+    columns: {
+      type: Array,
+      default: uni.$u.props.picker.columns
     },
     // 是否显示加载中状态
     loading: {
       type: Boolean,
-      default: uni.$u.props.datetimePicker.loading
+      default: uni.$u.props.picker.loading
     },
     // 各列中，单个选项的高度
     itemHeight: {
       type: [String, Number],
-      default: uni.$u.props.datetimePicker.itemHeight
+      default: uni.$u.props.picker.itemHeight
     },
     // 取消按钮的文字
     cancelText: {
       type: String,
-      default: uni.$u.props.datetimePicker.cancelText
+      default: uni.$u.props.picker.cancelText
     },
     // 确认按钮的文字
     confirmText: {
       type: String,
-      default: uni.$u.props.datetimePicker.confirmText
+      default: uni.$u.props.picker.confirmText
     },
     // 取消按钮的颜色
     cancelColor: {
       type: String,
-      default: uni.$u.props.datetimePicker.cancelColor
+      default: uni.$u.props.picker.cancelColor
     },
     // 确认按钮的颜色
     confirmColor: {
       type: String,
-      default: uni.$u.props.datetimePicker.confirmColor
+      default: uni.$u.props.picker.confirmColor
     },
     // 每列中可见选项的数量
     visibleItemCount: {
       type: [String, Number],
-      default: uni.$u.props.datetimePicker.visibleItemCount
+      default: uni.$u.props.picker.visibleItemCount
+    },
+    // 选项对象中，需要展示的属性键名
+    keyName: {
+      type: String,
+      default: uni.$u.props.picker.keyName
     },
     // 是否允许点击遮罩关闭选择器
     closeOnClickOverlay: {
       type: Boolean,
-      default: uni.$u.props.datetimePicker.closeOnClickOverlay
+      default: uni.$u.props.picker.closeOnClickOverlay
     },
     // 各列的默认索引
     defaultIndex: {
       type: Array,
-      default: uni.$u.props.datetimePicker.defaultIndex
+      default: uni.$u.props.picker.defaultIndex
+    },
+    // 是否在手指松开时立即触发 change 事件。若不开启则会在滚动动画结束后触发 change 事件，只在微信2.21.1及以上有效
+    immediateChange: {
+      type: Boolean,
+      default: uni.$u.props.picker.immediateChange
     }
   }
 };
@@ -30584,333 +31025,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 457 */
-/*!****************************************************************************!*\
-  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/libs/util/dayjs.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
-!function (t, e) {
-  ( false ? undefined : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = e() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (e),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
-}(this, function () {
-  'use strict';
-
-  var t = 'millisecond';
-  var e = 'second';
-  var n = 'minute';
-  var r = 'hour';
-  var i = 'day';
-  var s = 'week';
-  var u = 'month';
-  var a = 'quarter';
-  var o = 'year';
-  var f = 'date';
-  var h = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/;
-  var c = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
-  var d = {
-    name: 'en',
-    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
-  };
-  var $ = function $(t, e, n) {
-    var r = String(t);
-    return !r || r.length >= e ? t : "".concat(Array(e + 1 - r.length).join(n)).concat(t);
-  };
-  var l = {
-    s: $,
-    z: function z(t) {
-      var e = -t.utcOffset();
-      var n = Math.abs(e);
-      var r = Math.floor(n / 60);
-      var i = n % 60;
-      return "".concat((e <= 0 ? '+' : '-') + $(r, 2, '0'), ":").concat($(i, 2, '0'));
-    },
-    m: function t(e, n) {
-      if (e.date() < n.date()) return -t(n, e);
-      var r = 12 * (n.year() - e.year()) + (n.month() - e.month());
-      var i = e.clone().add(r, u);
-      var s = n - i < 0;
-      var a = e.clone().add(r + (s ? -1 : 1), u);
-      return +(-(r + (n - i) / (s ? i - a : a - i)) || 0);
-    },
-    a: function a(t) {
-      return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);
-    },
-    p: function p(h) {
-      return {
-        M: u,
-        y: o,
-        w: s,
-        d: i,
-        D: f,
-        h: r,
-        m: n,
-        s: e,
-        ms: t,
-        Q: a
-      }[h] || String(h || '').toLowerCase().replace(/s$/, '');
-    },
-    u: function u(t) {
-      return void 0 === t;
-    }
-  };
-  var y = 'en';
-  var M = {};
-  M[y] = d;
-  var m = function m(t) {
-    return t instanceof S;
-  };
-  var D = function D(t, e, n) {
-    var r;
-    if (!t) return y;
-    if (typeof t === 'string') M[t] && (r = t), e && (M[t] = e, r = t);else {
-      var _i = t.name;
-      M[_i] = t, r = _i;
-    }
-    return !n && r && (y = r), r || !n && y;
-  };
-  var v = function v(t, e) {
-    if (m(t)) return t.clone();
-    var n = _typeof(e) === 'object' ? e : {};
-    return n.date = t, n.args = arguments, new S(n);
-  };
-  var g = l;
-  g.l = D, g.i = m, g.w = function (t, e) {
-    return v(t, {
-      locale: e.$L,
-      utc: e.$u,
-      x: e.$x,
-      $offset: e.$offset
-    });
-  };
-  var S = function () {
-    function d(t) {
-      this.$L = D(t.locale, null, !0), this.parse(t);
-    }
-    var $ = d.prototype;
-    return $.parse = function (t) {
-      this.$d = function (t) {
-        var e = t.date;
-        var n = t.utc;
-        if (e === null) return new Date(NaN);
-        if (g.u(e)) return new Date();
-        if (e instanceof Date) return new Date(e);
-        if (typeof e === 'string' && !/Z$/i.test(e)) {
-          var _r = e.match(h);
-          if (_r) {
-            var _i2 = _r[2] - 1 || 0;
-            var _s = (_r[7] || '0').substring(0, 3);
-            return n ? new Date(Date.UTC(_r[1], _i2, _r[3] || 1, _r[4] || 0, _r[5] || 0, _r[6] || 0, _s)) : new Date(_r[1], _i2, _r[3] || 1, _r[4] || 0, _r[5] || 0, _r[6] || 0, _s);
-          }
-        }
-        return new Date(e);
-      }(t), this.$x = t.x || {}, this.init();
-    }, $.init = function () {
-      var t = this.$d;
-      this.$y = t.getFullYear(), this.$M = t.getMonth(), this.$D = t.getDate(), this.$W = t.getDay(), this.$H = t.getHours(), this.$m = t.getMinutes(), this.$s = t.getSeconds(), this.$ms = t.getMilliseconds();
-    }, $.$utils = function () {
-      return g;
-    }, $.isValid = function () {
-      return !(this.$d.toString() === 'Invalid Date');
-    }, $.isSame = function (t, e) {
-      var n = v(t);
-      return this.startOf(e) <= n && n <= this.endOf(e);
-    }, $.isAfter = function (t, e) {
-      return v(t) < this.startOf(e);
-    }, $.isBefore = function (t, e) {
-      return this.endOf(e) < v(t);
-    }, $.$g = function (t, e, n) {
-      return g.u(t) ? this[e] : this.set(n, t);
-    }, $.unix = function () {
-      return Math.floor(this.valueOf() / 1e3);
-    }, $.valueOf = function () {
-      return this.$d.getTime();
-    }, $.startOf = function (t, a) {
-      var h = this;
-      var c = !!g.u(a) || a;
-      var d = g.p(t);
-      var $ = function $(t, e) {
-        var n = g.w(h.$u ? Date.UTC(h.$y, e, t) : new Date(h.$y, e, t), h);
-        return c ? n : n.endOf(i);
-      };
-      var l = function l(t, e) {
-        return g.w(h.toDate()[t].apply(h.toDate('s'), (c ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e)), h);
-      };
-      var y = this.$W;
-      var M = this.$M;
-      var m = this.$D;
-      var D = "set".concat(this.$u ? 'UTC' : '');
-      switch (d) {
-        case o:
-          return c ? $(1, 0) : $(31, 11);
-        case u:
-          return c ? $(1, M) : $(0, M + 1);
-        case s:
-          var v = this.$locale().weekStart || 0;
-          var S = (y < v ? y + 7 : y) - v;
-          return $(c ? m - S : m + (6 - S), M);
-        case i:
-        case f:
-          return l("".concat(D, "Hours"), 0);
-        case r:
-          return l("".concat(D, "Minutes"), 1);
-        case n:
-          return l("".concat(D, "Seconds"), 2);
-        case e:
-          return l("".concat(D, "Milliseconds"), 3);
-        default:
-          return this.clone();
-      }
-    }, $.endOf = function (t) {
-      return this.startOf(t, !1);
-    }, $.$set = function (s, a) {
-      var h;
-      var c = g.p(s);
-      var d = "set".concat(this.$u ? 'UTC' : '');
-      var $ = (h = {}, h[i] = "".concat(d, "Date"), h[f] = "".concat(d, "Date"), h[u] = "".concat(d, "Month"), h[o] = "".concat(d, "FullYear"), h[r] = "".concat(d, "Hours"), h[n] = "".concat(d, "Minutes"), h[e] = "".concat(d, "Seconds"), h[t] = "".concat(d, "Milliseconds"), h)[c];
-      var l = c === i ? this.$D + (a - this.$W) : a;
-      if (c === u || c === o) {
-        var _y = this.clone().set(f, 1);
-        _y.$d[$](l), _y.init(), this.$d = _y.set(f, Math.min(this.$D, _y.daysInMonth())).$d;
-      } else $ && this.$d[$](l);
-      return this.init(), this;
-    }, $.set = function (t, e) {
-      return this.clone().$set(t, e);
-    }, $.get = function (t) {
-      return this[g.p(t)]();
-    }, $.add = function (t, a) {
-      var f;
-      var h = this;
-      t = Number(t);
-      var c = g.p(a);
-      var d = function d(e) {
-        var n = v(h);
-        return g.w(n.date(n.date() + Math.round(e * t)), h);
-      };
-      if (c === u) return this.set(u, this.$M + t);
-      if (c === o) return this.set(o, this.$y + t);
-      if (c === i) return d(1);
-      if (c === s) return d(7);
-      var $ = (f = {}, f[n] = 6e4, f[r] = 36e5, f[e] = 1e3, f)[c] || 1;
-      var l = this.$d.getTime() + t * $;
-      return g.w(l, this);
-    }, $.subtract = function (t, e) {
-      return this.add(-1 * t, e);
-    }, $.format = function (t) {
-      var e = this;
-      if (!this.isValid()) return 'Invalid Date';
-      var n = t || 'YYYY-MM-DDTHH:mm:ssZ';
-      var r = g.z(this);
-      var i = this.$locale();
-      var s = this.$H;
-      var u = this.$m;
-      var a = this.$M;
-      var o = i.weekdays;
-      var f = i.months;
-      var h = function h(t, r, i, s) {
-        return t && (t[r] || t(e, n)) || i[r].substr(0, s);
-      };
-      var d = function d(t) {
-        return g.s(s % 12 || 12, t, '0');
-      };
-      var $ = i.meridiem || function (t, e, n) {
-        var r = t < 12 ? 'AM' : 'PM';
-        return n ? r.toLowerCase() : r;
-      };
-      var l = {
-        YY: String(this.$y).slice(-2),
-        YYYY: this.$y,
-        M: a + 1,
-        MM: g.s(a + 1, 2, '0'),
-        MMM: h(i.monthsShort, a, f, 3),
-        MMMM: h(f, a),
-        D: this.$D,
-        DD: g.s(this.$D, 2, '0'),
-        d: String(this.$W),
-        dd: h(i.weekdaysMin, this.$W, o, 2),
-        ddd: h(i.weekdaysShort, this.$W, o, 3),
-        dddd: o[this.$W],
-        H: String(s),
-        HH: g.s(s, 2, '0'),
-        h: d(1),
-        hh: d(2),
-        a: $(s, u, !0),
-        A: $(s, u, !1),
-        m: String(u),
-        mm: g.s(u, 2, '0'),
-        s: String(this.$s),
-        ss: g.s(this.$s, 2, '0'),
-        SSS: g.s(this.$ms, 3, '0'),
-        Z: r
-      };
-      return n.replace(c, function (t, e) {
-        return e || l[t] || r.replace(':', '');
-      });
-    }, $.utcOffset = function () {
-      return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
-    }, $.diff = function (t, f, h) {
-      var c;
-      var d = g.p(f);
-      var $ = v(t);
-      var l = 6e4 * ($.utcOffset() - this.utcOffset());
-      var y = this - $;
-      var M = g.m(this, $);
-      return M = (c = {}, c[o] = M / 12, c[u] = M, c[a] = M / 3, c[s] = (y - l) / 6048e5, c[i] = (y - l) / 864e5, c[r] = y / 36e5, c[n] = y / 6e4, c[e] = y / 1e3, c)[d] || y, h ? M : g.a(M);
-    }, $.daysInMonth = function () {
-      return this.endOf(u).$D;
-    }, $.$locale = function () {
-      return M[this.$L];
-    }, $.locale = function (t, e) {
-      if (!t) return this.$L;
-      var n = this.clone();
-      var r = D(t, e, !0);
-      return r && (n.$L = r), n;
-    }, $.clone = function () {
-      return g.w(this.$d, this);
-    }, $.toDate = function () {
-      return new Date(this.valueOf());
-    }, $.toJSON = function () {
-      return this.isValid() ? this.toISOString() : null;
-    }, $.toISOString = function () {
-      return this.$d.toISOString();
-    }, $.toString = function () {
-      return this.$d.toUTCString();
-    }, d;
-  }();
-  var p = S.prototype;
-  return v.prototype = p, [['$ms', t], ['$s', e], ['$m', n], ['$H', r], ['$W', i], ['$M', u], ['$y', o], ['$D', f]].forEach(function (t) {
-    p[t[1]] = function (e) {
-      return this.$g(e, t[0], t[1]);
-    };
-  }), v.extend = function (t, e) {
-    return t.$i || (t(e, S, v), t.$i = !0), v;
-  }, v.locale = D, v.isDayjs = m, v.unix = function (t) {
-    return v(1e3 * t);
-  }, v.en = M[y], v.Ls = M, v.p = {}, v;
-});
-
-/***/ }),
-/* 458 */,
-/* 459 */,
-/* 460 */,
-/* 461 */,
-/* 462 */,
-/* 463 */,
-/* 464 */,
-/* 465 */,
 /* 466 */,
 /* 467 */,
 /* 468 */,
 /* 469 */,
 /* 470 */,
 /* 471 */,
-/* 472 */
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */
 /*!****************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \****************************************************************************************************/
@@ -31413,14 +31542,14 @@ var fontData = [{
 exports.fontData = fontData;
 
 /***/ }),
-/* 473 */,
-/* 474 */,
-/* 475 */,
-/* 476 */,
-/* 477 */,
-/* 478 */,
-/* 479 */,
-/* 480 */
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */
 /*!************************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
   \************************************************************************************************************/
@@ -31554,14 +31683,6 @@ function createAnimation(option, _this) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 481 */,
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */,
 /* 489 */,
 /* 490 */,
 /* 491 */,
@@ -31587,7 +31708,15 @@ function createAnimation(option, _this) {
 /* 511 */,
 /* 512 */,
 /* 513 */,
-/* 514 */
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */
 /*!*****************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
   \*****************************************************************************************************/
@@ -31602,9 +31731,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 515));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 516));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 517));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 523));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 524));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 525));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -31613,7 +31742,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 515 */
+/* 523 */
 /*!****************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
   \****************************************************************************************************/
@@ -31623,7 +31752,7 @@ exports.default = _default;
 module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
 
 /***/ }),
-/* 516 */
+/* 524 */
 /*!*********************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
   \*********************************************************************************************************/
@@ -31633,7 +31762,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show mo
 module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
 
 /***/ }),
-/* 517 */
+/* 525 */
 /*!*********************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
   \*********************************************************************************************************/
@@ -31643,14 +31772,14 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
 
 /***/ }),
-/* 518 */,
-/* 519 */,
-/* 520 */,
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */
+/* 526 */,
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */
 /*!******************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-transition/props.js ***!
   \******************************************************************************************/
@@ -31692,7 +31821,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 526 */
+/* 534 */
 /*!***********************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-transition/transition.js ***!
   \***********************************************************************************************/
@@ -31709,7 +31838,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 527));
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 535));
 // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {
   return new Promise(function (resolve) {
@@ -31801,7 +31930,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 527 */
+/* 535 */
 /*!*************************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \*************************************************************************************************/
@@ -31994,14 +32123,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 528 */,
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */,
-/* 534 */,
-/* 535 */
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */
 /*!************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \************************************************************************************/
@@ -32232,7 +32361,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 536 */
+/* 544 */
 /*!************************************************************************************!*\
   !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-icon/props.js ***!
   \************************************************************************************/
@@ -32332,110 +32461,6 @@ var _default = {
     stop: {
       type: Boolean,
       default: uni.$u.props.icon.stop
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/朱曼/Desktop/PetDaily/uni_modules/uview-ui/components/u-picker/props.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    // 是否展示picker弹窗
-    show: {
-      type: Boolean,
-      default: uni.$u.props.picker.show
-    },
-    // 是否展示顶部的操作栏
-    showToolbar: {
-      type: Boolean,
-      default: uni.$u.props.picker.showToolbar
-    },
-    // 顶部标题
-    title: {
-      type: String,
-      default: uni.$u.props.picker.title
-    },
-    // 对象数组，设置每一列的数据
-    columns: {
-      type: Array,
-      default: uni.$u.props.picker.columns
-    },
-    // 是否显示加载中状态
-    loading: {
-      type: Boolean,
-      default: uni.$u.props.picker.loading
-    },
-    // 各列中，单个选项的高度
-    itemHeight: {
-      type: [String, Number],
-      default: uni.$u.props.picker.itemHeight
-    },
-    // 取消按钮的文字
-    cancelText: {
-      type: String,
-      default: uni.$u.props.picker.cancelText
-    },
-    // 确认按钮的文字
-    confirmText: {
-      type: String,
-      default: uni.$u.props.picker.confirmText
-    },
-    // 取消按钮的颜色
-    cancelColor: {
-      type: String,
-      default: uni.$u.props.picker.cancelColor
-    },
-    // 确认按钮的颜色
-    confirmColor: {
-      type: String,
-      default: uni.$u.props.picker.confirmColor
-    },
-    // 每列中可见选项的数量
-    visibleItemCount: {
-      type: [String, Number],
-      default: uni.$u.props.picker.visibleItemCount
-    },
-    // 选项对象中，需要展示的属性键名
-    keyName: {
-      type: String,
-      default: uni.$u.props.picker.keyName
-    },
-    // 是否允许点击遮罩关闭选择器
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: uni.$u.props.picker.closeOnClickOverlay
-    },
-    // 各列的默认索引
-    defaultIndex: {
-      type: Array,
-      default: uni.$u.props.picker.defaultIndex
-    },
-    // 是否在手指松开时立即触发 change 事件。若不开启则会在滚动动画结束后触发 change 事件，只在微信2.21.1及以上有效
-    immediateChange: {
-      type: Boolean,
-      default: uni.$u.props.picker.immediateChange
     }
   }
 };

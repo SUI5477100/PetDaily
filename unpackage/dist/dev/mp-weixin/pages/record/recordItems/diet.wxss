@@ -30,4 +30,16 @@
 .m30.data-v-214ce6a9 {
   margin: 0 30rpx;
 }
+.text-center.data-v-214ce6a9 {
+  background-color: #f2f2f2;
+  border-radius: 20rpx;
+  width: 80rpx;
+  padding: 10rpx;
+  text-align: center;
+}
+.w230.data-v-214ce6a9 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 

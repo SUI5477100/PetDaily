@@ -77,10 +77,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show3 = true
+    }
+    _vm.e3 = function ($event) {
+      _vm.show4 = true
+    }
+    _vm.e4 = function ($event) {
+      _vm.show5 = true
+    }
+    _vm.e5 = function ($event) {
+      _vm.show6 = true
+    }
+    _vm.e6 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e7 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolType")
+    }
+    _vm.e8 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e9 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolUnit")
+    }
+    _vm.e10 = function ($event) {
+      _vm.show3 = false
+    }
+    _vm.e11 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolAmount")
+    }
+    _vm.e12 = function ($event) {
+      _vm.show4 = false
+    }
+    _vm.e13 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolStatus")
+    }
+    _vm.e14 = function ($event) {
+      _vm.show5 = false
+    }
+    _vm.e15 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolColor")
+    }
+    _vm.e16 = function ($event) {
+      _vm.show6 = false
+    }
+    _vm.e17 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolUnusual")
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -126,11 +205,212 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      show5: false,
+      show6: false,
+      columns: [['排尿', '排便', '尿便混合']],
+      columnsType: [['次/天', '次/周', '小时/次']],
+      columnsAmount: [['正常', '较少', '较多']],
+      columnsStatus: [['正常', '干硬', '松软', '稀便', '泥状便', '清澈', '絮状', '云雾状']],
+      columnsColor: [['正常', '淡黄色', '深黄色', '淡红色', '绿色', '黑色', '灰色']],
+      columnsUnusual: [['气味异常', '频率异常', '颜色异常', '状态异常', '排泄困难', '含异常物质']],
+      inputValue: '',
+      stoolUnit: '次/天',
+      // 存储排泄量单位
+      selectedValue: {
+        stoolType: '',
+        // 存储排泄类型
+        stoolFrequency: '',
+        // 存储计算后的排泄频率
+        stoolAmount: '正常',
+        stoolStatus: '正常',
+        stoolColor: '正常',
+        stoolUnusual: ''
+      }
+    };
   },
-  methods: {}
+  watch: {
+    // 监听 inputValue 或 stoolUnit 变化时计算并更新 stoolFrequency
+    inputValue: function inputValue() {
+      this.updatestoolFrequency();
+    },
+    stoolUnit: function stoolUnit() {
+      this.updatestoolFrequency();
+    }
+  },
+  methods: {
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      // 定义一个映射对象
+      var fieldMap = {
+        stoolType: 'stoolType',
+        stoolUnit: 'stoolUnit',
+        stoolAmount: 'stoolAmount',
+        stoolStatus: 'stoolStatus',
+        stoolColor: 'stoolColor',
+        stoolUnusual: 'stoolUnusual'
+      };
+      console.log(fieldMap[type], '999999');
+      // 更新选中的值
+      if (fieldMap[type]) {
+        this.selectedValue[fieldMap[type]] = value.value[0];
+      }
+
+      // 关闭弹框
+      this["show".concat(Object.keys(fieldMap).indexOf(type) + 1)] = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新排泄量
+      this.updatestoolFrequency();
+    },
+    // // 合并后的 picker 变化处理函数
+    // onPickerChangeCommon(value, type) {
+    // 	if (type === 'stoolType') {
+    // 		// 如果是排泄类型变化
+    // 		this.selectedValue.stoolType = value.value[0];
+    // 	} else if (type === 'stoolUnit') {
+    // 		// 如果是排泄单位变化
+    // 		this.stoolUnit = value.value[0];
+    // 	} else if (type === 'stoolAmount') {
+    // 		this.selectedValue.stoolAmount = value.value[0]
+    // 	} else if (type === 'stoolStatus') {
+    // 		this.selectedValue.stoolStatus = value.value[0]
+    // 	} else if (type === 'stoolColor') {
+    // 		this.selectedValue.stoolColor = value.value[0]
+    // 	}else if (type === 'stoolUnusual') {
+    // 		this.selectedValue.stoolUnusual = value.value[0]
+    // 	}
+    // 	// 关闭弹框
+    // 	if (type === 'stoolType') {
+    // 		this.show1 = false;
+    // 	} else if (type === 'stoolUnit') {
+    // 		this.show2 = false;
+    // 	} else if (type === 'stoolAmount') {
+    // 		this.show3 = false;
+    // 	} else if (type === 'stoolStatus') {
+    // 		this.show4 = false;
+    // 	} else if (type === 'stoolColor') {
+    // 		this.show5 = false;
+    // 	}else if (type === 'stoolUnusual') {
+    // 		this.show6 = false;
+    // 	}
+    // 	// 打印选择的值
+    // 	console.log(value.value);
+    // 	// 计算并更新排泄量
+    // 	this.updatestoolFrequency();
+    // },
+    // 更新排泄量
+    updatestoolFrequency: function updatestoolFrequency() {
+      var stoolFrequency = "".concat(this.inputValue).concat(this.stoolUnit);
+      this.selectedValue.stoolFrequency = stoolFrequency;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

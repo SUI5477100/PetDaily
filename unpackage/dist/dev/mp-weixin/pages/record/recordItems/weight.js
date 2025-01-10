@@ -77,10 +77,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -136,11 +167,59 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show2: false,
+      columnsType: [['kg', 'g']],
+      inputValue: '',
+      weightUnit: 'kg',
+      // 存储进食量单位
+      selectedValue: {
+        weightAmount: '' // 存储计算后的食物量
+      }
+    };
   },
-  methods: {}
+
+  watch: {
+    // 监听 inputValue 或 weightUnit 变化时计算并更新 weightAmount
+    inputValue: function inputValue() {
+      this.updateweightAmount();
+    },
+    weightUnit: function weightUnit() {
+      this.updateweightAmount();
+    }
+  },
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.weightUnit = value.value[0];
+      this.show2 = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新食物量
+      this.updateweightAmount();
+    },
+    // 更新食物量
+    updateweightAmount: function updateweightAmount() {
+      var weightAmount = "".concat(this.inputValue).concat(this.weightUnit);
+      this.selectedValue.weightAmount = weightAmount;
+      console.log(weightAmount);
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

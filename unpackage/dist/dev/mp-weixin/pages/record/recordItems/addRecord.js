@@ -80,7 +80,7 @@ var components
 try {
   components = {
     uPicker: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 539))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
     },
   }
 } catch (e) {
@@ -106,10 +106,22 @@ var render = function () {
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
     _vm.e0 = function ($event) {
-      _vm.show = true
+      _vm.show1 = true
     }
     _vm.e1 = function ($event) {
-      _vm.show = true
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e3 = function (value) {
+      return _vm.onPickerChangeCommon(value, "foodType")
+    }
+    _vm.e4 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e5 = function (value) {
+      return _vm.onPickerChangeCommon(value, "foodUnit")
     }
   }
 }
@@ -184,26 +196,72 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
-      show: false,
+      show1: false,
+      show2: false,
       columns: [['干粮', '罐头', '生食', '零食', '自制', '营养品']],
+      columnsType: [['g', 'kg', 'mg', 'ml', '勺', '杯', '罐', '碗', '袋', '条', '片', '颗', '粒']],
+      inputValue: '',
+      foodUnit: 'g',
+      // 存储进食量单位
       selectedValue: {
         foodType: '',
         // 存储食物类型
-        foodAmount: '' // 存储进食量
+        foodAmount: '' // 存储计算后的食物量
       }
     };
   },
 
+  watch: {
+    // 监听 inputValue 或 foodUnit 变化时计算并更新 foodAmount
+    inputValue: function inputValue() {
+      this.updateFoodAmount();
+    },
+    foodUnit: function foodUnit() {
+      this.updateFoodAmount();
+    }
+  },
   methods: {
-    // 处理选择变化的函数
-    onPickerChange: function onPickerChange(value) {
-      // 假设选择的是食物类型，可以根据不同的列名进行处理
-      this.selectedValue.foodType = value.value; // 示例，设置食物类型
-      this.show = false;
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      if (type === 'foodType') {
+        // 如果是食物类型变化
+        this.selectedValue.foodType = value.value[0];
+      } else if (type === 'foodUnit') {
+        // 如果是食物单位变化
+        this.foodUnit = value.value[0];
+      }
+
+      // 关闭弹框
+      if (type === 'foodType') {
+        this.show1 = false;
+      } else if (type === 'foodUnit') {
+        this.show2 = false;
+      }
+
+      // 打印选择的值
       console.log(value.value);
+
+      // 计算并更新食物量
+      this.updateFoodAmount();
+    },
+    // 更新食物量
+    updateFoodAmount: function updateFoodAmount() {
+      var foodAmount = "".concat(this.inputValue).concat(this.foodUnit);
+      this.selectedValue.foodAmount = foodAmount;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
     }
   }
 };
@@ -347,7 +405,7 @@ try {
       return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 360))
     },
     uDatetimePicker: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker.vue */ 451))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker.vue */ 388))
     },
   }
 } catch (e) {
@@ -519,6 +577,8 @@ var _medication = _interopRequireDefault(__webpack_require__(/*! ./medication */
 //
 //
 //
+//
+//
 var _default = {
   components: {
     diet: _diet.default,
@@ -593,6 +653,9 @@ var _default = {
     },
     closeBtn: function closeBtn() {
       this.show = false;
+    },
+    handleSelectedValue: function handleSelectedValue(updatedValue) {
+      console.log(updatedValue, '0000000000000'); // 这里可以接收到传递过来的 selectedValue
     }
   }
 };
@@ -677,10 +740,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -726,11 +820,69 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show2: false,
+      columnsType: [['ml', 'L', '杯', '瓶', '碗', '勺']],
+      inputValue: '',
+      drinkUnit: 'ml',
+      // 存储饮水量单位
+      selectedValue: {
+        drinkAmount: '' // 存储计算后的饮水量
+      }
+    };
   },
-  methods: {}
+
+  watch: {
+    // 监听 inputValue 或 drinkUnit 变化时计算并更新 drinkAmount
+    inputValue: function inputValue() {
+      this.updatedrinkAmount();
+    },
+    drinkUnit: function drinkUnit() {
+      this.updatedrinkAmount();
+    }
+  },
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.drinkUnit = value.value[0];
+      this.show2 = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新饮水量
+      this.updatedrinkAmount();
+    },
+    // 更新饮水量
+    updatedrinkAmount: function updatedrinkAmount() {
+      var drinkAmount = "".concat(this.inputValue).concat(this.drinkUnit);
+      this.selectedValue.drinkAmount = drinkAmount;
+      console.log(drinkAmount);
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 
@@ -842,10 +994,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -901,11 +1084,59 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show2: false,
+      columnsType: [['kg', 'g']],
+      inputValue: '',
+      weightUnit: 'kg',
+      // 存储进食量单位
+      selectedValue: {
+        weightAmount: '' // 存储计算后的食物量
+      }
+    };
   },
-  methods: {}
+
+  watch: {
+    // 监听 inputValue 或 weightUnit 变化时计算并更新 weightAmount
+    inputValue: function inputValue() {
+      this.updateweightAmount();
+    },
+    weightUnit: function weightUnit() {
+      this.updateweightAmount();
+    }
+  },
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.weightUnit = value.value[0];
+      this.show2 = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新食物量
+      this.updateweightAmount();
+    },
+    // 更新食物量
+    updateweightAmount: function updateweightAmount() {
+      var weightAmount = "".concat(this.inputValue).concat(this.weightUnit);
+      this.selectedValue.weightAmount = weightAmount;
+      console.log(weightAmount);
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 
@@ -1017,10 +1248,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show1 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1066,11 +1328,43 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      columns: [['洗澡', '驱虫', '梳毛', '耳朵清洁', '眼睛护理', '指甲修剪', '牙齿清洁', '皮肤护理', '修剪毛发', '气味控制', '肛门腺护理']],
+      selectedValue: {
+        cleansingType: '' // 存储洗护类型
+      }
+    };
   },
-  methods: {}
+
+  watch: {},
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.selectedValue.cleansingType = value.value[0];
+      this.show1 = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+      console.log(value.value);
+    }
+  }
 };
 exports.default = _default;
 
@@ -1182,10 +1476,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show3 = true
+    }
+    _vm.e3 = function ($event) {
+      _vm.show4 = true
+    }
+    _vm.e4 = function ($event) {
+      _vm.show5 = true
+    }
+    _vm.e5 = function ($event) {
+      _vm.show6 = true
+    }
+    _vm.e6 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e7 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolType")
+    }
+    _vm.e8 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e9 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolUnit")
+    }
+    _vm.e10 = function ($event) {
+      _vm.show3 = false
+    }
+    _vm.e11 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolAmount")
+    }
+    _vm.e12 = function ($event) {
+      _vm.show4 = false
+    }
+    _vm.e13 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolStatus")
+    }
+    _vm.e14 = function ($event) {
+      _vm.show5 = false
+    }
+    _vm.e15 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolColor")
+    }
+    _vm.e16 = function ($event) {
+      _vm.show6 = false
+    }
+    _vm.e17 = function (value) {
+      return _vm.onPickerChangeCommon(value, "stoolUnusual")
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1231,11 +1604,212 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      show5: false,
+      show6: false,
+      columns: [['排尿', '排便', '尿便混合']],
+      columnsType: [['次/天', '次/周', '小时/次']],
+      columnsAmount: [['正常', '较少', '较多']],
+      columnsStatus: [['正常', '干硬', '松软', '稀便', '泥状便', '清澈', '絮状', '云雾状']],
+      columnsColor: [['正常', '淡黄色', '深黄色', '淡红色', '绿色', '黑色', '灰色']],
+      columnsUnusual: [['气味异常', '频率异常', '颜色异常', '状态异常', '排泄困难', '含异常物质']],
+      inputValue: '',
+      stoolUnit: '次/天',
+      // 存储排泄量单位
+      selectedValue: {
+        stoolType: '',
+        // 存储排泄类型
+        stoolFrequency: '',
+        // 存储计算后的排泄频率
+        stoolAmount: '正常',
+        stoolStatus: '正常',
+        stoolColor: '正常',
+        stoolUnusual: ''
+      }
+    };
   },
-  methods: {}
+  watch: {
+    // 监听 inputValue 或 stoolUnit 变化时计算并更新 stoolFrequency
+    inputValue: function inputValue() {
+      this.updatestoolFrequency();
+    },
+    stoolUnit: function stoolUnit() {
+      this.updatestoolFrequency();
+    }
+  },
+  methods: {
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      // 定义一个映射对象
+      var fieldMap = {
+        stoolType: 'stoolType',
+        stoolUnit: 'stoolUnit',
+        stoolAmount: 'stoolAmount',
+        stoolStatus: 'stoolStatus',
+        stoolColor: 'stoolColor',
+        stoolUnusual: 'stoolUnusual'
+      };
+      console.log(fieldMap[type], '999999');
+      // 更新选中的值
+      if (fieldMap[type]) {
+        this.selectedValue[fieldMap[type]] = value.value[0];
+      }
+
+      // 关闭弹框
+      this["show".concat(Object.keys(fieldMap).indexOf(type) + 1)] = false;
+
+      // 打印选择的值
+      console.log(value.value);
+
+      // 计算并更新排泄量
+      this.updatestoolFrequency();
+    },
+    // // 合并后的 picker 变化处理函数
+    // onPickerChangeCommon(value, type) {
+    // 	if (type === 'stoolType') {
+    // 		// 如果是排泄类型变化
+    // 		this.selectedValue.stoolType = value.value[0];
+    // 	} else if (type === 'stoolUnit') {
+    // 		// 如果是排泄单位变化
+    // 		this.stoolUnit = value.value[0];
+    // 	} else if (type === 'stoolAmount') {
+    // 		this.selectedValue.stoolAmount = value.value[0]
+    // 	} else if (type === 'stoolStatus') {
+    // 		this.selectedValue.stoolStatus = value.value[0]
+    // 	} else if (type === 'stoolColor') {
+    // 		this.selectedValue.stoolColor = value.value[0]
+    // 	}else if (type === 'stoolUnusual') {
+    // 		this.selectedValue.stoolUnusual = value.value[0]
+    // 	}
+    // 	// 关闭弹框
+    // 	if (type === 'stoolType') {
+    // 		this.show1 = false;
+    // 	} else if (type === 'stoolUnit') {
+    // 		this.show2 = false;
+    // 	} else if (type === 'stoolAmount') {
+    // 		this.show3 = false;
+    // 	} else if (type === 'stoolStatus') {
+    // 		this.show4 = false;
+    // 	} else if (type === 'stoolColor') {
+    // 		this.show5 = false;
+    // 	}else if (type === 'stoolUnusual') {
+    // 		this.show6 = false;
+    // 	}
+    // 	// 打印选择的值
+    // 	console.log(value.value);
+    // 	// 计算并更新排泄量
+    // 	this.updatestoolFrequency();
+    // },
+    // 更新排泄量
+    updatestoolFrequency: function updatestoolFrequency() {
+      var stoolFrequency = "".concat(this.inputValue).concat(this.stoolUnit);
+      this.selectedValue.stoolFrequency = stoolFrequency;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 
@@ -1347,10 +1921,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show1 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1396,11 +2001,43 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      columns: [['随手记', '生日', '绝育', '发情', '相遇', '生病', '怀孕', '生产', '搬家', '手术', '训练']],
+      selectedValue: {
+        notesType: '随手记' // 存储记事类型
+      }
+    };
   },
-  methods: {}
+
+  watch: {},
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.selectedValue.notesType = value.value[0];
+      this.show1 = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+      console.log(value.value);
+    }
+  }
 };
 exports.default = _default;
 
@@ -1512,10 +2149,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1561,11 +2229,58 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show: false,
+      columns: [['体重异常', '皮肤异常', '呼吸异常', '消化异常', '尿便异常', '骨骼异常', '口腔异常', '眼睛异常', '耳朵异常', '精神异常'], ['增重过速', '减重过速', '食欲不振', '过度进食']],
+      columnData: [['增重过速', '减重过速', '食欲不振', '过度进食'], ['皮肤发炎', '脱毛、斑秃', '瘙痒、抓挠', '皮肤感染'], ['咳嗽', '呼吸困难', '喘息异常'], ['呕吐', '腹泻', '便秘', '口臭'], ['血尿', '频繁排泄', '排泄困难', '尿便异味'], ['骨折', '步态异常', '关节疼痛', '关节肿胀、变形'], ['口炎', '牙结石', '牙龈出血', '口腔溃疡'], ['流泪过多', '眼屎增多', '眼睛突出', '眼睛干涩', '眼睛发红、肿胀'], ['耳朵异味', '耳朵发炎', '分泌物增多', '抓耳频繁'], ['昏迷', '嗜睡', '焦虑', '害怕', '攻击性', '反应迟钝', '过度兴奋']],
+      selectedValue: {
+        abnormalType: '',
+        abnormalDetail: ''
+      }
+    };
   },
-  methods: {}
+  watch: {},
+  methods: {
+    changeHandler: function changeHandler(e) {
+      var columnIndex = e.columnIndex,
+        value = e.value,
+        values = e.values,
+        index = e.index,
+        _e$picker = e.picker,
+        picker = _e$picker === void 0 ? this.$refs.uPicker : _e$picker;
+      console.log(columnIndex, value, values, index);
+      // 当第一列值发生变化时，变化第二列(后一列)对应的选项
+      if (columnIndex === 0) {
+        // picker为选择器this实例，变化第二列对应的选项
+        picker.setColumnValues(1, this.columnData[index]);
+      }
+    },
+    // 回调参数为包含columnIndex、value、values
+    confirm: function confirm(e) {
+      console.log('confirm', e.value);
+      this.selectedValue.abnormalType = e.value[0];
+      this.selectedValue.abnormalDetail = e.value[1];
+      this.show = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 
@@ -1677,10 +2392,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show3 = true
+    }
+    _vm.e3 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e4 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e5 = function (value) {
+      return _vm.onPickerChangeCommon(value, "medicationMethod")
+    }
+    _vm.e6 = function ($event) {
+      _vm.show3 = false
+    }
+    _vm.e7 = function (value) {
+      return _vm.onPickerChangeCommon(value, "medicationUnit")
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -1726,11 +2490,129 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      show2: false,
+      show3: false,
+      columns: [['驱虫', '治疗性药物', '缓解症状药物', '消化系统用药', '内分泌和代谢类药物', '心血管系统用药', '抗过敏药物', '外用药物', '神经系统药物'], ['体内驱虫', '体外驱虫', '内外同驱']],
+      columnData: [['体内驱虫', '体外驱虫', '内外同驱'], ['抗生素', '抗真菌药', '抗病毒药'], ['止痛药', '抗炎药', '退烧药', '止咳药'], ['胃肠保护剂', '益生菌'], ['胰岛素', '甲状腺激素', '肾上腺皮质激素'], ['利尿剂', '心脏药物', '抗凝血药物'], ['抗组胺药', '皮质类固醇'], ['抗菌药膏', '抗真菌药膏', '止痒药膏'], ['抗焦虑药', '镇静药']],
+      columnsMethod: [['口服给药', '外用给药', '皮下注射', '肌肉注射', '静脉注射', '注射疫苗', '局部给药', '鼻腔给药', '局部贴剂', '食物药物']],
+      columnsType: [['g', 'mg', 'μg', 'ml', 'U', 'g/kg', 'mg/kg', '片/颗/粒', '次', '袋', '滴', '胶囊']],
+      inputValue: '',
+      medicationUnit: 'g',
+      selectedValue: {
+        medicationType: '',
+        medicationDetail: '',
+        medicationMethod: '',
+        medicationAmount: ''
+      }
+    };
   },
-  methods: {}
+  watch: {
+    // 监听 inputValue 或 medicationUnit 变化时计算并更新 medicationAmount
+    inputValue: function inputValue() {
+      this.updatemedicationAmount();
+    },
+    medicationUnit: function medicationUnit() {
+      this.updatemedicationAmount();
+    }
+  },
+  methods: {
+    changeHandler: function changeHandler(e) {
+      var columnIndex = e.columnIndex,
+        value = e.value,
+        values = e.values,
+        index = e.index,
+        _e$picker = e.picker,
+        picker = _e$picker === void 0 ? this.$refs.uPicker : _e$picker;
+      console.log(columnIndex, value, values, index);
+      // 当第一列值发生变化时，变化第二列(后一列)对应的选项
+      if (columnIndex === 0) {
+        // picker为选择器this实例，变化第二列对应的选项
+        picker.setColumnValues(1, this.columnData[index]);
+      }
+    },
+    // 回调参数为包含columnIndex、value、values
+    confirm: function confirm(e) {
+      console.log('confirm', e.value);
+      this.selectedValue.medicationType = e.value[0];
+      this.selectedValue.medicationDetail = e.value[1];
+      this.show1 = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+    },
+    // 更新排泄量
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      if (type === 'medicationMethod') {
+        this.selectedValue.medicationMethod = value.value[0];
+      } else if (type === 'medicationUnit') {
+        this.medicationUnit = value.value[0];
+      }
+
+      // 关闭弹框
+      if (type === 'medicationMethod') {
+        this.show2 = false;
+      } else if (type === 'medicationUnit') {
+        this.show3 = false;
+      }
+
+      // 打印选择的值
+      console.log(value.value);
+      this.updatemedicationAmount();
+    },
+    updatemedicationAmount: function updatemedicationAmount() {
+      var medicationAmount = "".concat(this.inputValue).concat(this.medicationUnit);
+      this.selectedValue.medicationAmount = medicationAmount;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
+    }
+  }
 };
 exports.default = _default;
 

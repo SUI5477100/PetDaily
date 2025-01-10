@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uPicker: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 539))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
     },
   }
 } catch (e) {
@@ -127,10 +127,22 @@ var render = function () {
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
     _vm.e0 = function ($event) {
-      _vm.show = true
+      _vm.show1 = true
     }
     _vm.e1 = function ($event) {
-      _vm.show = true
+      _vm.show2 = true
+    }
+    _vm.e2 = function ($event) {
+      _vm.show1 = false
+    }
+    _vm.e3 = function (value) {
+      return _vm.onPickerChangeCommon(value, "foodType")
+    }
+    _vm.e4 = function ($event) {
+      _vm.show2 = false
+    }
+    _vm.e5 = function (value) {
+      return _vm.onPickerChangeCommon(value, "foodUnit")
     }
   }
 }
@@ -205,26 +217,72 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
-      show: false,
+      show1: false,
+      show2: false,
       columns: [['干粮', '罐头', '生食', '零食', '自制', '营养品']],
+      columnsType: [['g', 'kg', 'mg', 'ml', '勺', '杯', '罐', '碗', '袋', '条', '片', '颗', '粒']],
+      inputValue: '',
+      foodUnit: 'g',
+      // 存储进食量单位
       selectedValue: {
         foodType: '',
         // 存储食物类型
-        foodAmount: '' // 存储进食量
+        foodAmount: '' // 存储计算后的食物量
       }
     };
   },
 
+  watch: {
+    // 监听 inputValue 或 foodUnit 变化时计算并更新 foodAmount
+    inputValue: function inputValue() {
+      this.updateFoodAmount();
+    },
+    foodUnit: function foodUnit() {
+      this.updateFoodAmount();
+    }
+  },
   methods: {
-    // 处理选择变化的函数
-    onPickerChange: function onPickerChange(value) {
-      // 假设选择的是食物类型，可以根据不同的列名进行处理
-      this.selectedValue.foodType = value.value; // 示例，设置食物类型
-      this.show = false;
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value, type) {
+      if (type === 'foodType') {
+        // 如果是食物类型变化
+        this.selectedValue.foodType = value.value[0];
+      } else if (type === 'foodUnit') {
+        // 如果是食物单位变化
+        this.foodUnit = value.value[0];
+      }
+
+      // 关闭弹框
+      if (type === 'foodType') {
+        this.show1 = false;
+      } else if (type === 'foodUnit') {
+        this.show2 = false;
+      }
+
+      // 打印选择的值
       console.log(value.value);
+
+      // 计算并更新食物量
+      this.updateFoodAmount();
+    },
+    // 更新食物量
+    updateFoodAmount: function updateFoodAmount() {
+      var foodAmount = "".concat(this.inputValue).concat(this.foodUnit);
+      this.selectedValue.foodAmount = foodAmount;
+      // 向父组件传递更新后的 selectedValue
+      this.$emit('update:selectedValue', this.selectedValue);
     }
   }
 };

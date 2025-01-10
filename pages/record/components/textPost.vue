@@ -2,7 +2,8 @@
 	<!--记录页面 -->
 	<view class="content">
 		<img src="../../../static/cat.png" alt="" class="img" />
-		<view class="" style="width: 90% ; background-color: #fff; border-radius: 20rpx; border: 4rpx solid #000 ;margin-bottom: 30rpx;">
+		<view class=""
+			style="width: 90% ; background-color: #fff; border-radius: 20rpx; border: 4rpx solid #000 ;margin-bottom: 30rpx;">
 			<view class="" style="margin: 20rpx;font-size: 36rpx;font-weight: 600;">
 				描述
 			</view>
@@ -31,7 +32,18 @@
 				>
 			</view>
 		</view>
-		<picker mode="time" @change="picker3" :value="time" start="09:00" end="18:00" class="w90">
+
+		<view class="button-text w90" @click="show = true">
+			<view style="margin-left: 20rpx;">时间</view>
+			<view class="center">
+				<view style="margin-right: 20rpx;">
+					{{time}}
+				</view>
+				>
+			</view>
+		</view>
+
+		<!-- 	<picker mode="time" @change="picker3" :value="time" start="09:00" end="18:00" class="w90">
 			<view class="button-text ">
 				<view style="margin-left: 20rpx;">时间</view>
 				<view class="center">
@@ -41,7 +53,7 @@
 					>
 				</view>
 			</view>
-		</picker>
+		</picker> -->
 
 		<view class="button-text w90" @click="toggleRemind('bottom')">
 			<view style="margin-left: 20rpx;">重复</view>
@@ -55,35 +67,6 @@
 		<view class="button-add">
 			保存
 		</view>
-
-
-		<!-- 类型弹窗 -->
-		<uni-popup ref="popup" background-color="#fff" @change="change" :show="show">
-			<view class="popup-content">
-
-				<uni-section title="类型" type="line"></uni-section>
-				<uni-list>
-					<uni-list-item title="日常提醒" clickable @click="onClick('日常提醒')" />
-					<uni-list-item title="洗护提醒" clickable @click="onClick('洗护提醒')" />
-					<uni-list-item title="清洁提醒" clickable @click="onClick('清洁提醒')" />
-					<uni-list-item title="用药提醒" clickable @click="onClick('用药提醒')" />
-				</uni-list>
-			</view>
-		</uni-popup>
-
-
-		<!-- 提醒弹框 -->
-		<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
-			<view class="popup-content">
-				<view style="display: flex;justify-content: space-between; align-items: center;">
-					<uni-section title="重复" type="line"></uni-section>
-					<view class="uploadBtn" @click="closePopup">
-						确定
-					</view>
-				</view>
-				<uni-indexed-list :options="list" :show-select="true" @click="bindClick" />
-			</view>
-		</uni-popup>
 
 
 		<!-- 选择宠物弹框 -->
@@ -105,6 +88,43 @@
 			</view>
 		</uni-popup>
 
+		<!-- 类型弹窗 -->
+		<uni-popup ref="popup" background-color="#fff" @change="change" :show="show">
+			<view class="popup-content">
+
+				<uni-section title="类型" type="line"></uni-section>
+				<uni-list>
+					<uni-list-item title="日常提醒" clickable @click="onClick('日常提醒')" />
+					<uni-list-item title="洗护提醒" clickable @click="onClick('洗护提醒')" />
+					<uni-list-item title="清洁提醒" clickable @click="onClick('清洁提醒')" />
+					<uni-list-item title="用药提醒" clickable @click="onClick('用药提醒')" />
+				</uni-list>
+			</view>
+		</uni-popup>
+
+
+		<!-- 时间弹框 -->
+		<u-datetime-picker :show="show" v-model="time" mode="time"></u-datetime-picker>
+
+
+
+
+		<!-- 提醒弹框 -->
+		<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
+			<view class="popup-content">
+				<view style="display: flex;justify-content: space-between; align-items: center;">
+					<uni-section title="重复" type="line"></uni-section>
+					<view class="uploadBtn" @click="closePopup">
+						确定
+					</view>
+				</view>
+				<uni-indexed-list :options="list" :show-select="true" @click="bindClick" />
+			</view>
+		</uni-popup>
+
+
+
+
 	</view>
 </template>
 
@@ -114,9 +134,8 @@
 			return {
 				record: '',
 				remind: '',
-				time: '12:01',
-				minTime: '09:01',
-				maxTime: "21:01",
+				show: false,
+				time: this.formatTimestamp(Number(new Date())),
 				list: [{
 					data: [
 						'周一',
@@ -131,21 +150,32 @@
 				selectedDays: [], // 用于存储选中的天数
 				selectPet: [],
 				items: [{
-						// value: 'USA',
+
 						name: '暹罗',
 						img: 'https://www.serverzhu.com/mimi1.jpg'
 					},
 					{
-						// value: 'CHN',
 						name: '梨花',
 						img: 'https://www.serverzhu.com/mimi2.png'
 					},
 				]
 			}
 		},
+		computed: {},
 		methods: {
-			picker3(e) {
-				this.time = e.detail.value;
+			// 格式化时间戳
+			formatTimestamp(timestamp) {
+				const date = new Date(timestamp);
+				// 提取年份、月份、日期、小时、分钟、秒
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0');
+				const day = String(date.getDate()).padStart(2, '0');
+				const hours = String(date.getHours()).padStart(2, '0');
+				const minutes = String(date.getMinutes()).padStart(2, '0');
+				const seconds = String(date.getSeconds()).padStart(2, '0');
+
+				// 返回格式化的日期字符串
+				return `${hours}:${minutes}`;
 			},
 			// 类型弹框
 			toggle(type) {
@@ -401,6 +431,10 @@
 		display: flex;
 		margin: 30rpx;
 		align-items: center;
+	}
+
+	/deep/.uni-indexed-list__item-border {
+		border-bottom-color: #fff !important;
 	}
 
 	.select-pet {

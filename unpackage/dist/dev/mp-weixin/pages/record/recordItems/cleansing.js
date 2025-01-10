@@ -77,10 +77,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 460))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show1 = true
+    }
+    _vm.e1 = function ($event) {
+      _vm.show1 = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -126,11 +157,43 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
-    return {};
+    return {
+      show1: false,
+      columns: [['洗澡', '驱虫', '梳毛', '耳朵清洁', '眼睛护理', '指甲修剪', '牙齿清洁', '皮肤护理', '修剪毛发', '气味控制', '肛门腺护理']],
+      selectedValue: {
+        cleansingType: '' // 存储洗护类型
+      }
+    };
   },
-  methods: {}
+
+  watch: {},
+  methods: {
+    // 合并后的 picker 变化处理函数
+    onPickerChangeCommon: function onPickerChangeCommon(value) {
+      this.selectedValue.cleansingType = value.value[0];
+      this.show1 = false;
+      this.$emit('update:selectedValue', this.selectedValue);
+      console.log(value.value);
+    }
+  }
 };
 exports.default = _default;
 

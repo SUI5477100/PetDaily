@@ -69,6 +69,7 @@
 		{
 			"path": "pages/record/components/picturesTextPost",
 			"style": {
+				"navigationBarBackgroundColor": "#ffea9c",
 				"navigationBarTitleText": ""
 			}
 		},
@@ -80,76 +81,66 @@
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/diet",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/diet",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/logbook",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+			"path": "pages/record/recordItems/logbook",
+			"style": {
+				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#ffeb9e"
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/addRecord",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+			"path": "pages/record/recordItems/addRecord",
+			"style": {
+				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#ffeb9e"
-					// "navigationStyle": "custom"
+				// "navigationStyle": "custom"
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/drink",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/drink",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/weight",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/weight",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/cleansing",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/cleansing",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/stool",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/stool",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/notes",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/notes",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/abnormal",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/abnormal",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/record/recordItems/medication",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/record/recordItems/medication",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
 	],
@@ -191,5 +182,35 @@
 			}
 		]
 	},
-	"uniIdRouter": {}
+	"uniIdRouter": {},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0,
+		"list": [{
+				"name": "1.开屏页", //模式名称
+				"path": "pages/firstPage/firstPage", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "2.添加宠物生活记录",
+				"path": "pages/record/recordItems/addRecord",
+				"query": ""
+			},
+			{
+				"name": "3.编辑宠物信息",
+				"path": "pages/petInfo/petInfo",
+				"query": ""
+			},
+			{
+				"name": "4.添加日常提醒",
+				"path": "pages/record/components/textPost",
+				"query": ""
+			},
+			{
+				"name": "5.发帖",
+				"path": "pages/record/components/picturesTextPost",
+				"query": ""
+			}
+
+		]
+	}
 }
