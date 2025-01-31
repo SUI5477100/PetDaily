@@ -1,0 +1,54 @@
+.content.data-v-5d01c5f0 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fffce0;
+  width: 100%;
+  height: 100vh;
+}
+.log.data-v-5d01c5f0 {
+  width: 90%;
+  background-color: #fefefe;
+  border-radius: 40rpx;
+}
+.tips.data-v-5d01c5f0 {
+  width: 120rpx;
+  height: 60rpx;
+  border-radius: 40rpx;
+  border-bottom-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
+  background-color: #fdd666;
+  border: 4rpx solid #99621b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #754712;
+}
+.time.data-v-5d01c5f0 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #754712;
+  margin-left: 40rpx;
+}
+.log-content.data-v-5d01c5f0 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.log-text.data-v-5d01c5f0 {
+  width: 85%;
+  border-radius: 40rpx;
+  padding: 10rpx 20rpx;
+  margin: 20rpx 0rpx;
+  background-color: #f8f9f4;
+}
+

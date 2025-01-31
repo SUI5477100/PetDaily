@@ -27,7 +27,7 @@
 
 		<view class="select-box" @click="show3= true">
 			<view class="select-title">
-				进食量
+				药物用量
 			</view>
 			<view class="m40 w230">
 				<view style="margin: 0rpx 20rpx;">
@@ -144,6 +144,7 @@
 
 				this.updatemedicationAmount();
 			},
+			// 更新药物用量
 			updatemedicationAmount() {
 				const medicationAmount = `${this.inputValue}${this.medicationUnit}`;
 				this.selectedValue.medicationAmount = medicationAmount;

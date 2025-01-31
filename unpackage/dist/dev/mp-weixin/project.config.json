@@ -18,7 +18,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.6.5",
+  "libVersion": "3.5.5",
   "appid": "wxe93f33a155dfe6a0",
   "projectname": "PetDaily",
   "condition": {
@@ -47,6 +47,16 @@
         {
           "name": "5.发帖",
           "pathName": "pages/record/components/picturesTextPost",
+          "query": ""
+        },
+        {
+          "name": "6.记录本",
+          "pathName": "pages/record/recordItems/logbook",
+          "query": ""
+        },
+        {
+          "name": "7.登陆页面",
+          "pathName": "pages/loginPage/loginPage",
           "query": ""
         }
       ]

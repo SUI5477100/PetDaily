@@ -142,6 +142,13 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		}, {
+			"path": "pages/loginPage/loginPage",
+			"style": {
+	
+				"navigationStyle": "custom"
+			}
+
 		}
 	],
 	"globalStyle": {
@@ -209,8 +216,17 @@
 				"name": "5.发帖",
 				"path": "pages/record/components/picturesTextPost",
 				"query": ""
+			},
+			{
+				"name": "6.记录本",
+				"path": "pages/record/recordItems/logbook",
+				"query": ""
+			},
+			{
+				"name": "7.登陆页面",
+				"path": "pages/loginPage/loginPage",
+				"query": ""
 			}
-
 		]
 	}
 }

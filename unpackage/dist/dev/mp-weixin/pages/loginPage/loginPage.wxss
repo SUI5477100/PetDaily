@@ -1,0 +1,72 @@
+.content.data-v-5188b278 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 横向居中 */
+  justify-content: center;
+  /* 纵向居中 */
+  background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fffce0;
+  width: 100%;
+  height: 100vh;
+}
+.input-container.data-v-5188b278 {
+  width: 80%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 控制输入框的宽度 */
+  max-width: 400px;
+  position: relative;
+  /* 限制最大宽度 */
+}
+.data-v-5188b278 .u-subsection {
+  background-color: transparent !important;
+}
+.data-v-5188b278 .u-subsection__bar {
+  background-color: transparent !important;
+}
+.data-v-5188b278 .u-subsection__item {
+  border-color: transparent !important;
+}
+.data-v-5188b278 .u-subsection__item__text {
+  font-size: 36rpx !important;
+}
+.data-v-5188b278 .is-input-border {
+  border-radius: 30rpx;
+}
+.data-v-5188b278 .uni-easyinput {
+  margin-top: 60rpx;
+}
+.vx-login.data-v-5188b278 {
+  width: 80rpx;
+  height: 80rpx;
+  background-image: url('https://www.serverzhu.com/petImg/wxLogin.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.vx-login.data-v-5188b278:active {
+  background-image: url('https://www.serverzhu.com/petImg/wxLogin2.png');
+}
+.record-book.data-v-5188b278 {
+  width: 100%;
+  height: 80rpx;
+  margin-top: 60rpx;
+  border: #000 4rpx solid;
+  background-color: #ffd553;
+  border-radius: 100rpx;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 34rpx;
+  align-items: center;
+}
+.record-book.data-v-5188b278:active {
+  background-color: #eac34c;
+}
+

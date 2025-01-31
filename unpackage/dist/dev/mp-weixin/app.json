@@ -21,7 +21,8 @@
     "pages/record/recordItems/stool",
     "pages/record/recordItems/notes",
     "pages/record/recordItems/abnormal",
-    "pages/record/recordItems/medication"
+    "pages/record/recordItems/medication",
+    "pages/loginPage/loginPage"
   ],
   "subPackages": [],
   "window": {
