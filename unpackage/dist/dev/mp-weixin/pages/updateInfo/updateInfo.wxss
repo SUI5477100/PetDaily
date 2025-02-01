@@ -1,0 +1,79 @@
+
+.container.data-v-02b0dae6 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* 横向居中 */
+	/* justify-content: center; */
+	/* 纵向居中 */
+	background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/background.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fffce0;
+	width: 100%;
+	height: 100vh;
+}
+.avatar.data-v-02b0dae6 {
+	width: 160rpx;
+	height: 160rpx;
+	border-radius: 50%;
+}
+.input-container.data-v-02b0dae6 {
+	margin-top: 80rpx;
+}
+input.data-v-02b0dae6 {
+	width: 90%;
+	padding: 20rpx;
+	border-radius: 10rpx;
+	border: 4rpx solid #000;
+	background-color: #fff;
+}
+button.data-v-02b0dae6 {
+	margin-top: 10vh;
+	/* background-color: #007aff; */
+	color: white;
+	/* padding: 10px 20px; */
+	border-radius: 10rpx;
+	width: 160rpx;
+	height: 160rpx;
+	border: 4rpx solid #000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* 横向居中 */
+	justify-content: center;
+	border-radius: 50%;
+	padding: 0rpx;
+}
+.record-book.data-v-02b0dae6 {
+	width: 60%;
+	height: 80rpx;
+	margin-top: 80rpx;
+	border: #000 4rpx solid;
+	background-color: #ffd553;
+	border-radius: 100rpx;
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 34rpx;
+	align-items: center;
+}
+.record-book.data-v-02b0dae6:active {
+	background-color: #eac34c;
+}
+.data-v-02b0dae6 .uni-navbar__header-container-inner {
+	align-items: flex-end !important;
+	margin-bottom: 20rpx;
+}
+.data-v-02b0dae6 .uni-navbar__header-btns-left {
+	align-items: flex-end !important;
+	margin-bottom: 20rpx;
+}
+.data-v-02b0dae6 .uni-navbar--border {
+	border-bottom-color: #ffe68c !important;
+}
+.data-v-02b0dae6 .uni-navbar__header {
+	background-color: #ffe68c !important;
+}
+

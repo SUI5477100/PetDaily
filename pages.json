@@ -1,5 +1,10 @@
 {
 	"pages": [{
+			"path": "pages/firstPage/firstPage",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
 			"path": "pages/master/master",
 			"style": {
 				"navigationBarBackgroundColor": "#ffeeac",
@@ -28,12 +33,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/firstPage/firstPage",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
+
 
 		{
 			"path": "pages/index/components/petInfo",
@@ -145,12 +145,21 @@
 		}, {
 			"path": "pages/loginPage/loginPage",
 			"style": {
-	
+
 				"navigationStyle": "custom"
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/updateInfo/updateInfo",
+            "style" :                                                                                    
+            {
+			"navigationStyle": "custom",
+			"disableScroll": true
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 
@@ -225,6 +234,11 @@
 			{
 				"name": "7.登陆页面",
 				"path": "pages/loginPage/loginPage",
+				"query": ""
+			},
+			{
+				"name": "8.编辑头像昵称",
+				"path": "pages/updateInfo/updateInfo",
 				"query": ""
 			}
 		]

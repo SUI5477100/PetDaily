@@ -1,6 +1,33 @@
 
-.background-image.data-v-7b309e46 {
-  width: 100%;
-  height: 100vh;
+.content.data-v-7b309e46 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/firstPage.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fffce0;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+}
+
+/* 让按钮固定在左上角 */
+.countdown-btn.data-v-7b309e46 {
+	position: absolute;
+	top: 60rpx;
+	left: 20px;
+	width: 100px;
+	z-index: 1000;
+	height: 40px;
+	font-size: 14px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	border-radius: 20px;
+	text-align: center;
+	line-height: 40px;
+	border: none;
 }
 

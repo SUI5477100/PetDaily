@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/firstPage/firstPage",
     "pages/master/master",
     "pages/record/record",
     "pages/index/index",
     "pages/pet/pet",
-    "pages/firstPage/firstPage",
     "pages/index/components/petInfo",
     "pages/record/components/circle",
     "pages/record/components/recordItems",
@@ -22,7 +22,8 @@
     "pages/record/recordItems/notes",
     "pages/record/recordItems/abnormal",
     "pages/record/recordItems/medication",
-    "pages/loginPage/loginPage"
+    "pages/loginPage/loginPage",
+    "pages/updateInfo/updateInfo"
   ],
   "subPackages": [],
   "window": {

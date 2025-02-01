@@ -58,6 +58,11 @@
           "name": "7.登陆页面",
           "pathName": "pages/loginPage/loginPage",
           "query": ""
+        },
+        {
+          "name": "8.编辑头像昵称",
+          "pathName": "pages/updateInfo/updateInfo",
+          "query": ""
         }
       ]
     }

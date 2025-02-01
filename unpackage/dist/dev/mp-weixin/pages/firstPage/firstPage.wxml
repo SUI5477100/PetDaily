@@ -1,1 +1,1 @@
-<view class="data-v-7b309e46"><image class="background-image data-v-7b309e46" src="https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/firstPage.png" mode="aspectFill"></image></view>
+<view class="content data-v-7b309e46"><button data-event-opts="{{[['tap',[['skip',['$event']]]]]}}" class="countdown-btn data-v-7b309e46" bindtap="__e">{{''+(countdown>0?'跳过 ('+countdown+'s)':"进入应用")+''}}</button></view>

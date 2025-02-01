@@ -60,9 +60,7 @@
 				current: 0 // 控制显示当前选项，0 是登陆，1 是注册
 			};
 		},
-		onReady() {
-			// this.handleLogin(); // 条件满足时才调用 handleLogin
-		},
+		
 		methods: {
 			input(e) {
 				console.log('输入内容：', e);
@@ -85,6 +83,7 @@
 					this.handleRegister()
 				}
 			},
+		
 			// 邮箱密码登陆
 			async handleLogin() {
 				try {
@@ -163,7 +162,6 @@
 			// 		// 登录失败后的逻辑
 			// 	}
 			// },
-
 			//goregirect()为点击响应事件，可在HTML部分设置 @tap="goregirect()"
 			goRegirect() {
 				uni.switchTab({
@@ -171,8 +169,8 @@
 					url: '../master/master'
 				});
 			},
+			// 错误提示弹框
 			showToast(params) {
-				console.log(params)
 				this.$refs.uToast.show({
 					...params,
 				});

@@ -5,10 +5,10 @@
 			<img src="https://www.serverzhu.com/%E7%BB%84%20178.png" alt="" style="position: absolute;bottom: -20%;right: -5%;
 			width: 150rpx;height: 150rpx;" />
 			<!-- 头像 -->
-			<view class="avatar"></view>
+			<view class="avatar" @click="goUpdateInfoPage"></view>
 			<view class="avatar-right">
 				<!-- 名字 -->
-				<view class="name-box">
+				<view class="name-box" @click="goUpdateInfoPage">
 					<view class="name-title">
 						<view class="name">
 							铲屎官
@@ -88,7 +88,8 @@
 			<view class="addpet">
 				<view class="addpet-btn">
 					<view class="btn-content">
-						<img src="https://www.serverzhu.com/petImg/add.png" style="width: 18%;height: 80%;margin-right: 10rpx;" /> 添加宠物
+						<img src="https://www.serverzhu.com/petImg/add.png"
+							style="width: 18%;height: 80%;margin-right: 10rpx;" /> 添加宠物
 					</view>
 				</view>
 			</view>
@@ -141,7 +142,12 @@
 			}
 		},
 		methods: {
-
+			goUpdateInfoPage() {
+				console.log('111111111')
+				uni.redirectTo({
+					url: '../updateInfo/updateInfo'
+				});
+			},
 		}
 	}
 </script>
@@ -311,7 +317,8 @@
 		display: flex;
 		align-items: center;
 	}
-	.assistant:active{
+
+	.assistant:active {
 		background-color: #f2f2f2;
 	}
 </style>
