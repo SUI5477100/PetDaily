@@ -14,7 +14,7 @@
 					<view class="detail-text">● 喂饭</view>
 					<view class="detail-text">● 喂饭</view>
 				</view>
-				<img class="corner-image" src="../../static/clouds.png" alt="" />
+				<img class="corner-image" src="https://www.serverzhu.com/petImg/clouds.png" alt="" />
 			</view>
 			<view class="detail-right">
 				<!-- 记录 -->
@@ -27,7 +27,7 @@
 							见证小宠的成长
 						</view>
 					</view>
-					<img src="../../static/recordPet.png" style="width: 44%;" class="record-right" />
+					<img src="https://www.serverzhu.com/petImg/recordPet.png" style="width: 44%;" class="record-right" />
 				</view>
 				<!-- 提醒 -->
 				<view class="record">
@@ -39,14 +39,14 @@
 							更好的照顾小宠
 						</view>
 					</view>
-					<img src="../../static/tips.png" style="width: 38%;" class="record-right" />
+					<img src="https://www.serverzhu.com/petImg/tips.png" style="width: 38%;" class="record-right" />
 				</view>
 			</view>
 		</view>
 		<!-- 今日科普 -->
 		<view class="knowledge">
 			<view class="knowledge-title">
-				<img src="../../static/knowledge-title.png" class="knowledge-title-img" />
+				<img src="https://www.serverzhu.com/petImg/knowledge-title.png" class="knowledge-title-img" />
 				<view class="knowledge-title-info">
 					【长出蒜瓣毛】
 				</view>
@@ -57,8 +57,8 @@
 				说明平时吃的很好很有营养，是被养的
 				很好的表现哦～
 			</view>
-			<img src="../../static/sun.png"  class="knowledge-img-sun" />
-			<img src="../../static/knowledge.png"  class="knowledge-img" />
+			<img src="https://www.serverzhu.com/petImg/sun.png"  class="knowledge-img-sun" />
+			<img src="https://www.serverzhu.com/petImg/knowledge.png"  class="knowledge-img" />
 		</view>
 
 	</view>

@@ -34,6 +34,8 @@
 				inputValue: '',
 				weightUnit: 'kg', // 存储进食量单位
 				selectedValue: {
+					type:'体重',
+					color:'#fbc02d',
 					weightAmount: '' // 存储计算后的食物量
 				}
 			};

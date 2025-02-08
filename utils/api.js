@@ -35,34 +35,55 @@ const request = (url, method = 'GET', data = {}) => {
 
 // 登录接口
 const login = (data) => {
-	return request('/users/login', 'POST', data);
+	return request(`/users/login`, 'POST', data);
 };
 // 获取注册接口
 const register = (data) => {
 	return request(`/users/register`, 'POST', data);
 };
 // 微信登录接口
-const wxLogin = (code) => {
-	return request('/users/wxLogin', 'POST', {
-		code
-	});
+const wxLogin = (data) => {
+	return request(`/users/wxLogin`, 'POST', data);
 };
 // 获取用户信息接口
 const getUserInfo = () => {
 	return request(`/my/userInfo`, 'GET');
 };
 // 修改用户头像昵称接口
-const updateUser = (date) => {
-	return request('/my/update/userInfo', 'POST', date);
+const updateUser = (data) => {
+	return request(`/my/update/userInfo`, 'POST', data);
 };
 // 上传图片接口
-const uploadImg = (date) => {
-	return request('/upload', 'POST', date);
+const uploadImg = (data) => {
+	return request(`/upload`, 'POST', data);
 };
-// 其他接口
-// const getPets = (userId) => {
-//   return request(`/user/${userId}/pets`, 'GET');
-// };
+// 添加宠物信息
+const addPet = (data) => {
+	return request(`/petInfo/addPet`, 'POST', data)
+}
+// 获取宠物信息
+const getPet = (id = null) => {
+	// 如果 id 存在，拼接 id；否则请求所有宠物信息
+	const url = id ? `/petInfo/getPet/${id}` : `/petInfo/getPet`;
+	return request(url, 'GET');
+};
+
+// 修改宠物信息
+const updatePet = (id, data) => {
+	return request(`/petInfo/updatePet/${id}`, 'PUT', data)
+}
+// 删除宠物信息
+const deletePet = (data) => {
+	return request(`/petInfo/deletePet`, 'DELETE', data)
+}
+// 添加记录
+const addRecord = (data) => {
+	return request('/record/addRecord', 'POST', data)
+}
+// 获取记录
+const getRecord = () => {
+	return request('/record/getRecord', 'GET')
+}
 
 // 将封装好的接口导出
 export default {
@@ -71,6 +92,11 @@ export default {
 	wxLogin,
 	register,
 	uploadImg,
-	updateUser
-	// getPets
+	updateUser,
+	addPet,
+	getPet,
+	deletePet,
+	updatePet,
+	addRecord,
+	getRecord
 };

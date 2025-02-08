@@ -42,6 +42,8 @@
 					['昏迷', '嗜睡', '焦虑', '害怕', '攻击性', '反应迟钝', '过度兴奋']
 				],
 				selectedValue: {
+					type:'异常',
+					color:'#d32f2f',
 					abnormalType: '',
 					abnormalDetail: ''
 				}

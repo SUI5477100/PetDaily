@@ -58,6 +58,7 @@
 			onChooseavatar(e) {
 				console.log('选择的头像信息：', e.detail);
 				const avatarUrl = e.detail.avatarUrl; // 获取头像临时路径
+				console.log(avatarUrl,'999')
 				this.uploadAvatar(avatarUrl); // 上传头像到服务器
 			},
 
@@ -65,7 +66,7 @@
 			uploadAvatar(avatarUrl) {
 				wx.uploadFile({
 					filePath: avatarUrl,
-					name: 'file', 
+					name: 'file',
 					url: 'https://serverzhu.com:3000/upload', // 替换为你的服务器地址
 					success: (res) => {
 						console.log(res);
@@ -102,24 +103,28 @@
 			async saveInfo() {
 				console.log('保存的用户信息：', this.userInfo);
 				try {
-					const response = await api.updateUser({
-						user_pic: this.userInfo.user_pic,
-						username: this.userInfo.username
-					})
+					const response = await api.updateUser(this.userInfo)
 					console.log(response.message)
 					this.showToast(this.list[2])
-				} catch {
-					console.log('登录失败:', error);
+				} catch(err) {
+					console.log('登录失败:', err);
 					this.showToast(this.list[3])
+				}
+			},
+			// 获取已有的头像和昵称
+			async getUserInfo() {
+				try {
+					const response = await api.getUserInfo()
+					this.userInfo.username = response.data.username
+					this.userInfo.user_pic = response.data.user_pic
+					console.log(response)
+				} catch (err) {
+					console.log(err)
 				}
 			}
 		},
-		created() {
-			// 检查是否已有用户信息存储
-			// const storedUserInfo = uni.getStorageSync('userInfo');
-			// if (storedUserInfo) {
-			// 	this.userInfo = storedUserInfo;
-			// }
+		onReady() {
+			this.getUserInfo()
 		}
 	};
 </script>

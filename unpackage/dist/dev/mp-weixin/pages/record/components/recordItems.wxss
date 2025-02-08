@@ -25,20 +25,4 @@
 .right-icon.data-v-c797d76a {
   margin-right: 25rpx;
 }
-.record-book.data-v-c797d76a {
-  width: 100%;
-  height: 100rpx;
-  margin-top: 30rpx;
-  border: #000 4rpx solid;
-  background-color: #ffd553;
-  border-radius: 100rpx;
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 34rpx;
-  align-items: center;
-}
-.record-book.data-v-c797d76a:active {
-  background-color: #eac34c;
-}
 

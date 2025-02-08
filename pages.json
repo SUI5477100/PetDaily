@@ -1,18 +1,21 @@
 {
 	"pages": [{
+			"path": "pages/master/master",
+			"style": {
+				"navigationBarBackgroundColor": "#ffeeac",
+				"backgroundColor": "#ffeeac"
+				// "disableScroll": true
+				// "navigationBarTitleText": "铲屎官"
+				// "navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/firstPage/firstPage",
 			"style": {
 				"navigationStyle": "custom"
 			}
-		}, {
-			"path": "pages/master/master",
-			"style": {
-				"navigationBarBackgroundColor": "#ffeeac",
-				"disableScroll": true
-				// "navigationBarTitleText": "铲屎官"
-				// "navigationStyle": "custom"
-			}
-		}, {
+		},
+		{
 			"path": "pages/record/record",
 			"style": {
 				"navigationStyle": "custom"
@@ -76,7 +79,7 @@
 		{
 			"path": "pages/petInfo/petInfo",
 			"style": {
-				"navigationBarBackgroundColor": "#ffeb9e",
+				"navigationStyle": "custom",
 				"disableScroll": true
 			}
 		},
@@ -89,16 +92,13 @@
 		{
 			"path": "pages/record/recordItems/logbook",
 			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#ffeb9e"
+			"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/record/recordItems/addRecord",
 			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#ffeb9e"
-				// "navigationStyle": "custom"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -149,13 +149,19 @@
 				"navigationStyle": "custom"
 			}
 
+		}, {
+			"path": "pages/updateInfo/updateInfo",
+			"style": {
+				"navigationStyle": "custom",
+				"disableScroll": true
+			}
+
 		}
 	    ,{
-            "path" : "pages/updateInfo/updateInfo",
+            "path" : "pages/deletePet/deletePet",
             "style" :                                                                                    
             {
-			"navigationStyle": "custom",
-			"disableScroll": true
+              "navigationStyle": "custom"
             }
             
         }
@@ -239,6 +245,11 @@
 			{
 				"name": "8.编辑头像昵称",
 				"path": "pages/updateInfo/updateInfo",
+				"query": ""
+			},
+			{
+				"name": "9.删除宠物",
+				"path": "pages/deletePet/deletePet",
 				"query": ""
 			}
 		]

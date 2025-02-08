@@ -55,6 +55,8 @@
 				inputValue: '',
 				foodUnit: 'g', // 存储进食量单位
 				selectedValue: {
+					type:'饮食',
+					color:'#f29766',
 					foodType: '', // 存储食物类型
 					foodAmount: '' // 存储计算后的食物量
 				}

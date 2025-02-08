@@ -60,7 +60,7 @@
 				current: 0 // 控制显示当前选项，0 是登陆，1 是注册
 			};
 		},
-		
+
 		methods: {
 			input(e) {
 				console.log('输入内容：', e);
@@ -83,7 +83,7 @@
 					this.handleRegister()
 				}
 			},
-		
+
 			// 邮箱密码登陆
 			async handleLogin() {
 				try {
@@ -125,7 +125,9 @@
 						if (res.code) {
 							console.log('获取到微信登录 code:', res.code);
 							try {
-								const response = await api.wxLogin(res.code);
+								const response = await api.wxLogin({
+									code: res.code
+								});
 								console.log(response, '0000')
 								const token = response.token
 								if (token) {
@@ -135,15 +137,19 @@
 									this.goRegirect()
 								} else {
 									console.error('登录失败:', data.message);
-									this.list[0].message = data.message
+									this.list[0].message = "登陆失败"
 									this.showToast(this.list[0])
 								}
 							} catch (error) {
 								console.error('微信登录失败:', error);
+								this.list[0].message = "微信登陆失败"
+								this.showToast(this.list[0])
 
 							}
 						} else {
 							console.error('微信登录失败:', res.errMsg);
+							this.list[0].message = "微信登陆失败"
+							this.showToast(this.list[0])
 						}
 					},
 					fail: (err) => {

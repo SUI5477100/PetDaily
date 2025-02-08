@@ -1,7 +1,7 @@
 <template>
 	<!--记录页面 -->
 	<view class="content">
-		<img src="../../../static/cat.png" alt="" class="img" />
+		<img src="https://www.serverzhu.com/petImg/cat.png" alt="" class="img" />
 		<view class=""
 			style="width: 90% ; background-color: #fff; border-radius: 20rpx; border: 4rpx solid #000 ;margin-bottom: 30rpx;">
 			<view class="" style="margin: 20rpx;font-size: 36rpx;font-weight: 600;">
@@ -239,7 +239,7 @@
 				console.log('当前模式：' + e.type + ',状态：' + e.show);
 			},
 			// 选择宠物操作
-			checkboxChange: function(e) {
+			checkboxChange(e){
 				var items = this.items,
 					values = e.detail.value;
 				this.selectPet = values

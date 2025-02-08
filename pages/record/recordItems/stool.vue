@@ -132,6 +132,8 @@
 				inputValue: '',
 				stoolUnit: '次/天', // 存储排泄量单位
 				selectedValue: {
+					type: '尿便',
+					color: '#455A64',
 					stoolType: '', // 存储排泄类型
 					stoolFrequency: '', // 存储计算后的排泄频率
 					stoolAmount: '正常',
@@ -172,7 +174,9 @@
 
 				// 打印选择的值
 				console.log(value.value);
-
+				if (type === 'stoolUnit') {
+					this.stoolUnit = value.value
+				}
 				// 计算并更新排泄量
 				this.updatestoolFrequency();
 			},
@@ -221,6 +225,7 @@
 			updatestoolFrequency() {
 				const stoolFrequency = `${this.inputValue}${this.stoolUnit}`;
 				this.selectedValue.stoolFrequency = stoolFrequency;
+				console.log(stoolFrequency, this.stoolUnit)
 				// 向父组件传递更新后的 selectedValue
 				this.$emit('update:selectedValue', this.selectedValue);
 			}

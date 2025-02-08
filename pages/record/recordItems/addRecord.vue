@@ -1,92 +1,94 @@
 <template>
-	<view class="content">
-		<view class="select">
-			<!-- 选择宠物 -->
-			<view class="select-box" @click="toggle('bottom')">
-				<view class="select-title">
-					记录宠物
-				</view>
-				<view class="m40">
-					<view class="m30">
-						{{ selectPet.join(', ') }}
+	<view class="">
+		<uni-nav-bar left-icon="left" title="记录" @clickLeft="back" height="160rpx" />
+		<view class="content">
+			<view class="select">
+				<!-- 选择宠物 -->
+				<view class="select-box" @click="toggle('bottom')">
+					<view class="select-title">
+						记录宠物
 					</view>
-					<view> > </view>
-				</view>
-			</view>
-			<!-- 分割线 -->
-			<view class="line"></view>
-			<!-- 选择时间 -->
-			<view class="select-box" @click="show = true">
-				<view class="select-title">
-					记录时间
-				</view>
-				<view class="m40">
-					<view class="m30">
-						{{formattedTime}}
+					<view class="m40">
+						<view class="m30">
+							{{ selectedPetNames.join(', ') }} <!-- 显示宠物名称 -->
+						</view>
+						<view> > </view>
 					</view>
-					<view> > </view>
+				</view>
+				<!-- 分割线 -->
+				<view class="line"></view>
+				<!-- 选择时间 -->
+				<view class="select-box" @click="show = true">
+					<view class="select-title">
+						记录时间
+					</view>
+					<view class="m40">
+						<view class="m30">
+							{{ formattedTime }}
+						</view>
+						<view> > </view>
+					</view>
 				</view>
 			</view>
-		</view>
 
+			<!-- 饮食 -->
+			<diet v-show="pageType==='diet'" class="w90" @update:selectedValue="handleSelectedValue"></diet>
+			<!-- 喝水 -->
+			<drink v-show="pageType==='drink'" class="w90" @update:selectedValue="handleSelectedValue"></drink>
+			<!-- 体重 -->
+			<weight v-show="pageType==='weight'" class="w90" @update:selectedValue="handleSelectedValue"></weight>
+			<!-- 洗护 -->
+			<cleansing v-show="pageType==='cleansing'" class="w90" @update:selectedValue="handleSelectedValue">
+			</cleansing>
+			<!-- 尿便 -->
+			<stool v-show="pageType==='stool'" class="w90" @update:selectedValue="handleSelectedValue"></stool>
+			<!-- 记事 -->
+			<notes v-show="pageType==='notes'" class="w90" @update:selectedValue="handleSelectedValue"></notes>
+			<!-- 异常 -->
+			<abnormal v-show="pageType==='abnormal'" class="w90" @update:selectedValue="handleSelectedValue"></abnormal>
+			<!-- 用药 -->
+			<medication v-show="pageType==='medication'" class="w90" @update:selectedValue="handleSelectedValue">
+			</medication>
 
-		<!-- 饮食 -->
-		<!-- <diet class="w90" @update:selectedValue="handleSelectedValue"></diet> -->
-		<!-- 喝水 -->
-		<!-- <drink class="w90"  @update:selectedValue="handleSelectedValue"></drink> -->
-		<!-- 体重 -->
-		<!-- <weight class="w90" @update:selectedValue="handleSelectedValue"></weight> -->
-		<!-- 洗护 -->
-		<!-- <cleansing class="w90"  @update:selectedValue="handleSelectedValue"></cleansing> -->
-		<!-- 尿便 -->
-		<!-- <stool class="w90"  @update:selectedValue="handleSelectedValue"></stool> -->
-		<!-- 记事 -->
-		<!-- <notes class="w90" @update:selectedValue="handleSelectedValue"></notes> -->
-		<!-- 异常 -->
-		<!-- <abnormal class="w90" @update:selectedValue="handleSelectedValue"></abnormal> -->
-		<!-- 用药 -->
-		<medication class="w90" @update:selectedValue="handleSelectedValue"></medication>
-
-
-
-		<view class="input-box">
-			<view class=" input-title">
-				描述
+			<view class="input-box">
+				<view class="input-title">
+					描述
+				</view>
+				<uni-easyinput type="textarea" v-model="inputValue" placeholder="请输入内容" class="input"
+					placeholderStyle="font-size: 32rpx"></uni-easyinput>
 			</view>
-			<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容" class="input"
-				placeholderStyle="font-size: 32rpx"></uni-easyinput>
-		</view>
-		<view class="button-add">
-			保存
-		</view>
-
-		<!-- 选择宠物弹窗 -->
-		<uni-popup ref="popup" background-color="#fff" @change="change">
-			<view class="select-pet">
-				选择宠物
-			</view>
-			<view class="uni-list">
-				<checkbox-group @change="checkboxChange">
-					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.index">
-						<checkbox color="#FFCC33" :value="item.name" />
-						<img :src="item.img" class="pet-img" />
-						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
-			</view>
-			<view class="saveBtn" @click="closeSelectPet">
+			<view class="button-add" @click="saveRecord">
 				保存
 			</view>
-		</uni-popup>
 
+			<!-- 选择宠物弹窗 -->
+			<uni-popup ref="popup" background-color="#fff" @change="change">
+				<view class="select-pet">
+					选择宠物
+				</view>
+				<view class="uni-list">
+					<checkbox-group @change="checkboxChange">
+						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.id">
+							<checkbox color="#FFCC33" :value="item.id" />
+							<img :src="item.pet_pic" class="pet-img" />
+							<view>{{ item.name }}</view>
+						</label>
+					</checkbox-group>
+				</view>
+				<view class="saveBtn" @click="closeSelectPet">
+					保存
+				</view>
+			</uni-popup>
 
-		<!-- 时间选择弹框 -->
-		<u-datetime-picker :show="show" v-model="valueTime" mode="datetime" @confirm="confirmBtn"
-			@cancel="closeBtn"></u-datetime-picker>
+			<!-- 时间选择弹框 -->
+			<u-datetime-picker :show="show" v-model="valueTime" mode="datetime" @confirm="confirmBtn"
+				@cancel="closeBtn">
+			</u-datetime-picker>
+		</view>
 	</view>
 </template>
-
 <script>
+	import api from '../../../utils/api.js';
 	import diet from './diet.vue'
 	import drink from './drink.vue'
 	import weight from './weight.vue'
@@ -95,6 +97,7 @@
 	import notes from './notes'
 	import abnormal from './abnormal'
 	import medication from './medication'
+
 	export default {
 		components: {
 			diet,
@@ -109,19 +112,17 @@
 		data() {
 			return {
 				show: false,
-				selectPet: [],
+				selectPet: [], // 存储选中的宠物 ID
+				selectedPetNames: [], // 存储选中的宠物名称
+				inputValue: '',
+				updatedValue: {},
 				valueTime: Number(new Date()),
 				items: [{
-						// value: 'USA',
-						name: '暹罗',
-						img: 'https://www.serverzhu.com/mimi1.jpg'
-					},
-					{
-						// value: 'CHN',
-						name: '梨花',
-						img: 'https://www.serverzhu.com/mimi2.png'
-					},
-				]
+					id: '',
+					name: '',
+					pet_pic: '',
+				}],
+				pageType: ''
 			}
 		},
 		computed: {
@@ -136,6 +137,13 @@
 				return `${year}-${month}-${day} ${hours}:${minutes}`;
 			}
 		},
+		onReady() {
+			this.getPetList()
+		},
+		onLoad(options) {
+			this.pageType = options.type;
+			console.log("Received type ", this.pageType);
+		},
 		methods: {
 			// 打开选择宠物弹框
 			toggle(type) {
@@ -148,25 +156,22 @@
 			},
 			change(e) {
 				console.log('当前模式：' + e.type + ',状态：' + e.show);
+				console.log(this.selectPet)
 			},
 			// 选择宠物操作
-			checkboxChange: function(e) {
+			checkboxChange(e) {
 				var items = this.items,
 					values = e.detail.value;
-				this.selectPet = values
-				// console.log(values, '0000000000')
-				for (var i = 0, lenI = items.length; i < lenI; ++i) {
-					const item = items[i]
-					if (values.includes(item.value)) {
-						this.$set(item, 'checked', true)
-					} else {
-						this.$set(item, 'checked', false)
-					}
-				}
+				this.selectPet = values;
+
+				// 显示选中的宠物名字
+				const selectedPets = items.filter(item => values.includes(item.id.toString()));
+				this.selectedPetNames = selectedPets.map(item => item.name); // 获取宠物名称
+
+				console.log(this.selectedPetNames); // 这里会是选中的宠物名称
 			},
 			// 关闭时间弹框
 			confirmBtn() {
-				// console.log('999999')
 				this.show = false
 			},
 			closeBtn() {
@@ -174,7 +179,39 @@
 			},
 			handleSelectedValue(updatedValue) {
 				console.log(updatedValue, '0000000000000'); // 这里可以接收到传递过来的 selectedValue
-			}
+				this.updatedValue = updatedValue
+			},
+			// 返回页面
+			back() {
+				uni.switchTab({
+					url: '/pages/record/record'
+				});
+			},
+			// 添加记录
+			async saveRecord() {
+				console.log(this.inputValue, this.selectPet,
+					this.updatedValue, this.formattedTime)
+				try {
+					const response = await api.addRecord({
+						pet_id: this.selectPet,
+						event_type: this.updatedValue,
+						note: this.inputValue,
+						recorded_at: this.formattedTime
+					})
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			// 获取宠物列表
+			async getPetList() {
+				try {
+					const response = await api.getPet()
+					console.log(response)
+					this.items = response.data
+				} catch (err) {
+					console.log(err)
+				}
+			},
 		}
 	}
 </script>
@@ -193,8 +230,9 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-color: #fffce0;
+
 		width: 100%;
-		height: 100vh;
+		// height: 100vh;
 	}
 
 	.select {
@@ -216,6 +254,7 @@
 
 	.select-title {
 		margin: 30rpx;
+		width: 180rpx;
 		font-size: 34rpx;
 		font-weight: 600;
 	}
@@ -332,11 +371,29 @@
 	}
 
 	.button-add:active {
-		background-color: #e7d335;
+		background-color: #fff1b6;
 	}
 
 	.w90 {
 		width: 90%;
 		margin-top: 30rpx;
+	}
+
+	/deep/.uni-navbar__header-container-inner {
+		align-items: flex-end !important;
+		margin-bottom: 20rpx;
+	}
+
+	/deep/.uni-navbar__header-btns-left {
+		align-items: flex-end !important;
+		margin-bottom: 20rpx;
+	}
+
+	/deep/.uni-navbar--border {
+		border-bottom-color: #fff1b6 !important;
+	}
+
+	/deep/.uni-navbar__header {
+		background-color: #fff1b6 !important;
 	}
 </style>

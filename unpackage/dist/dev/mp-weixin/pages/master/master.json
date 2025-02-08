@@ -1,5 +1,5 @@
 {
   "navigationBarBackgroundColor": "#ffeeac",
-  "disableScroll": true,
+  "backgroundColor": "#ffeeac",
   "usingComponents": {}
 }

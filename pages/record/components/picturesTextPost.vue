@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<img src="../../../static/cat.png" alt="" class="img" />
+		<img src="https://www.serverzhu.com/petImg/cat.png" alt="" class="img" />
 		<view class="button-text w90">
 			<view style="margin: 30rpx;font-size: 36rpx;font-weight: 600;">
 				描述

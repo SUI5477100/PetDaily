@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "",
-  "navigationBarBackgroundColor": "#ffeb9e",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar"
+  }
 }

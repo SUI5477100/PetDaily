@@ -9,9 +9,9 @@
 				>
 			</view>
 		</view>
-		<view class="record-book">
+	<!-- 	<view class="record-book" @click="logbook">
 			小宠的记录本
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -65,7 +65,12 @@
 		methods: {
 			onclick(value) {
 				console.log(value)
-			}
+				// console.log('111111111')
+				uni.redirectTo({
+					url: `/pages/record/recordItems/addRecord?type=${value}`
+				});
+			},
+
 		}
 	}
 </script>
@@ -103,21 +108,4 @@
 		margin-right: 25rpx;
 	}
 
-	.record-book {
-		width: 100%;
-		height: 100rpx;
-		margin-top: 30rpx;
-		border: #000 4rpx solid;
-		background-color: #ffd553;
-		border-radius: 100rpx;
-		display: flex;
-		justify-content: center;
-		font-weight: 600;
-		font-size: 34rpx;
-		align-items: center;
-	}
-
-	.record-book:active {
-		background-color: #eac34c;
-	}
 </style>

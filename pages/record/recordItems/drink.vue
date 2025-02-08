@@ -34,6 +34,8 @@
 				inputValue: '',
 				drinkUnit: 'ml', // 存储饮水量单位
 				selectedValue: {
+					type:'饮水',
+					color:'#69b0e5',
 					drinkAmount: '' // 存储计算后的饮水量
 				}
 			};

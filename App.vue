@@ -14,4 +14,8 @@
 
 <style lang="scss">
 	/*每个页面公共css */
+	// background-color: #ffeeac;
+	page{
+		background-color: #fffce0 !important;
+	}
 </style>

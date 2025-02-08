@@ -81,6 +81,8 @@
 				inputValue: '',
 				medicationUnit: 'g',
 				selectedValue: {
+					type:'用药',
+					color:'#c2185b',
 					medicationType: '',
 					medicationDetail: '',
 					medicationMethod: '',

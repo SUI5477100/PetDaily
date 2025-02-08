@@ -5,13 +5,13 @@
 			<img src="https://www.serverzhu.com/%E7%BB%84%20178.png" alt="" style="position: absolute;bottom: -20%;right: -5%;
 			width: 150rpx;height: 150rpx;" />
 			<!-- 头像 -->
-			<view class="avatar" @click="goUpdateInfoPage"></view>
+			<img class="avatar" :src="userInfo.user_pic" @click="goUpdateInfoPage"></img>
 			<view class="avatar-right">
 				<!-- 名字 -->
 				<view class="name-box" @click="goUpdateInfoPage">
 					<view class="name-title">
 						<view class="name">
-							铲屎官
+							{{userInfo.username}}
 						</view>
 
 					</view>
@@ -45,13 +45,18 @@
 		</view>
 		<!-- 我的宠物 -->
 		<view class="mypet" style="">
-			<img src="https://www.serverzhu.com/mypet.png" alt=""
-				style="margin-left: 20rpx;margin-top: 10rpx;width: 160rpx;height: 60rpx; " />
+			<view style="display: flex;justify-content: space-between;align-items: center;"  @click="getAllPet">
+				<img src="https://www.serverzhu.com/mypet.png" alt=""
+					style="margin-left: 20rpx;margin-top: 10rpx;width: 160rpx;height: 60rpx; " />
+				<view style="font-weight: 600; margin-right: 20rpx;">
+					>
+				</view>
+			</view>
 			<view class="view-wrapper" style="">
 				<!-- 宠物信息卡 -->
-				<view class="master-box" v-for="(item,index) in petList" :key="index">
+				<view class="master-box" v-for="(item,index) in petList" :key="index" @click="getPetIndex(item.id)">
 					<!-- 头像 -->
-					<img class="avatar-pet" :src="item.img"></img>
+					<img class="avatar-pet" :src="item.pet_pic"></img>
 					<view class="avatar-right">
 						<!-- 名字 -->
 						<view class="name-pet">
@@ -59,7 +64,7 @@
 								<view class="name">
 									{{item.name}}
 								</view>
-								<img v-if="item.sex === 'man'" class="sex" src='https://www.serverzhu.com/man.png'>
+								<img v-if="item.sex === 1" class="sex" src='https://www.serverzhu.com/man.png'>
 								</img>
 								<img v-else class="sex" src='https://www.serverzhu.com/woman.png'>
 								</img>
@@ -85,7 +90,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="addpet">
+			<view class="addpet" @click="goAddPetPage">
 				<view class="addpet-btn">
 					<view class="btn-content">
 						<img src="https://www.serverzhu.com/petImg/add.png"
@@ -114,40 +119,77 @@
 </template>
 
 <script>
+	import api from '../../utils/api.js';
 	export default {
 		data() {
 			return {
+				userInfo: {
+					user_pic: '',
+					username: ''
+				},
 				petList: [{
-						name: '暹罗猫',
-						age: "12个月",
-						weight: '5kg',
-						sex: 'man',
-						img: 'https://www.serverzhu.com/mimi2.png'
-					},
-					{
-						name: '橘猫',
-						age: "1个月",
-						weight: '3kg',
-						sex: 'woman',
-						img: 'https://www.serverzhu.com/mimi1.jpg'
-					},
-					// {
-					// 	name: '橘猫',
-					// 	age: "1个月",
-					// 	weight: '3kg',
-					// 	sex: '♀',
-					// 	img: 'https://www.serverzhu.com/mimi1.jpg'
-					// }
-				]
+					name: '',
+					age: '',
+					weight: '',
+					sex: null,
+					pet_pic: ''
+				}, ]
 			}
+		},
+		onReady() {
+			this.getUserInfo()
+			this.getPetList()
 		},
 		methods: {
 			goUpdateInfoPage() {
-				console.log('111111111')
+				// console.log('111111111')
 				uni.redirectTo({
 					url: '../updateInfo/updateInfo'
 				});
 			},
+			goAddPetPage() {
+				// console.log('111111111')
+				uni.redirectTo({
+					url: '../petInfo/petInfo'
+				});
+			},
+			goUpdatePetPage(id) {
+				console.log(id)
+				uni.redirectTo({
+					url: `../petInfo/petInfo?id=${id}`
+				});
+			},
+			getAllPet(){
+				console.log('9999')
+				uni.redirectTo({
+					url: `../deletePet/deletePet`
+				});
+			},
+			// 获取用户头像昵称
+			async getUserInfo() {
+				try {
+					const response = await api.getUserInfo()
+					this.userInfo.username = response.data.username
+					this.userInfo.user_pic = response.data.user_pic
+					console.log(response)
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			// 获取宠物列表
+			async getPetList() {
+				try {
+					const response = await api.getPet()
+					console.log(response)
+					this.petList = response.data
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			getPetIndex(id) {
+				console.log(id)
+				this.goUpdatePetPage(id)
+			}
 		}
 	}
 </script>
@@ -160,10 +202,10 @@
 		background-image: url('https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/background.png');
 		background-size: cover;
 		background-position: center;
-		background-repeat: no-repeat;
-		background-color: #fffce0;
+		background-repeat: repeat-y;
+		// background-color: #ffeeac;
 		width: 100%;
-		height: 100vh;
+		// height: 100vh;
 
 	}
 
@@ -182,13 +224,17 @@
 	.master-box {
 		border-radius: 20rpx;
 		border: 4rpx solid #000;
-		width: 48%;
-		margin-bottom: 15rpx;
+		width: 47%;
+		margin-bottom: 20rpx;
 		height: 150rpx;
 		background-color: #fff;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+	}
+
+	.master-box:active {
+		background-color: #f2f2f2
 	}
 
 	.avatar-right {
@@ -235,7 +281,7 @@
 		border: 4rpx solid #000;
 		height: 150rpx;
 		width: 150rpx;
-		background-color: #55ff00;
+		background-color: #fff;
 	}
 
 	.avatar-pet {

@@ -12,14 +12,21 @@
 				</view>
 			</view>
 			<view class="rili">
-				<uni-calendar class="uni-calendar--hook" :selected="info.selected" :showMonth="false" @change="change"
+				<uni-calendar v-if="activeSlot === 1" class="uni-calendar--hook" :showMonth="false" @change="change"
 					@monthSwitch="monthSwitch" />
+				<uni-calendar v-else-if="activeSlot === 2" class="uni-calendar--hook" :showMonth="false"
+					@change="change2" @monthSwitch="monthSwitch2" />
+
 			</view>
+
 			<view v-show="activeSlot===1" class="record-items">
 				<recordItems></recordItems>
 			</view>
 			<view v-show="activeSlot===2" class="record-items">
 				<tipsItems></tipsItems>
+			</view>
+			<view v-if="activeSlot===1" class="record-book" @click="logbook">
+				小宠的记录本
 			</view>
 		</view>
 	</view>
@@ -39,9 +46,17 @@
 			return {
 				activeSlot: 1,
 				info: {
-					selected: []
-				}
+					selected: [],
+					selected2: []
+				},
+
 			}
+		},
+		onReady() {
+			const e = {
+				fulldate: new Date().toISOString().split('T')[0] // 获取当前日期，格式为 YYYY-MM-DD
+			};
+			this.change(e)
 		},
 		methods: {
 			setActive(slot) {
@@ -53,16 +68,21 @@
 				}
 			},
 			change(e) {
-				console.log('change 返回:', e)
-				// 模拟动态打卡
-				if (this.info.selected.length > 5) return
-				this.info.selected.push({
-					date: e.fulldate,
-					// info: '打卡'
-				})
+				console.log('change记录 返回:', e.fulldate)
 			},
 			monthSwitch(e) {
 				console.log('monthSwitchs 返回:', e)
+			},
+			change2(e) {
+				console.log('change 返回:', e)
+			},
+			monthSwitch2(e) {
+				console.log('monthSwitchs 返回:', e)
+			},
+			logbook() {
+				uni.redirectTo({
+					url: `/pages/record/recordItems/logbook`
+				});
 			}
 		}
 	}
@@ -113,5 +133,23 @@
 
 	.record-items {
 		width: 100%;
+	}
+
+	.record-book {
+		width: 100%;
+		height: 100rpx;
+		margin-top: 30rpx;
+		border: #000 4rpx solid;
+		background-color: #ffd553;
+		border-radius: 100rpx;
+		display: flex;
+		justify-content: center;
+		font-weight: 600;
+		font-size: 34rpx;
+		align-items: center;
+	}
+
+	.record-book:active {
+		background-color: #eac34c;
 	}
 </style>

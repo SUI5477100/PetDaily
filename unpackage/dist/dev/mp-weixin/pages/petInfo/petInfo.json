@@ -1,7 +1,9 @@
 {
-  "navigationBarBackgroundColor": "#ffeb9e",
+  "navigationStyle": "custom",
   "disableScroll": true,
   "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
     "uni-file-picker": "/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker",
     "uni-forms": "/uni_modules/uni-forms/components/uni-forms/uni-forms",
     "uni-forms-item": "/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item",

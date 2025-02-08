@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/firstPage/firstPage",
     "pages/master/master",
+    "pages/firstPage/firstPage",
     "pages/record/record",
     "pages/index/index",
     "pages/pet/pet",
@@ -23,7 +23,8 @@
     "pages/record/recordItems/abnormal",
     "pages/record/recordItems/medication",
     "pages/loginPage/loginPage",
-    "pages/updateInfo/updateInfo"
+    "pages/updateInfo/updateInfo",
+    "pages/deletePet/deletePet"
   ],
   "subPackages": [],
   "window": {
