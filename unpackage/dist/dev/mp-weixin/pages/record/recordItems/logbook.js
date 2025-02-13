@@ -103,6 +103,18 @@ try {
     uniNavBar: function () {
       return __webpack_require__.e(/*! import() | uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar */ "uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue */ 442))
     },
+    uIcon: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 598))
+    },
+    uPicker: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 494))
+    },
+    uniIcons: function () {
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 502))
+    },
+    uPopup: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 510))
+    },
   }
 } catch (e) {
   if (
@@ -167,93 +179,243 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _api = _interopRequireDefault(__webpack_require__(/*! ../../../utils/api.js */ 165));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
+      show: false,
+      showPicker: false,
+      petColumns: [],
+      selectedPetId: null,
+      // 存储选中的宠物ID
+      selectedPetName: null,
       record: [{
         created_at: '',
         event_type: '',
         note: '',
         pet_names: [],
         pet_pics: []
-      }]
+      }],
+      selectId: '',
+      isOpen: [],
+      searchList: [{
+        name: '宠物搜索'
+      }, {
+        name: '日期搜索'
+      }, {
+        name: '类型搜索'
+      }],
+      selectedLog: {} // 新增属性来存储选中的记录
     };
   },
   onReady: function onReady() {
     this.getRecordList();
+    this.getPet();
   },
   methods: {
-    getRecordList: function getRecordList() {
-      var _this = this;
+    // 宠物搜索
+    onPetConfirm: function onPetConfirm(e) {
+      // 获取选中项的索引
+      var _e$indexs = (0, _slicedToArray2.default)(e.indexs, 1),
+        selectedIndex = _e$indexs[0];
+      console.log(selectedIndex);
+      var selectedPet = this.petColumns[0][selectedIndex];
+      this.selectedPetId = selectedPet.value;
+      this.selectedPetName = selectedPet.label;
+      console.log('最终选中的宠物ID:', this.selectedPetId, this.selectedPetName);
+      // 关闭搜索弹框
+      this.showPicker = false;
+      // 修改搜索框的背景颜色
+      this.$set(this.isOpen, 0, !this.isOpen[0]);
+      // 将宠物名回显在搜索框
+      this.searchList[0].name = this.selectedPetName;
+      this.getRecordList();
+    },
+    // 关闭宠物搜索弹框
+    cancelPet: function cancelPet() {
+      this.showPicker = false;
+    },
+    // 选中对应的搜索框切换背景颜色
+    toggleHandler: function toggleHandler(index) {
+      // 切换对应项的背景颜色
+      this.$set(this.isOpen, index, !this.isOpen[index]);
+      console.log(index);
+      // 打开宠物搜索弹框
+      if (index === 0) {
+        this.showPicker = !this.showPicker;
+      }
+    },
+    // 打开删除弹框
+    open: function open(id) {
+      this.show = true;
+      this.selectId = id;
+      console.log(id);
+      // 查找选中的记录并保存到 selectedLog
+      var selectedRecord = this.record.find(function (item) {
+        return item.id === id;
+      });
+      this.selectedLog = selectedRecord || {}; // 如果找不到记录，给一个空对象
+    },
+    // 删除记录
+    deleteRecord: function deleteRecord() {
+      console.log(this.selectId, '777777');
+      this.deleteRecordList(this.selectId);
+      this.show = false;
+      // this.selectId = '';
+      this.getRecordList();
+    },
+    // 关闭删除弹框
+    close: function close() {
+      this.show = false;
+      this.selectId = '';
+      this.getRecordList(); // 关闭时重新加载记录列表
+    },
+    // 删除接口
+    deleteRecordList: function deleteRecordList(id) {
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         var response;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _api.default.getRecord();
-              case 3:
+                console.log(id, '000000');
+                _context.prev = 1;
+                _context.next = 4;
+                return _api.default.deleteRecord(id);
+              case 4:
                 response = _context.sent;
-                console.log(response.data);
-
-                // 处理 event_type，将其解析为对象
-                _this.record = response.data.map(function (item) {
-                  var eventType = {};
-                  try {
-                    eventType = JSON.parse(item.event_type); // 尝试解析 JSON 字符串
-                    console.log(eventType.color); // 打印 color 的值
-                  } catch (e) {
-                    console.error("event_type 解析失败", e);
-                  }
-                  // 设置 eventType 的不同字段
-                  var eventDetails = '';
-                  if (eventType.type === '饮食') {
-                    eventDetails = "\u98DF\u7269\u7C7B\u578B: ".concat(eventType.foodType, "<br>\n\t\t\t\t\t\t\t \u8FDB\u98DF\u91CF: ").concat(eventType.foodAmount, "<br>");
-                  } else if (eventType.type === '饮水') {
-                    eventDetails = "\u996E\u6C34\u91CF: ".concat(eventType.drinkAmount);
-                  } else if (eventType.type === '体重') {
-                    eventDetails = "\u4F53\u91CD: ".concat(eventType.weightAmount);
-                  } else if (eventType.type === '洗护') {
-                    eventDetails = "\u6D17\u62A4\u7C7B\u578B: ".concat(eventType.cleansingType);
-                  } else if (eventType.type === '尿便') {
-                    eventDetails = "\u6392\u6CC4\u7C7B\u578B: ".concat(eventType.stoolType, "<br>\n\t\t\t\t\t\t\t \u6392\u6CC4\u9891\u7387: ").concat(eventType.stoolFrequency, "<br>\n\t\t\t\t\t\t\t \u6392\u6CC4\u91CF: ").concat(eventType.stoolAmount, "<br>\n\t\t\t\t\t\t\t \u5C3F\u4FBF\u72B6\u6001: ").concat(eventType.stoolStatus, "<br>\n\t\t\t\t\t\t\t \u5C3F\u4FBF\u989C\u8272: ").concat(eventType.stoolColor, "<br>\n\t\t\t\t\t\t\t \u5C3F\u4FBF\u5F02\u5E38: ").concat(eventType.stoolUnusual, "<br>\n\t\t\t\t\t\t");
-                  } else if (eventType.type === '记事') {
-                    eventDetails = "\u8BB0\u5F55\u7C7B\u578B: ".concat(eventType.notesType);
-                  } else if (eventType.type === '异常') {
-                    eventDetails = "\u5F02\u5E38\u7C7B\u578B: ".concat(eventType.abnormalType, "<br>\n\t\t\t\t\t\t\t \u5F02\u5E38\u7EC6\u8282: ").concat(eventType.abnormalDetail, "<br>");
-                  } else if (eventType.type === '用药') {
-                    eventDetails = "\u7528\u836F\u7C7B\u578B: ".concat(eventType.medicationType, ",").concat(eventType.medicationDetail, "<br>\n\t\t\t\t\t\t\t \u7ED9\u836F\u65B9\u5F0F: ").concat(eventType.medicationMethod, "<br>\n\t\t\t\t\t\t\t \u836F\u7269\u7528\u91CF: ").concat(eventType.medicationAmount, "<br>\n\t\t\t\t\t\t");
-                  } else {
-                    eventDetails = '未知事件';
-                  }
-
-                  // 设置动态背景色
-                  return _objectSpread(_objectSpread({}, item), {}, {
-                    eventType: eventType.type || '默认类型',
-                    // 提取 type 或者给一个默认值
-                    backgroundColor: eventType.color || '#4f6df9',
-                    // 默认颜色,
-                    eventDetails: eventDetails // 存储处理后的内容
-                  });
-                });
-                _context.next = 11;
+                _context.next = 10;
                 break;
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[1, 7]]);
+      }))();
+    },
+    //获取宠物信息
+    getPet: function getPet() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var response;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _api.default.getPet();
+              case 3:
+                response = _context2.sent;
+                // 直接处理 petColumns 数据，添加“全部”选项
+                _this.petColumns = [[{
+                  label: "全部",
+                  value: null
+                }].concat((0, _toConsumableArray2.default)(response.data.map(function (pet) {
+                  return {
+                    label: pet.name,
+                    value: pet.id
+                  };
+                })))];
+                console.log(_this.petColumns);
+                _context2.next = 11;
+                break;
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    },
+    // 获取/搜索记录事项
+    getRecordList: function getRecordList() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var response;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log(_this2.selectedPetId);
+                _context3.prev = 1;
+                _context3.next = 4;
+                return _api.default.getRecord({
+                  pet_id: _this2.selectedPetId
+                });
+              case 4:
+                response = _context3.sent;
+                console.log(response.data);
+                _this2.record = response.data.map(function (item) {
+                  var eventType = {};
+                  try {
+                    eventType = JSON.parse(item.event_type); // 解析 event_type 字符串
+                  } catch (e) {
+                    console.error("event_type 解析失败", e);
+                  }
+                  var eventDetails = '';
+                  // 使用 switch case 来处理不同的 eventType.type
+                  switch (eventType.type) {
+                    case '饮食':
+                      eventDetails = "\u98DF\u7269\u7C7B\u578B: ".concat(eventType.foodType, "<br>\u8FDB\u98DF\u91CF: ").concat(eventType.foodAmount, "<br>");
+                      break;
+                    case '饮水':
+                      eventDetails = "\u996E\u6C34\u91CF: ".concat(eventType.drinkAmount);
+                      break;
+                    case '体重':
+                      eventDetails = "\u4F53\u91CD: ".concat(eventType.weightAmount);
+                      break;
+                    case '洗护':
+                      eventDetails = "\u6D17\u62A4\u7C7B\u578B: ".concat(eventType.cleansingType);
+                      break;
+                    case '尿便':
+                      eventDetails = "\u6392\u6CC4\u7C7B\u578B: ".concat(eventType.stoolType, "<br>\u6392\u6CC4\u9891\u7387: ").concat(eventType.stoolFrequency, "<br>\u6392\u6CC4\u91CF: ").concat(eventType.stoolAmount, "<br>\u5C3F\u4FBF\u72B6\u6001: ").concat(eventType.stoolStatus, "<br>\u5C3F\u4FBF\u989C\u8272: ").concat(eventType.stoolColor, "<br>\u5C3F\u4FBF\u5F02\u5E38: ").concat(eventType.stoolUnusual, "<br>");
+                      break;
+                    case '记事':
+                      eventDetails = "\u8BB0\u5F55\u7C7B\u578B: ".concat(eventType.notesType);
+                      break;
+                    case '异常':
+                      eventDetails = "\u5F02\u5E38\u7C7B\u578B: ".concat(eventType.abnormalType, "<br>\u5F02\u5E38\u7EC6\u8282: ").concat(eventType.abnormalDetail, "<br>");
+                      break;
+                    case '用药':
+                      eventDetails = "\u7528\u836F\u7C7B\u578B: ".concat(eventType.medicationType, ",").concat(eventType.medicationDetail, "<br>\u7ED9\u836F\u65B9\u5F0F: ").concat(eventType.medicationMethod, "<br>\u836F\u7269\u7528\u91CF: ").concat(eventType.medicationAmount, "<br>");
+                      break;
+                    default:
+                      eventDetails = '未知事件';
+                      break;
+                  }
+                  return _objectSpread(_objectSpread({}, item), {}, {
+                    eventType: eventType.type || '默认类型',
+                    backgroundColor: eventType.color || '#4f6df9',
+                    eventDetails: eventDetails
+                  });
+                });
+                _context3.next = 12;
+                break;
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](1);
+                console.log(_context3.t0);
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 9]]);
       }))();
     },
     back: function back() {

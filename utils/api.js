@@ -81,10 +81,13 @@ const addRecord = (data) => {
 	return request('/record/addRecord', 'POST', data)
 }
 // 获取记录
-const getRecord = () => {
-	return request('/record/getRecord', 'GET')
+const getRecord = (params) => {
+	return request('/record/getRecord', 'GET', params)
 }
-
+// 删除记录
+const deleteRecord = (id) => {
+	return request(`/record/deleteRecord/${id}`, 'DELETE')
+}
 // 将封装好的接口导出
 export default {
 	login,
@@ -98,5 +101,6 @@ export default {
 	deletePet,
 	updatePet,
 	addRecord,
-	getRecord
+	getRecord,
+	deleteRecord
 };

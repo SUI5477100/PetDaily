@@ -188,7 +188,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ./i18n/index.js */ 3
 //
 var CalendarItem = function CalendarItem() {
   __webpack_require__.e(/*! require.ensure | uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item */ "uni_modules/uni-calendar/components/uni-calendar/uni-calendar-item").then((function () {
-    return resolve(__webpack_require__(/*! ./uni-calendar-item.vue */ 518));
+    return resolve(__webpack_require__(/*! ./uni-calendar-item.vue */ 534));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _initVueI18n = (0, _uniI18n.initVueI18n)(_index.default),
