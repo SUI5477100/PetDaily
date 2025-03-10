@@ -88,6 +88,18 @@ const getRecord = (params) => {
 const deleteRecord = (id) => {
 	return request(`/record/deleteRecord/${id}`, 'DELETE')
 }
+// 获取全部帖子
+const getPost = (params) => {
+	return request(`/post/getPosts`, 'GET', params)
+}
+// 点赞帖子
+const addLike = (data) => {
+	return request(`/post/likes`, 'POST', data)
+}
+// 查看帖子评论
+const getComment = (post_id) => {
+	return request(`/post/comments/${post_id}`, 'GET')
+}
 // 将封装好的接口导出
 export default {
 	login,
@@ -102,5 +114,8 @@ export default {
 	updatePet,
 	addRecord,
 	getRecord,
-	deleteRecord
+	deleteRecord,
+	getPost,
+	addLike,
+	getComment
 };

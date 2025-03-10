@@ -1,5 +1,10 @@
 {
 	"pages": [{
+			"path": "pages/firstPage/firstPage",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
 			"path": "pages/master/master",
 			"style": {
 				"navigationBarBackgroundColor": "#ffeeac",
@@ -9,12 +14,7 @@
 				// "navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/firstPage/firstPage",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
+
 		{
 			"path": "pages/record/record",
 			"style": {
@@ -92,7 +92,7 @@
 		{
 			"path": "pages/record/recordItems/logbook",
 			"style": {
-			"navigationStyle": "custom"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -156,16 +156,21 @@
 				"disableScroll": true
 			}
 
+		}, {
+			"path": "pages/deletePet/deletePet",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/pet/petPost",
+			"style": {
+
+				"navigationStyle": "custom"
+			}
+
 		}
-	    ,{
-            "path" : "pages/deletePet/deletePet",
-            "style" :                                                                                    
-            {
-              "navigationStyle": "custom"
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 
@@ -250,6 +255,11 @@
 			{
 				"name": "9.删除宠物",
 				"path": "pages/deletePet/deletePet",
+				"query": ""
+			},
+			{
+				"name": "10.帖子详情",
+				"path": "pages/pet/petPost",
 				"query": ""
 			}
 		]

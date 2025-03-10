@@ -11,10 +11,18 @@
 				<u-icon name="arrow-down" color="#818177" size="15"></u-icon>
 			</view>
 		</view>
+		<!-- 宠物搜索弹框 -->
 		<u-picker :show="showPicker" :columns="petColumns" @confirm="onPetConfirm" v-model="selectedPetId"
 			@cancel="cancelPet" keyName="label">
 		</u-picker>
-
+		<!-- 记事类型搜索弹框 -->
+		<u-picker :show="showType" :columns="typeColumns" @confirm="onTypeConfirm" v-model="selectedType"
+			@cancel="cancelType">
+		</u-picker>
+		<!-- 时间搜索弹框 -->
+		<u-picker :show="showData" :columns="dataColumns" @confirm="onDataConfirm" v-model="selectedData" ref="uPicker"
+			@change="changeHandler" @cancel="cancelData">
+		</u-picker>
 		<view class="content">
 
 			<view class="log" v-for="(item, index) in record" :key="item.id">
@@ -25,7 +33,7 @@
 					</view>
 					<!-- 时间 -->
 					<view class="time">
-						{{ item.created_at }}
+						{{ item.recorded_at }}
 					</view>
 				</view>
 				<view class="log-content">
@@ -68,7 +76,7 @@
 								{{ selectedLog.eventType || '' }}
 							</view>
 							<view class="time">
-								{{ selectedLog.created_at }}
+								{{ selectedLog.recorded_at }}
 							</view>
 						</view>
 
@@ -111,12 +119,16 @@
 		data() {
 			return {
 				show: false,
+				showType: false,
 				showPicker: false,
+				showData: false,
+				selectedType: '',
+				selectedData: '',
 				petColumns: [],
 				selectedPetId: null, // 存储选中的宠物ID
 				selectedPetName: null,
 				record: [{
-					created_at: '',
+					recorded_at: '',
 					event_type: '',
 					note: '',
 					pet_names: [],
@@ -134,7 +146,25 @@
 						name: '类型搜索',
 					},
 				],
-				selectedLog: {} // 新增属性来存储选中的记录
+				typeColumns: [
+					['全部类型', '饮食', '饮水', '体重', '洗护', '尿便', '记事', '异常', '用药']
+				],
+				dataColumns: [
+					['全部年份', '2025', '2024', '2023', '2022', '2021', '2020'],
+					['全部月份'],
+				],
+				columnData: [
+					['全部月份'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+					['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+				],
+				selectedLog: {}, // 新增属性来存储选中的记录
+				year: '',
+				month: ''
 			};
 		},
 		onReady() {
@@ -142,6 +172,59 @@
 			this.getPet()
 		},
 		methods: {
+			// 日期搜索确认弹框
+			onDataConfirm() {
+				console.log(this.year, this.month)
+				this.showData = false
+				if (this.month === "全部月份" || this.year === '全部年份') {
+					this.selectedData = this.year
+				} else if (this.year === '') {
+					this.selectedData = "全部年份"
+				} else {
+					this.selectedData = this.year + '-' + this.month
+				}
+				this.searchList[1].name = this.selectedData
+				this.$set(this.isOpen, 1, !this.isOpen[1]);
+				this.getRecordList()
+			},
+			// 关闭日期搜索弹框
+			cancelData() {
+				this.showData = false
+				this.$set(this.isOpen, 1, !this.isOpen[1]);
+			},
+			// 当日期搜索列数变化的时候，对应变化第二列
+			changeHandler(e) {
+				const {
+					columnIndex,
+					value,
+					values, // values为当前变化列的数组内容
+					index,
+					// 微信小程序无法将picker实例传出来，只能通过ref操作
+					picker = this.$refs.uPicker
+				} = e
+				console.log(e.value[0], e.value[1])
+				this.year = e.value[0]
+				this.month = e.value[1]
+				// 当第一列值发生变化时，变化第二列(后一列)对应的选项
+				if (columnIndex === 0) {
+					// picker为选择器this实例，变化第二列对应的选项
+					picker.setColumnValues(1, this.columnData[index])
+				}
+			},
+			// 记录类似搜索
+			onTypeConfirm(e) {
+				this.selectedType = e.value[0]
+				this.searchList[2].name = this.selectedType
+				console.log(e.value[0], e)
+				this.showType = false
+				this.$set(this.isOpen, 2, !this.isOpen[2]);
+				this.getRecordList()
+			},
+			// 关闭记录类型搜索弹框
+			cancelType() {
+				this.showType = false
+				this.$set(this.isOpen, 2, !this.isOpen[2]);
+			},
 			// 宠物搜索
 			onPetConfirm(e) {
 				// 获取选中项的索引
@@ -162,6 +245,7 @@
 			// 关闭宠物搜索弹框
 			cancelPet() {
 				this.showPicker = false
+				this.$set(this.isOpen, 0, !this.isOpen[0]);
 			},
 			// 选中对应的搜索框切换背景颜色
 			toggleHandler(index) {
@@ -171,6 +255,10 @@
 				// 打开宠物搜索弹框
 				if (index === 0) {
 					this.showPicker = !this.showPicker
+				} else if (index === 1) {
+					this.showData = !this.showData
+				} else if (index === 2) {
+					this.showType = !this.showType
 				}
 			},
 			// 打开删除弹框
@@ -194,11 +282,11 @@
 			close() {
 				this.show = false;
 				this.selectId = '';
-				this.getRecordList(); // 关闭时重新加载记录列表
+				this.getRecordList();
 			},
 			// 删除接口
 			async deleteRecordList(id) {
-				console.log(id, '000000')
+				// console.log(id, '000000')
 				try {
 					const response = await api.deleteRecord(id)
 				} catch (err) {
@@ -212,7 +300,7 @@
 					// 直接处理 petColumns 数据，添加“全部”选项
 					this.petColumns = [
 						[{
-								label: "全部",
+								label: "全部宠物",
 								value: null
 							},
 							...response.data.map(pet => ({
@@ -228,10 +316,13 @@
 			},
 			// 获取/搜索记录事项
 			async getRecordList() {
-				console.log(this.selectedPetId);
+				console.log(this.selectedPetId, this.selectedType, this.year, this.month);
 				try {
 					const response = await api.getRecord({
-						pet_id: this.selectedPetId
+						pet_id: this.selectedPetId,
+						event_type: this.selectedType,
+						year: this.year,
+						month: this.month
 					});
 					console.log(response.data);
 

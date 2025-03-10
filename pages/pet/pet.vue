@@ -10,24 +10,21 @@
 			</view>
 		</view>
 		<!-- 帖子 -->
-		<view class="post" v-for="(item, index) in posts" :key="index">
+		<view class="post" v-for="(item, index) in posts" :key="index" @click="getPostContent(item.id)">
 			<!-- 头像部分 -->
 			<view class="post-title">
 				<view class="avatar">
-					<view class="avatar-img">
-
-					</view>
+					<!-- <view > -->
+					<img class="avatar-img" :src="item.user_pic" alt="">
+					<!-- </view> -->
 					<view class="avatar-name">
 						<view class="name-text">
-							{{ item.name }}
+							{{ item.username }}
 						</view>
 						<view class="name-cat">
-							{{ item.cat }}
+							{{ item.created_at }}
 						</view>
 					</view>
-				</view>
-				<view class="time">
-					{{ item.time }}
 				</view>
 			</view>
 			<!-- 文字内容 -->
@@ -36,70 +33,72 @@
 			</view>
 			<!-- 图片内容 -->
 			<view class="img">
-				<view class="grid">
-					<view class="grid-item" v-for="(img, index) in item.images" :key="index">
-					</view>
+				<view class="image-container">
+					<img v-for="(img, index) in item.post_pic" :key="index" :src="img" class="preview-image">
 				</view>
 			</view>
-
 			<!-- 点赞 -->
 			<view class="like">
-				<view class="icon" 	@click="toggleCheck(index)">
-					<img class="icon-img"
-						:src="item.isChecked ? '../../static/dianzan.png':'../../static/dianzan_1.png'"
-					 />
+				<view class="icon" @click.stop="toggleCheck(index, item.id)">
+					<img class="icon-img" :src="item.liked ? '../../static/dianzan_1.png':'../../static/dianzan.png'" />
 					<view class="count">
-						{{ item.likes }}
+						{{ item.like_count }}
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="fixed">
-		
+
 		</view>
 	</view>
 </template>
 
 <script>
+	import api from '../../utils/api.js';
 	export default {
 		data() {
 			return {
-				posts: [
-					{
-						name: '名字1',
-						cat: '波斯猫',
-						time: '刚刚',
-						content: '哇塞，宝子你这句话就像春风吹过，瞬间让人心情明媚！你的厉害，就像夜空中最亮的星，无论在哪里都能熠熠生辉！🌟🌟🌟。跟你一起，让他的光芒照亮更多人！关注我，每日夸夸，给你能量满满！/追星路上，我陪你！关注我，每日彩虹屁不断！。',
-						images: [/* 图片数据 */],
-						isChecked: false,
-						likes: 1
-					},
-					{
-						name: '名字2',
-						cat: '金毛猫',
-						time: '1分钟前',
-						content: '金毛猫非常聪明。',
-						images: [/* 图片数据 */],
-						isChecked: false,
-						likes: 3
-					},
-					{
-						name: '名字3',
-						cat: '暹罗猫',
-						time: '2分钟前',
-						content: '暹罗猫非常温顺。',
-						images: [1,2,3,4,5,6,7,8,9],
-						isChecked: false,
-						likes: 5
-					}
-				]
+				posts: []
 			}
 		},
+		onReady() {
+			this.getPostList()
+		},
 		methods: {
-			toggleCheck(index) {
-				this.posts[index].isChecked = !this.posts[index].isChecked
+			// 获取全部帖子
+			async getPostList() {
+				try {
+					const response = await api.getPost()
+					this.posts = response.data
+					console.log(response)
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			// 点赞接口
+			async addLike(id) {
+				try {
+					console.log(id)
+					const response = await api.addLike({
+						post_id:id
+					})
+					console.log(response)
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			getPostContent(id){
+				console.log(id)
+				uni.redirectTo({
+					url: `/pages/pet/petPost?id=${id}`
+				});
+			},
+			// 点赞切换效果
+			toggleCheck(index,id) {
+				this.posts[index].liked = !this.posts[index].liked
 				// 切换点赞状态后更新点赞数
-				this.posts[index].likes += this.posts[index].isChecked ? 1 : -1;
+				this.posts[index].like_count += this.posts[index].liked ? 1 : -1;
+				this.addLike(id)
 			}
 		}
 	}
@@ -141,8 +140,7 @@
 	}
 
 	.post-title {
-		height: 130rpx;
-		margin-top: 20rpx;
+		margin: 40rpx 0rpx;
 		display: flex;
 		justify-content: space-between;
 	}
@@ -158,7 +156,7 @@
 	.avatar-img {
 		width: 80rpx;
 		height: 80rpx;
-		background-color: #ff5500;
+		background-color: #000;
 		border-radius: 100rpx;
 		border: #000 2rpx solid;
 		margin-left: 20rpx;
@@ -169,8 +167,8 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: center;
+		margin-left: 30rpx;
 	}
 
 	.name-text {
@@ -179,8 +177,9 @@
 	}
 
 	.name-cat {
-		width: 80%;
+		// width: 80%;
 		height: 40%;
+		color: #b0b0b0;
 	}
 
 	.time {
@@ -202,22 +201,23 @@
 	}
 
 	.img {
-		width: 100%;
+		width: 90%;
+		margin: auto;
 	}
 
-	.grid {
-		// margin: 20rpx;
+	.image-container {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-evenly;
+		gap: 20rpx;
+		justify-content: flex-start;
 	}
 
-	.grid-item {
-		width: 200rpx;
-		margin-bottom: 20rpx;
-		height: 200rpx;
-		background-color: #ddd;
+	.preview-image {
+		flex: 0 0 calc(33.33% - 14rpx);
+		width: calc(33.33% - 14rpx);
+		height: 180rpx;
 		border-radius: 8rpx;
+		box-sizing: border-box;
 	}
 
 	.like {
@@ -239,9 +239,11 @@
 		width: 40rpx;
 		height: 40rpx;
 	}
-	.count{
+
+	.count {
 		margin-left: 10rpx;
 	}
+
 	.fixed {
 		background-image: url('https://www.serverzhu.com/petImg/add.png');
 		background-size: cover;
@@ -253,7 +255,7 @@
 		bottom: 3%;
 		right: -4%;
 	}
-	
+
 	.fixed:active {
 		background-image: url('https://www.serverzhu.com/petImg/add2.png');
 	}

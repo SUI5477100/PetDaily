@@ -79,11 +79,11 @@
 					保存
 				</view>
 			</uni-popup>
-
 			<!-- 时间选择弹框 -->
 			<u-datetime-picker :show="show" v-model="valueTime" mode="datetime" @confirm="confirmBtn"
 				@cancel="closeBtn">
 			</u-datetime-picker>
+			<u-toast ref="uToast"></u-toast>
 		</view>
 	</view>
 </template>
@@ -122,7 +122,11 @@
 					name: '',
 					pet_pic: '',
 				}],
-				pageType: ''
+				pageType: '',
+				list: [{
+					type: "",
+					message: "",
+				}, ],
 			}
 		},
 		computed: {
@@ -187,10 +191,25 @@
 					url: '/pages/record/record'
 				});
 			},
-			// 添加记录
+
+			// 错误/正确信息提醒
+			sendToast(type, message) {
+				this.list.type = type
+				this.list.message = message
+				this.showToast(this.list)
+			},
+			showToast(params) {
+				this.$refs.uToast.show({
+					...params,
+				});
+			},
+
+			// 添加记录接口
 			async saveRecord() {
-				console.log(this.inputValue, this.selectPet,
-					this.updatedValue, this.formattedTime)
+				if (this.selectPet.length === 0 || Object.keys(this.updatedValue).length === 0) {
+					this.sendToast('warning', '信息没填全哦(⊙_⊙;)')
+					return;
+				}
 				try {
 					const response = await api.addRecord({
 						pet_id: this.selectPet,
@@ -198,8 +217,17 @@
 						note: this.inputValue,
 						recorded_at: this.formattedTime
 					})
+					this.sendToast('success', '添加成功(•̀ᴗ•́)و ̑̑');
+					// console.log(response)
+					if (response.status === 200) {
+						// 设置延迟，等toast显示完成后再跳转
+						setTimeout(() => {
+							this.back(); // 执行返回操作
+						}, 400); // 这里设置了2秒的延迟，可以根据需要调整
+					}
 				} catch (err) {
 					console.log(err)
+					this.sendToast('error', '出错了，请重试！(；´д｀)ゞ ')
 				}
 			},
 			// 获取宠物列表

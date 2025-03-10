@@ -135,19 +135,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
 
-
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
+var _api = _interopRequireDefault(__webpack_require__(/*! ../../utils/api.js */ 173));
 //
 //
 //
@@ -206,42 +203,91 @@ exports.default = void 0;
 var _default = {
   data: function data() {
     return {
-      posts: [{
-        name: '名字1',
-        cat: '波斯猫',
-        time: '刚刚',
-        content: '哇塞，宝子你这句话就像春风吹过，瞬间让人心情明媚！你的厉害，就像夜空中最亮的星，无论在哪里都能熠熠生辉！🌟🌟🌟。跟你一起，让他的光芒照亮更多人！关注我，每日夸夸，给你能量满满！/追星路上，我陪你！关注我，每日彩虹屁不断！。',
-        images: [/* 图片数据 */],
-        isChecked: false,
-        likes: 1
-      }, {
-        name: '名字2',
-        cat: '金毛猫',
-        time: '1分钟前',
-        content: '金毛猫非常聪明。',
-        images: [/* 图片数据 */],
-        isChecked: false,
-        likes: 3
-      }, {
-        name: '名字3',
-        cat: '暹罗猫',
-        time: '2分钟前',
-        content: '暹罗猫非常温顺。',
-        images: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        isChecked: false,
-        likes: 5
-      }]
+      posts: []
     };
   },
+  onReady: function onReady() {
+    this.getPostList();
+  },
   methods: {
-    toggleCheck: function toggleCheck(index) {
-      this.posts[index].isChecked = !this.posts[index].isChecked;
+    // 获取全部帖子
+    getPostList: function getPostList() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var response;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _api.default.getPost();
+              case 3:
+                response = _context.sent;
+                _this.posts = response.data;
+                console.log(response);
+                _context.next = 11;
+                break;
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
+    },
+    // 点赞接口
+    addLike: function addLike(id) {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var response;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                console.log(id);
+                _context2.next = 4;
+                return _api.default.addLike({
+                  post_id: id
+                });
+              case 4:
+                response = _context2.sent;
+                console.log(response);
+                _context2.next = 11;
+                break;
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    },
+    getPostContent: function getPostContent(id) {
+      console.log(id);
+      uni.redirectTo({
+        url: "/pages/pet/petPost?id=".concat(id)
+      });
+    },
+    // 点赞切换效果
+    toggleCheck: function toggleCheck(index, id) {
+      this.posts[index].liked = !this.posts[index].liked;
       // 切换点赞状态后更新点赞数
-      this.posts[index].likes += this.posts[index].isChecked ? 1 : -1;
+      this.posts[index].like_count += this.posts[index].liked ? 1 : -1;
+      this.addLike(id);
     }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

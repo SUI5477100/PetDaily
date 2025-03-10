@@ -68,6 +68,11 @@
           "name": "9.删除宠物",
           "pathName": "pages/deletePet/deletePet",
           "query": ""
+        },
+        {
+          "name": "10.帖子详情",
+          "pathName": "pages/pet/petPost",
+          "query": ""
         }
       ]
     }

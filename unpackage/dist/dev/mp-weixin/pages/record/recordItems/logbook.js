@@ -101,19 +101,19 @@ var components
 try {
   components = {
     uniNavBar: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar */ "uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue */ 442))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar */ "uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue */ 450))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 598))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 510))
     },
     uPicker: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 494))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 502))
     },
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 502))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 519))
     },
     uPopup: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 510))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 527))
     },
   }
 } catch (e) {
@@ -182,20 +182,24 @@ var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/run
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-var _api = _interopRequireDefault(__webpack_require__(/*! ../../../utils/api.js */ 165));
+var _api = _interopRequireDefault(__webpack_require__(/*! ../../../utils/api.js */ 173));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
       show: false,
+      showType: false,
       showPicker: false,
+      showData: false,
+      selectedType: '',
+      selectedData: '',
       petColumns: [],
       selectedPetId: null,
       // 存储选中的宠物ID
       selectedPetName: null,
       record: [{
-        created_at: '',
+        recorded_at: '',
         event_type: '',
         note: '',
         pet_names: [],
@@ -210,7 +214,13 @@ var _default = {
       }, {
         name: '类型搜索'
       }],
-      selectedLog: {} // 新增属性来存储选中的记录
+      typeColumns: [['全部类型', '饮食', '饮水', '体重', '洗护', '尿便', '记事', '异常', '用药']],
+      dataColumns: [['全部年份', '2025', '2024', '2023', '2022', '2021', '2020'], ['全部月份']],
+      columnData: [['全部月份'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'], ['全部月份', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']],
+      selectedLog: {},
+      // 新增属性来存储选中的记录
+      year: '',
+      month: ''
     };
   },
   onReady: function onReady() {
@@ -218,6 +228,57 @@ var _default = {
     this.getPet();
   },
   methods: {
+    // 日期搜索确认弹框
+    onDataConfirm: function onDataConfirm() {
+      console.log(this.year, this.month);
+      this.showData = false;
+      if (this.month === "全部月份" || this.year === '全部年份') {
+        this.selectedData = this.year;
+      } else if (this.year === '') {
+        this.selectedData = "全部年份";
+      } else {
+        this.selectedData = this.year + '-' + this.month;
+      }
+      this.searchList[1].name = this.selectedData;
+      this.$set(this.isOpen, 1, !this.isOpen[1]);
+      this.getRecordList();
+    },
+    // 关闭日期搜索弹框
+    cancelData: function cancelData() {
+      this.showData = false;
+      this.$set(this.isOpen, 1, !this.isOpen[1]);
+    },
+    // 当日期搜索列数变化的时候，对应变化第二列
+    changeHandler: function changeHandler(e) {
+      var columnIndex = e.columnIndex,
+        value = e.value,
+        values = e.values,
+        index = e.index,
+        _e$picker = e.picker,
+        picker = _e$picker === void 0 ? this.$refs.uPicker : _e$picker;
+      console.log(e.value[0], e.value[1]);
+      this.year = e.value[0];
+      this.month = e.value[1];
+      // 当第一列值发生变化时，变化第二列(后一列)对应的选项
+      if (columnIndex === 0) {
+        // picker为选择器this实例，变化第二列对应的选项
+        picker.setColumnValues(1, this.columnData[index]);
+      }
+    },
+    // 记录类似搜索
+    onTypeConfirm: function onTypeConfirm(e) {
+      this.selectedType = e.value[0];
+      this.searchList[2].name = this.selectedType;
+      console.log(e.value[0], e);
+      this.showType = false;
+      this.$set(this.isOpen, 2, !this.isOpen[2]);
+      this.getRecordList();
+    },
+    // 关闭记录类型搜索弹框
+    cancelType: function cancelType() {
+      this.showType = false;
+      this.$set(this.isOpen, 2, !this.isOpen[2]);
+    },
     // 宠物搜索
     onPetConfirm: function onPetConfirm(e) {
       // 获取选中项的索引
@@ -239,6 +300,7 @@ var _default = {
     // 关闭宠物搜索弹框
     cancelPet: function cancelPet() {
       this.showPicker = false;
+      this.$set(this.isOpen, 0, !this.isOpen[0]);
     },
     // 选中对应的搜索框切换背景颜色
     toggleHandler: function toggleHandler(index) {
@@ -248,6 +310,10 @@ var _default = {
       // 打开宠物搜索弹框
       if (index === 0) {
         this.showPicker = !this.showPicker;
+      } else if (index === 1) {
+        this.showData = !this.showData;
+      } else if (index === 2) {
+        this.showType = !this.showType;
       }
     },
     // 打开删除弹框
@@ -273,7 +339,7 @@ var _default = {
     close: function close() {
       this.show = false;
       this.selectId = '';
-      this.getRecordList(); // 关闭时重新加载记录列表
+      this.getRecordList();
     },
     // 删除接口
     deleteRecordList: function deleteRecordList(id) {
@@ -283,24 +349,23 @@ var _default = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(id, '000000');
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 0;
+                _context.next = 3;
                 return _api.default.deleteRecord(id);
-              case 4:
+              case 3:
                 response = _context.sent;
-                _context.next = 10;
+                _context.next = 9;
                 break;
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](1);
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 7]]);
+        }, _callee, null, [[0, 6]]);
       }))();
     },
     //获取宠物信息
@@ -319,7 +384,7 @@ var _default = {
                 response = _context2.sent;
                 // 直接处理 petColumns 数据，添加“全部”选项
                 _this.petColumns = [[{
-                  label: "全部",
+                  label: "全部宠物",
                   value: null
                 }].concat((0, _toConsumableArray2.default)(response.data.map(function (pet) {
                   return {
@@ -351,11 +416,14 @@ var _default = {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log(_this2.selectedPetId);
+                console.log(_this2.selectedPetId, _this2.selectedType, _this2.year, _this2.month);
                 _context3.prev = 1;
                 _context3.next = 4;
                 return _api.default.getRecord({
-                  pet_id: _this2.selectedPetId
+                  pet_id: _this2.selectedPetId,
+                  event_type: _this2.selectedType,
+                  year: _this2.year,
+                  month: _this2.month
                 });
               case 4:
                 response = _context3.sent;
