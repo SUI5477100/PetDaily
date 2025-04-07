@@ -1,7 +1,8 @@
 {
-  "navigationBarBackgroundColor": "#ffea9c",
-  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
+  "disableScroll": true,
   "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
     "uni-easyinput": "/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
     "uni-file-picker": "/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker"
   }

@@ -486,6 +486,15 @@
 .button-add.data-v-73edd5ed:active {
   background-color: #fff1b6;
 }
+.m10.data-v-73edd5ed {
+  margin: 20rpx;
+}
+.button-text.data-v-73edd5ed {
+  display: flex;
+  flex-direction: column;
+  border-radius: 40rpx;
+  background-color: #fff;
+}
 .w90.data-v-73edd5ed {
   width: 90%;
   margin-top: 30rpx;

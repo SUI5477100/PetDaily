@@ -45,7 +45,7 @@
 		</view>
 		<!-- 我的宠物 -->
 		<view class="mypet" style="">
-			<view style="display: flex;justify-content: space-between;align-items: center;"  @click="getAllPet">
+			<view style="display: flex;justify-content: space-between;align-items: center;" @click="getAllPet">
 				<img src="https://www.serverzhu.com/mypet.png" alt=""
 					style="margin-left: 20rpx;margin-top: 10rpx;width: 160rpx;height: 60rpx; " />
 				<view style="font-weight: 600; margin-right: 20rpx;">
@@ -108,13 +108,19 @@
 			</view>
 		</view>
 		<!-- 客服中心 -->
+		<!-- <view class="assistant"> -->
+
 		<view class="assistant">
 			<img src="https://www.serverzhu.com/server.png" style="width: 60rpx;height: 60rpx;margin: 0rpx 20rpx;"
 				alt="" />
-			<view class="assistant-title">
-				问题反馈
-			</view>
+			<view class="custom-btn">联系客服</view>
+			<button class="transparent-btn" open-type="contact" session-from="weapp"></button>
 		</view>
+
+		<!-- 	<view class="">
+				问题反馈
+			</view> -->
+		<!-- </view> -->
 	</view>
 </template>
 
@@ -141,6 +147,10 @@
 			this.getPetList()
 		},
 		methods: {
+			// 监听客服会话回调（可选）
+			handleContactEvent(e) {
+				console.log('客服会话状态变化:', e.detail);
+			},
 			goUpdateInfoPage() {
 				// console.log('111111111')
 				uni.redirectTo({
@@ -159,7 +169,7 @@
 					url: `../petInfo/petInfo?id=${id}`
 				});
 			},
-			getAllPet(){
+			getAllPet() {
 				console.log('9999')
 				uni.redirectTo({
 					url: `../deletePet/deletePet`
@@ -366,5 +376,34 @@
 
 	.assistant:active {
 		background-color: #f2f2f2;
+	}
+
+	.custom-contact-wrapper {
+		position: relative;
+		width: 200rpx;
+		height: 80rpx;
+	}
+
+	.custom-btn {
+		width: 100%;
+		height: 100%;
+		// background-color: #ffcc00;
+		color: #000;
+		display: flex;
+		align-items: center;
+		line-height: 80rpx;
+		border-radius: 20rpx;
+	}
+
+	.transparent-btn {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 15%;
+		background-color: transparent;
+		color: transparent;
+		border: none;
+		z-index: 10;
 	}
 </style>

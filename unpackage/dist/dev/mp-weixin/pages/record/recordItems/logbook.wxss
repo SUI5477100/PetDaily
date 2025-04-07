@@ -60,6 +60,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20rpx;
+  margin-bottom: 30rpx;
   justify-content: flex-start;
 }
 .preview-image.data-v-5d01c5f0 {

@@ -23,7 +23,7 @@
 				<recordItems></recordItems>
 			</view>
 			<view v-show="activeSlot===2" class="record-items">
-				<tipsItems></tipsItems>
+				<tipsItems :calendarData="calendarData"></tipsItems>
 			</view>
 			<view v-if="activeSlot===1" class="record-book" @click="logbook">
 				小宠的记录本
@@ -45,9 +45,10 @@
 		data() {
 			return {
 				activeSlot: 1,
+				calendarData: null,
 				info: {
 					selected: [],
-					selected2: []
+					selected2: [],
 				},
 
 			}
@@ -58,6 +59,13 @@
 			};
 			this.change(e)
 		},
+		onLoad() {
+			const e = {
+				fulldate: new Date().toISOString().split('T')[0]
+			}
+			this.change2(e)
+		},
+
 		methods: {
 			setActive(slot) {
 				// 切换激活插槽，保证不能同时激活两个插槽
@@ -75,6 +83,8 @@
 			},
 			change2(e) {
 				console.log('change 返回:', e)
+				// 将数据保存到响应式变量
+				this.calendarData = e
 			},
 			monthSwitch2(e) {
 				console.log('monthSwitchs 返回:', e)

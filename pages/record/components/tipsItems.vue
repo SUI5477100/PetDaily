@@ -15,15 +15,17 @@
 			<img :src="items.isChecked ? '../../../static/yuanfuxuankuang.png' : '../../../static/fuxuankuangkongyuan.png'"
 				@click="toggleCheck(index)" class="right-icon" />
 		</view>
-		<view class="fixed">
+		<view class="fixed" @click="textPost">
 
 		</view>
 	</view>
 </template>
 <script>
 	export default {
+
 		data() {
 			return {
+				currentDate: '',
 				colorList: [{
 						color: '#fff7b0',
 						text: '日常提醒'
@@ -74,7 +76,31 @@
 				]
 			};
 		},
+		props: {
+			calendarData: {
+				type: Object,
+				default: () => ({})
+			}
+		},
+
+		watch: {
+			// 监听数据变化
+			calendarData(newVal) {
+				if (Object.keys(newVal).length) {
+					console.log('收到父组件传递的日历数据:', newVal.fulldate)
+					// 这里可以执行后续业务逻辑
+					this.currentDate = newVal.fulldate; // 更新 currentDate
+				}
+			}
+		},
+
 		methods: {
+			textPost() {
+				  const date = encodeURIComponent(this.currentDate);
+				uni.redirectTo({
+					url: `/pages/record/components/textPost?fulldate=${date}`
+				});
+			},
 			toggleCheck(index) {
 				this.iconList[index].isChecked = !this.iconList[index].isChecked;
 			}

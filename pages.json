@@ -72,8 +72,8 @@
 		{
 			"path": "pages/record/components/picturesTextPost",
 			"style": {
-				"navigationBarBackgroundColor": "#ffea9c",
-				"navigationBarTitleText": ""
+			"navigationStyle": "custom",
+			"disableScroll": true
 			}
 		},
 		{

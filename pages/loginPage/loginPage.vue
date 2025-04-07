@@ -130,9 +130,11 @@
 								});
 								console.log(response, '0000')
 								const token = response.token
+								const openid = response.openid
 								if (token) {
 									uni.setStorageSync('token', token);
-									console.log('登录成功，Token:', token);
+									uni.setStorageSync('openID', openid);
+									console.log('登录成功，Token:', token,openid);
 									// this.getUserInfo()
 									this.goRegirect()
 								} else {

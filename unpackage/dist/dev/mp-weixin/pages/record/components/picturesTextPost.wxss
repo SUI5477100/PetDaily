@@ -60,4 +60,18 @@
 .button-add.data-v-701ea696:active {
   background-color: #f5df36;
 }
+.data-v-701ea696 .uni-navbar__header-container-inner {
+  align-items: flex-end !important;
+  margin-bottom: 20rpx;
+}
+.data-v-701ea696 .uni-navbar__header-btns-left {
+  align-items: flex-end !important;
+  margin-bottom: 20rpx;
+}
+.data-v-701ea696 .uni-navbar--border {
+  border-bottom-color: #ffe68e !important;
+}
+.data-v-701ea696 .uni-navbar__header {
+  background-color: #ffe68e !important;
+}
 

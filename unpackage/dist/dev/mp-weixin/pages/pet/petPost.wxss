@@ -10,6 +10,12 @@
   padding-top: 15%;
   width: 100%;
 }
+.detail-title.data-v-11cd2606 {
+  font-size: 38rpx;
+  margin-left: 30rpx;
+  position: relative;
+  margin-right: auto;
+}
 .title.data-v-11cd2606 {
   font-size: 40rpx;
   font-weight: 600;
@@ -18,18 +24,18 @@
   margin-right: auto;
 }
 .text.data-v-11cd2606 {
-  position: relative;
-  display: inline-block;
+  display: flex;
 }
 .post.data-v-11cd2606 {
   width: 90%;
   background-color: #fff;
   border: #000 4rpx solid;
   border-radius: 20rpx;
-  margin-top: 8%;
+  margin-top: 5%;
+  padding-bottom: 20rpx;
 }
 .post-title.data-v-11cd2606 {
-  margin: 40rpx 0rpx;
+  margin: 40rpx 40rpx 0rpx 0rpx;
   display: flex;
   justify-content: space-between;
 }
@@ -47,6 +53,7 @@
 .comments.data-v-11cd2606 {
   height: 100%;
   margin-top: 20rpx;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
 }
@@ -66,6 +73,7 @@
   margin-left: 30rpx;
 }
 .comment-name.data-v-11cd2606 {
+  width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -96,6 +104,8 @@
   margin: 20rpx 0rpx;
   margin-right: 20rpx;
   line-height: 42rpx;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 .img.data-v-11cd2606 {
   width: 90%;
@@ -145,5 +155,52 @@
 }
 .data-v-11cd2606 .u-input {
   height: 80rpx !important;
+}
+.sendBtn.data-v-11cd2606 {
+  width: 100rpx;
+  height: 60rpx;
+  margin: 0rpx 20rpx;
+  background-color: #ffd117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 10rpx;
+}
+.sendBtn.data-v-11cd2606:active {
+  background-color: #eac015;
+}
+.check-comment.data-v-11cd2606 {
+  color: #ffd117;
+  display: flex;
+  align-items: center;
+}
+.click-btn.data-v-11cd2606 {
+  margin-bottom: 20rpx;
+  display: flex;
+  color: #999999;
+}
+.click-btn.data-v-11cd2606:active {
+  margin-bottom: 20rpx;
+  display: flex;
+  color: #707070;
+}
+.img-popup.data-v-11cd2606 {
+  position: absolute;
+  right: 0%;
+  top: -30%;
+  width: 130rpx;
+  height: 130rpx;
+}
+.box-popup.data-v-11cd2606 {
+  padding: 30rpx 0rpx;
+  position: relative;
+}
+.reply-list.data-v-11cd2606 {
+  width: 100%;
+  background-color: #f7f7f7;
+  margin-top: 10rpx;
+  padding: 20rpx 20rpx;
+  border-radius: 20rpx;
 }
 

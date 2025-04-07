@@ -7,7 +7,7 @@
 			<view class="" style="margin: 20rpx;font-size: 36rpx;font-weight: 600;">
 				描述
 			</view>
-			<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容" class="input"
+			<uni-easyinput type="textarea" v-model="valueText" placeholder="请输入内容" class="input"
 				placeholderStyle="font-size: 32rpx"></uni-easyinput>
 		</view>
 
@@ -43,18 +43,6 @@
 			</view>
 		</view>
 
-		<!-- 	<picker mode="time" @change="picker3" :value="time" start="09:00" end="18:00" class="w90">
-			<view class="button-text ">
-				<view style="margin-left: 20rpx;">时间</view>
-				<view class="center">
-					<view style="margin-right: 20rpx;">
-						{{time}}
-					</view>
-					>
-				</view>
-			</view>
-		</picker> -->
-
 		<view class="button-text w90" @click="toggleRemind('bottom')">
 			<view style="margin-left: 20rpx;">重复</view>
 			<view class="center">
@@ -64,7 +52,7 @@
 				>
 			</view>
 		</view>
-		<view class="button-add">
+		<view class="button-add" @click="saveAll">
 			保存
 		</view>
 
@@ -76,9 +64,9 @@
 			</view>
 			<view class="uni-list">
 				<checkbox-group @change="checkboxChange">
-					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.index">
-						<checkbox color="#FFCC33" :value="item.name" />
-						<img :src="item.img" class="pet-img" />
+					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in items" :key="item.id">
+						<checkbox color="#FFCC33" :value="item.id" />
+						<img :src="item.pet_pic" class="pet-img" />
 						<view>{{item.name}}</view>
 					</label>
 				</checkbox-group>
@@ -87,28 +75,21 @@
 				保存
 			</view>
 		</uni-popup>
-
 		<!-- 类型弹窗 -->
 		<uni-popup ref="popup" background-color="#fff" @change="change" :show="show">
 			<view class="popup-content">
-
 				<uni-section title="类型" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item title="日常提醒" clickable @click="onClick('日常提醒')" />
-					<uni-list-item title="洗护提醒" clickable @click="onClick('洗护提醒')" />
-					<uni-list-item title="清洁提醒" clickable @click="onClick('清洁提醒')" />
-					<uni-list-item title="用药提醒" clickable @click="onClick('用药提醒')" />
+					<uni-list-item title="日常提醒" clickable @click="onClick('日常提醒','#fff7b0')" />
+					<uni-list-item title="洗护提醒" clickable @click="onClick('洗护提醒','#b0f8ff')" />
+					<uni-list-item title="清洁提醒" clickable @click="onClick('清洁提醒','#ffc2b0')" />
+					<uni-list-item title="用药提醒" clickable @click="onClick('用药提醒','#d2b0ff')" />
 				</uni-list>
 			</view>
 		</uni-popup>
-
-
 		<!-- 时间弹框 -->
-		<u-datetime-picker :show="show" v-model="time" mode="time"></u-datetime-picker>
-
-
-
-
+		<u-datetime-picker :show="show" v-model="time" mode="time" ref="popupTime" @confirm="closeTime"
+			@cancel="cancelTime"></u-datetime-picker>
 		<!-- 提醒弹框 -->
 		<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
 			<view class="popup-content">
@@ -122,13 +103,11 @@
 			</view>
 		</uni-popup>
 
-
-
-
 	</view>
 </template>
 
 <script>
+	import api from '../../../utils/api.js'
 	export default {
 		data() {
 			return {
@@ -147,22 +126,48 @@
 						'周日'
 					]
 				}],
+				valueText: '',
+				selectedPetIds: [],
+				selectPet:[],
 				selectedDays: [], // 用于存储选中的天数
 				selectPet: [],
-				items: [{
-
-						name: '暹罗',
-						img: 'https://www.serverzhu.com/mimi1.jpg'
-					},
-					{
-						name: '梨花',
-						img: 'https://www.serverzhu.com/mimi2.png'
-					},
-				]
+				items: [],
+				recordColor: '',
+				fulldate: ''
 			}
 		},
 		computed: {},
+		onReady() {
+			this.getPetList()
+		},
+		onLoad(options) {
+			// console.log(options.fulldate, '9999')
+			this.fulldate = options.fulldate
+			console.log(this.fulldate, '000000')
+
+		},
 		methods: {
+			// 获取宠物列表
+			async getPetList() {
+				try {
+					const response = await api.getPet()
+					console.log(response)
+					this.items = response.data
+				} catch (err) {
+					console.log(err)
+					this.sendToast('error', '获取宠物信息失败了(´～`)')
+				}
+			},
+			cancelTime() {
+				this.show = false;
+			},
+			closeTime() {
+				this.show = false;
+			},
+			saveAll() {
+				console.log('描述', this.valueText, '保存类型', this.record, '时间', this.time, '选中id', this.selectPet, '重复',
+					this.remind, '颜色', this.recordColor, '选中日期', this.fulldate)
+			},
 			// 格式化时间戳
 			formatTimestamp(timestamp) {
 				const date = new Date(timestamp);
@@ -173,7 +178,6 @@
 				const hours = String(date.getHours()).padStart(2, '0');
 				const minutes = String(date.getMinutes()).padStart(2, '0');
 				const seconds = String(date.getSeconds()).padStart(2, '0');
-
 				// 返回格式化的日期字符串
 				return `${hours}:${minutes}`;
 			},
@@ -203,9 +207,7 @@
 				if (this.selectedDays.length === 7) {
 					this.remind = '每天'; // 如果选中了所有的星期，显示'每天'
 				} else {
-					// console.log(this.selectedDays, '9999')
 					this.remind = this.selectedDays.join(', '); // 否则显示选中的天数
-					// console.log(this.remind, '0000')
 				}
 			},
 			// 关闭重复弹框
@@ -216,9 +218,10 @@
 				console.log('当前模式(重复)：' + e.type + ',状态：' + e.show);
 			},
 			// 保存类型
-			onClick(e) {
-				console.log('执行click事件', e);
+			onClick(e, color) {
+				// console.log('执行click事件', e);
 				this.record = e;
+				this.recordColor = color
 				console.log(this.record);
 				uni.showToast({
 					title: '保存成功',
@@ -232,6 +235,7 @@
 			},
 			// 关闭选择宠物弹框
 			closeSelectPet() {
+				console.log('最终选中的宠物ID:', this.selectedPetIds);
 				this.$refs.popupSelectPet.close()
 			},
 			// 切换宠物弹框模式
@@ -239,20 +243,24 @@
 				console.log('当前模式：' + e.type + ',状态：' + e.show);
 			},
 			// 选择宠物操作
-			checkboxChange(e){
-				var items = this.items,
-					values = e.detail.value;
-				this.selectPet = values
-				// console.log(values, '0000000000')
-				for (var i = 0, lenI = items.length; i < lenI; ++i) {
-					const item = items[i]
-					if (values.includes(item.value)) {
-						this.$set(item, 'checked', true)
-					} else {
-						this.$set(item, 'checked', false)
-					}
-				}
-			},
+			checkboxChange(e) {
+				// 直接获取选中id数组（自动转为字符串数组）
+				const selectedIds = e.detail.value;
+
+				// 转换为数字数组（如果需要数字类型）
+				this.selectedPetIds = selectedIds.map(id => Number(id));
+
+				// 更新选中显示（如果需要name）
+				this.selectPet = this.items
+					.filter(item => selectedIds.includes(String(item.id)))
+					.map(item => item.name);
+
+				// 更新复选框状态（可选，如果需要保持状态）
+				this.items = this.items.map(item => ({
+					...item,
+					checked: selectedIds.includes(String(item.id))
+				}));
+			}
 		}
 	}
 </script>

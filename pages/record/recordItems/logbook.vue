@@ -44,9 +44,10 @@
 							备注： {{ item.note }}
 						</view>
 						<view class="image-container">
-							<img v-for="(img, imgIndex) in item.note_pic" :key="imgIndex" :src="img"
-								class="preview-image">
+							<u-album v-if="Array.isArray(item.note_pic)" :urls="item.note_pic || []" rowCount="3"
+								multipleSize="80px" class="preview-image"></u-album>
 						</view>
+
 					</view>
 
 					<view class="pet-container">
@@ -86,11 +87,13 @@
 								<view class="note" style="color: #8d5515;" v-html="selectedLog.eventDetails"></view>
 								<view class="note">
 									备注： {{ selectedLog.note }}
-								</view>
+								</vie
 								<view class="image-container">
-									<img v-for="(img, imgIndex) in selectedLog.note_pic" :key="imgIndex" :src="img"
-										class="preview-image">
+									<u-album v-if="Array.isArray(selectedLog.note_pic )"
+										:urls="selectedLog.note_pic || []" rowCount="3" multipleSize="80px"
+										class="preview-image"></u-album>
 								</view>
+
 							</view>
 
 							<view class="pet-container">
@@ -199,7 +202,6 @@
 					value,
 					values, // values为当前变化列的数组内容
 					index,
-					// 微信小程序无法将picker实例传出来，只能通过ref操作
 					picker = this.$refs.uPicker
 				} = e
 				console.log(e.value[0], e.value[1])
@@ -268,7 +270,7 @@
 				console.log(id)
 				// 查找选中的记录并保存到 selectedLog
 				const selectedRecord = this.record.find(item => item.id === id);
-				this.selectedLog = selectedRecord || {}; // 如果找不到记录，给一个空对象
+				this.selectedLog = selectedRecord || {}; 
 			},
 			// 删除记录
 			deleteRecord() {
@@ -461,6 +463,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20rpx;
+		margin-bottom: 30rpx;
 		justify-content: flex-start;
 	}
 

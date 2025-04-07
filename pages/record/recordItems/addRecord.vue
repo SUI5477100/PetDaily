@@ -56,6 +56,10 @@
 				</view>
 				<uni-easyinput type="textarea" v-model="inputValue" placeholder="请输入内容" class="input"
 					placeholderStyle="font-size: 32rpx"></uni-easyinput>
+				<view class="button-text m10">
+					<uni-file-picker v-model="fileLists" :image-styles="imageStyles" file-mediatype="image" mode="grid"
+						@select="onFileSelect" />
+				</view>
 			</view>
 			<view class="button-add" @click="saveRecord">
 				保存
@@ -123,6 +127,15 @@
 					pet_pic: '',
 				}],
 				pageType: '',
+				fileLists: [],
+				imageStyles: {
+					border: {
+						color: "#f1f1f1",
+						width: 2,
+						radius: '20rpx'
+					}
+				},
+				uploadedUrls: [],
 				list: [{
 					type: "",
 					message: "",
@@ -149,6 +162,47 @@
 			console.log("Received type ", this.pageType);
 		},
 		methods: {
+			// 选中图片
+			onFileSelect(e) {
+				this.fileLists = [...this.fileLists, ...e.tempFiles]
+			},
+			// 上传图片
+			async upload() {
+			
+				// 重置
+				this.uploadedUrls = []
+				uni.showLoading({
+					title: '上传中...'
+				})
+				try {
+					for (let i = 0; i < this.fileLists.length; i++) {
+						const file = this.fileLists[i]
+						const res = await uni.uploadFile({
+							url: 'https://serverzhu.com:3000/upload',
+							filePath: file.path,
+							name: 'file'
+						})
+
+						const result = JSON.parse(res.data)
+						const urls = result.data.url // 后端返回的数组
+						this.uploadedUrls.push(...urls)
+					}
+
+					console.log('所有上传成功的图片地址:', this.uploadedUrls)
+					uni.hideLoading()
+					uni.showToast({
+						title: '上传成功',
+						icon: 'success'
+					})
+				} catch (err) {
+					uni.hideLoading()
+					console.error('上传失败:', err)
+					uni.showToast({
+						title: '上传失败',
+						icon: 'none'
+					})
+				}
+			},
 			// 打开选择宠物弹框
 			toggle(type) {
 				this.type = type
@@ -211,11 +265,13 @@
 					return;
 				}
 				try {
+					await this.upload()
 					const response = await api.addRecord({
 						pet_id: this.selectPet,
 						event_type: this.updatedValue,
 						note: this.inputValue,
-						recorded_at: this.formattedTime
+						recorded_at: this.formattedTime,
+						note_pic:this.uploadedUrls
 					})
 					this.sendToast('success', '添加成功(•̀ᴗ•́)و ̑̑');
 					// console.log(response)
@@ -401,7 +457,17 @@
 	.button-add:active {
 		background-color: #fff1b6;
 	}
-
+.m10 {
+		margin: 20rpx;
+	}
+		.button-text {
+			display: flex;
+			flex-direction: column;
+			// justify-content: space-between;
+			// align-items: center;
+			border-radius: 40rpx;
+			background-color: #fff
+		}
 	.w90 {
 		width: 90%;
 		margin-top: 30rpx;
