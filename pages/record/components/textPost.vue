@@ -128,9 +128,8 @@
 				}],
 				valueText: '',
 				selectedPetIds: [],
-				selectPet:[],
-				selectedDays: [], // 用于存储选中的天数
 				selectPet: [],
+				selectedDays: [], // 用于存储选中的天数
 				items: [],
 				recordColor: '',
 				fulldate: ''
@@ -164,9 +163,62 @@
 			closeTime() {
 				this.show = false;
 			},
+			// saveAll() {
+			// 	console.log('描述', this.valueText, '保存类型', this.record, '时间', this.time, '选中id', this.selectPet, '重复',
+			// 		this.remind, '颜色', this.recordColor, '选中日期', this.fulldate)
+			// 	this.submitRemind()
+			// },
 			saveAll() {
-				console.log('描述', this.valueText, '保存类型', this.record, '时间', this.time, '选中id', this.selectPet, '重复',
-					this.remind, '颜色', this.recordColor, '选中日期', this.fulldate)
+				// 1. 先调用 wx.requestSubscribeMessage
+				uni.requestSubscribeMessage({
+					tmplIds: ['3R4JVF2k2EvISj7-soVGL7iY70taAaD1y_Gqy_FrlJM'], // 多个也可写成数组
+					success: (res) => {
+						if (res['3R4JVF2k2EvISj7-soVGL7iY70taAaD1y_Gqy_FrlJM'] === 'accept') {
+							// 用户同意
+							this.doAddReminder(); // 去执行提交 remind
+						} else {
+							console.log('用户拒绝订阅');
+						}
+					},
+					fail: (err) => {
+						console.error('订阅接口调用失败', err);
+					}
+				});
+			},
+			doAddReminder() {
+				console.log(
+					'描述', this.valueText,
+					'保存类型', this.record,
+					'时间', this.time,
+					'选中id', this.selectPet,
+					'重复', this.remind,
+					'颜色', this.recordColor,
+					'选中日期', this.fulldate
+				);
+
+				this.submitRemind(); // 调用你写好的接口 addReminders(...)
+			},
+			async submitRemind() {
+				try {
+					const res = await api.addReminders({
+						description: this.valueText,
+						reminder_type: this.record,
+						remind_time: this.fulldate + ' ' + this.time,
+						pet_names: JSON.stringify(this.selectPet),
+						repeat_type: this.remind,
+						color: this.recordColor,
+						selected_date: this.fulldate
+					});
+					// if (res[1].data.success) {
+					// 	uni.showToast({
+					// 		title: '添加提醒成功',
+					// 		icon: 'none'
+					// 	});
+					// }
+					console.log('res,', res)
+				} catch (err) {
+					console.error(err);
+				}
 			},
 			// 格式化时间戳
 			formatTimestamp(timestamp) {

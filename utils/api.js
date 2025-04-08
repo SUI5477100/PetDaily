@@ -178,6 +178,10 @@ const deletePost = (post_id) => {
 const sendPost = (data) => {
 	return request('/post/addPosts', 'POST', data)
 }
+// 添加提醒接口
+const addReminders = (data)=>{
+	return request(`/reminders/add`,`POST`,data)
+}
 // 将封装好的接口导出
 export default {
 	login,
@@ -200,5 +204,6 @@ export default {
 	commentReplies,
 	deleteComment,
 	deletePost,
-	sendPost
+	sendPost,
+	addReminders
 };
