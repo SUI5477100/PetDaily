@@ -25,6 +25,10 @@
 							{{ item.created_at }}
 						</view>
 					</view>
+					
+				</view>
+				<view class="friend-btn" @click.stop="toggleFriend(index)">
+					关注ta
 				</view>
 			</view>
 			<!-- 文字内容 -->
@@ -79,7 +83,10 @@
 			async getPostList() {
 				try {
 					const response = await api.getPost()
-					this.posts = response.data
+					this.posts = response.data.map(post => ({
+						...post,
+						isFriend: false // 添加好友状态字段
+					}))
 					console.log(response)
 				} catch (err) {
 					console.log(err)
@@ -114,6 +121,11 @@
 				// 切换点赞状态后更新点赞数
 				this.posts[index].like_count += this.posts[index].liked ? 1 : -1;
 				this.addLike(id)
+			},
+			// 切换好友状态
+			toggleFriend(index) {
+				this.posts[index].isFriend = !this.posts[index].isFriend;
+				// TODO: 这里可以添加调用后端接口的逻辑
 			}
 		}
 	}
@@ -273,5 +285,24 @@
 
 	.fixed:active {
 		background-image: url('https://www.serverzhu.com/petImg/add2.png');
+	}
+
+	.friend-btn {
+		padding: 10rpx 30rpx;
+		border-radius: 30rpx;
+		font-size: 24rpx;
+		background-color: #000;
+		color: #fff;
+		border: 2rpx solid #000;
+		transition: all 0.3s ease;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 20rpx;
+
+		&.is-friend {
+			background-color: #000;
+			color: #fff;
+		}
 	}
 </style>

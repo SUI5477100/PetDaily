@@ -1,0 +1,319 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 整页白底 */
+.page.data-v-3a0574b4 {
+	width: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+	min-height: 100vh;
+	background-color: #ffffff;
+}
+/* 顶部背景图 */
+.background.data-v-3a0574b4 {
+	position: relative;
+	width: 100%;
+	height: 30vh;
+	background-image: url('https://www.serverzhu.com/petImg/Rectangle%209%20(2).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.card-front.data-v-3a0574b4 {
+	margin: 40rpx;
+	height: 200rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+/* 返回图标位置 */
+.back-icon.data-v-3a0574b4 {
+	position: absolute;
+	top: 8vh;
+	left: 40rpx;
+}
+/* 顶部余额卡片，横向居中，向上偏移 */
+.balance-card.data-v-3a0574b4 {
+	position: absolute;
+	bottom: -12%;
+	/* padding: 30rpx; */
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	width: 90%;
+	height: 300rpx;
+	background-color: #ffc600;
+	border-radius: 16px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+/* 中间白底板块 */
+.dashboard.data-v-3a0574b4 {
+	margin: 0 auto;
+	margin-top: 5vh;
+	padding: 16px;
+	background-color: #ffffff;
+	/* 纯白背景 */
+}
+/* 交易记录标题行 */
+.transactions-header.data-v-3a0574b4 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.transactions-header ._h2.data-v-3a0574b4 {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0;
+}
+.transactions-header ._a.data-v-3a0574b4 {
+	font-size: 14px;
+	color: #007bff;
+	text-decoration: none;
+}
+/* 列表重置 */
+.transaction-list.data-v-3a0574b4 {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+/* 单条交易项 */
+.transaction-item.data-v-3a0574b4 {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	margin-bottom: 12px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.transaction-item.data-v-3a0574b4:active {
+	background-color: #ececec;
+}
+/* 文本详情 */
+.transaction-details.data-v-3a0574b4 {
+	flex: 1;
+}
+.transaction-details .title.data-v-3a0574b4 {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0 0 4px;
+}
+.transaction-details .date.data-v-3a0574b4 {
+	font-size: 12px;
+	color: #888;
+	margin: 0;
+}
+/* 金额 */
+.transaction-amount.data-v-3a0574b4 {
+	font-size: 22px;
+
+	white-space: nowrap;
+	font-weight: 800;
+}
+.transaction-amount.income.data-v-3a0574b4 {
+	font-size: 24px;
+	color: #000;
+}
+.transaction-amount.expense.data-v-3a0574b4 {
+	color: #dc3545;
+	font-size: 15px;
+	font-weight: 600;
+}
+.data-v-3a0574b4 .u-icon__icon {
+	border: #aaaaaa 4rpx solid;
+	padding: 10rpx;
+	margin: 15rpx;
+	border-radius: 10rpx;
+}
+.data-v-3a0574b4 .u-icon--right {
+	flex-direction: column !important;
+	margin: 30rpx;
+}
+.popup-content.data-v-3a0574b4 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 20rpx;
+}
+.data-v-3a0574b4:deep(.u-popup__content) {
+	display: flex !important;
+	flex-direction: row !important;
+	justify-content: center !important;
+	align-items: center !important;
+}
+

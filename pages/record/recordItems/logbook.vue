@@ -44,7 +44,7 @@
 							备注： {{ item.note }}
 						</view>
 						<view class="image-container">
-							<u-album v-if="Array.isArray(item.note_pic)" :urls="item.note_pic || []" rowCount="3"
+							<u-album  v-if="Array.isArray(item.note_pic) && item.note_pic.length > 0" :urls="item.note_pic || []" rowCount="3"
 								multipleSize="80px" class="preview-image"></u-album>
 						</view>
 
@@ -87,9 +87,9 @@
 								<view class="note" style="color: #8d5515;" v-html="selectedLog.eventDetails"></view>
 								<view class="note">
 									备注： {{ selectedLog.note }}
-								</vie
+								</view>
 								<view class="image-container">
-									<u-album v-if="Array.isArray(selectedLog.note_pic )"
+									<u-album  v-if="Array.isArray(selectedLog.note_pic) && selectedLog.note_pic.length > 0"
 										:urls="selectedLog.note_pic || []" rowCount="3" multipleSize="80px"
 										class="preview-image"></u-album>
 								</view>
@@ -385,7 +385,7 @@
 			},
 			back() {
 				uni.switchTab({
-					url: '/pages/record/record'
+					url: '/pages/index/index'
 				});
 			}
 		}

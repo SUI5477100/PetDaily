@@ -36,7 +36,9 @@ view.data-v-55c89db1, scroll-view.data-v-55c89db1, swiper-item.data-v-55c89db1 {
 }
 .u-toolbar.data-v-55c89db1 {
   height: 42px;
+
   display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -58,4 +60,3 @@ view.data-v-55c89db1, scroll-view.data-v-55c89db1, swiper-item.data-v-55c89db1 {
   font-size: 15px;
   padding: 0 15px;
 }
-

@@ -69,4 +69,16 @@
 .record-book.data-v-5188b278:active {
   background-color: #eac34c;
 }
+.weixin.data-v-5188b278 {
+  width: 65%;
+  height: 100rpx;
+  border-radius: 100rpx;
+  background-color: #1ec700;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.weixin.data-v-5188b278:active {
+  background-color: #1eb600;
+}
 

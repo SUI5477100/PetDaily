@@ -18,7 +18,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.5.5",
+  "libVersion": "3.8.8",
   "appid": "wxe93f33a155dfe6a0",
   "projectname": "PetDaily",
   "condition": {
@@ -72,6 +72,46 @@
         {
           "name": "10.帖子详情",
           "pathName": "pages/pet/petPost",
+          "query": ""
+        },
+        {
+          "name": "10.帖子详情",
+          "pathName": "pages/pet/petPost",
+          "query": ""
+        },
+        {
+          "name": "11.智能体聊天",
+          "pathName": "pages/agent/agent",
+          "query": ""
+        },
+        {
+          "name": "12.记账本",
+          "pathName": "pages/ledger/ledger",
+          "query": ""
+        },
+        {
+          "name": "13.添加花销",
+          "pathName": "pages/addLedger/addLedger",
+          "query": ""
+        },
+        {
+          "name": "14.饼图",
+          "pathName": "pages/uCharts/uCharts",
+          "query": ""
+        },
+        {
+          "name": "15.我的帖子",
+          "pathName": "pages/pet/myPost",
+          "query": ""
+        },
+        {
+          "name": "16.聊天列表",
+          "pathName": "pages/chatList/chatList",
+          "query": ""
+        },
+        {
+          "name": "17.聊天",
+          "pathName": "pages/chat/chat",
           "query": ""
         }
       ]

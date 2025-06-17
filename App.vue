@@ -15,7 +15,9 @@
 <style lang="scss">
 	/*每个页面公共css */
 	// background-color: #ffeeac;
-	page{
+	page {
 		background-color: #fffce0 !important;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, sans-serif !important;
 	}
 </style>

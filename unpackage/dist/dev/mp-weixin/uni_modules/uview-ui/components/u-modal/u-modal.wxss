@@ -48,7 +48,9 @@ view.data-v-0156a215, scroll-view.data-v-0156a215, swiper-item.data-v-0156a215 {
 }
 .u-modal__content.data-v-0156a215 {
   padding: 12px 25px 25px 25px;
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
 }
@@ -58,7 +60,9 @@ view.data-v-0156a215, scroll-view.data-v-0156a215, swiper-item.data-v-0156a215 {
   flex: 1;
 }
 .u-modal__button-group.data-v-0156a215 {
+
   display: flex;
+
   flex-direction: row;
 }
 .u-modal__button-group--confirm-button.data-v-0156a215 {
@@ -67,7 +71,9 @@ view.data-v-0156a215, scroll-view.data-v-0156a215, swiper-item.data-v-0156a215 {
 }
 .u-modal__button-group__wrapper.data-v-0156a215 {
   flex: 1;
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -87,4 +93,3 @@ view.data-v-0156a215, scroll-view.data-v-0156a215, swiper-item.data-v-0156a215 {
   font-size: 16px;
   text-align: center;
 }
-

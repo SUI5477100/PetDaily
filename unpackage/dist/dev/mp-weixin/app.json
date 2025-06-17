@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/firstPage/firstPage",
+    "pages/index/index",
     "pages/master/master",
     "pages/record/record",
-    "pages/index/index",
     "pages/pet/pet",
     "pages/index/components/petInfo",
     "pages/record/components/circle",
@@ -25,7 +25,14 @@
     "pages/loginPage/loginPage",
     "pages/updateInfo/updateInfo",
     "pages/deletePet/deletePet",
-    "pages/pet/petPost"
+    "pages/pet/petPost",
+    "pages/agent/agent",
+    "pages/ledger/ledger",
+    "pages/addLedger/addLedger",
+    "pages/uCharts/uCharts",
+    "pages/pet/myPost",
+    "pages/chat/chat",
+    "pages/chatList/chatList"
   ],
   "subPackages": [],
   "window": {

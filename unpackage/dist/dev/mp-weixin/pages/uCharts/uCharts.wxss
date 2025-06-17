@@ -1,0 +1,205 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 请根据实际需求修改父元素尺寸，组件自动识别宽高 */
+.charts-box.data-v-47b1bb5c {
+	width: 100%;
+	min-height: 100vh;
+	/* background-color: #ffffff; */
+}
+.empty-state.data-v-47b1bb5c {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	color: #999;
+	font-size: 16px;
+}
+.empty-list.data-v-47b1bb5c {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px 0;
+	color: #999;
+	font-size: 14px;
+}
+/* 列表样式 */
+.dashboard.data-v-47b1bb5c {
+	margin: 0 auto;
+	padding: 16px;
+	/* background-color: #ffffff; */
+}
+.transactions-header.data-v-47b1bb5c {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.transactions-header ._h2.data-v-47b1bb5c {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0;
+}
+.transaction-list.data-v-47b1bb5c {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.transaction-item.data-v-47b1bb5c {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	margin-bottom: 12px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.transaction-item.data-v-47b1bb5c:active {
+	background-color: #ececec;
+}
+.transaction-details.data-v-47b1bb5c {
+	flex: 1;
+}
+.transaction-details .title.data-v-47b1bb5c {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0 0 4px;
+}
+.transaction-amount.data-v-47b1bb5c {
+	font-size: 22px;
+	white-space: nowrap;
+	font-weight: 800;
+}
+.transaction-amount.expense.data-v-47b1bb5c {
+	color: #dc3545;
+	font-size: 15px;
+	font-weight: 600;
+}
+.data-v-47b1bb5c .uni-navbar__header-container-inner {
+	align-items: flex-end !important;
+	margin-bottom: 20rpx;
+}
+.data-v-47b1bb5c .uni-navbar__header-btns-left {
+	align-items: flex-end !important;
+	margin-bottom: 20rpx;
+}
+.data-v-47b1bb5c .uni-navbar--border {
+	border-bottom-color: #fffce0 !important;
+}
+.data-v-47b1bb5c .uni-navbar__header {
+	background-color: #fffce0 !important;
+}
+

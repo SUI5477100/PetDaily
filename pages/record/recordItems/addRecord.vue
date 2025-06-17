@@ -168,7 +168,7 @@
 			},
 			// 上传图片
 			async upload() {
-			
+
 				// 重置
 				this.uploadedUrls = []
 				uni.showLoading({
@@ -257,7 +257,11 @@
 					...params,
 				});
 			},
-
+			backRecord() {
+				uni.redirectTo({
+					url: `/pages/record/recordItems/logbook`
+				});
+			},
 			// 添加记录接口
 			async saveRecord() {
 				if (this.selectPet.length === 0 || Object.keys(this.updatedValue).length === 0) {
@@ -271,14 +275,14 @@
 						event_type: this.updatedValue,
 						note: this.inputValue,
 						recorded_at: this.formattedTime,
-						note_pic:this.uploadedUrls
+						note_pic: this.uploadedUrls
 					})
 					this.sendToast('success', '添加成功(•̀ᴗ•́)و ̑̑');
 					// console.log(response)
 					if (response.status === 200) {
 						// 设置延迟，等toast显示完成后再跳转
 						setTimeout(() => {
-							this.back(); // 执行返回操作
+							this.backRecord(); // 执行返回操作
 						}, 400); // 这里设置了2秒的延迟，可以根据需要调整
 					}
 				} catch (err) {
@@ -457,17 +461,20 @@
 	.button-add:active {
 		background-color: #fff1b6;
 	}
-.m10 {
+
+	.m10 {
 		margin: 20rpx;
 	}
-		.button-text {
-			display: flex;
-			flex-direction: column;
-			// justify-content: space-between;
-			// align-items: center;
-			border-radius: 40rpx;
-			background-color: #fff
-		}
+
+	.button-text {
+		display: flex;
+		flex-direction: column;
+		// justify-content: space-between;
+		// align-items: center;
+		border-radius: 40rpx;
+		background-color: #fff
+	}
+
 	.w90 {
 		width: 90%;
 		margin-top: 30rpx;

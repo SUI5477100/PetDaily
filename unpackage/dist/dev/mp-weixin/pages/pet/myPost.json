@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-album": "/uni_modules/uview-ui/components/u-album/u-album",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

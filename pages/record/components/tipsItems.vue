@@ -7,25 +7,31 @@
 			</view>
 		</view>
 		<view class="record-items" v-for="(items, index) in iconList" :key="index" @click="toggleCheck(index)">
-			<view class="color"></view>
+			<view class="color" :style="{ backgroundColor: items.color }"></view>
 			<view class="items-left">
-				<view :class="{ 'strikethrough': items.isChecked }" class="text">{{ items.text }}</view>
-				<view class="text">{{ items.time }}</view>
+				<view :class="{ 'strikethrough': items.isChecked }" class="text">{{ items.description }}</view>
+				<view class="text">{{ items.remind_time }}</view>
 			</view>
 			<img :src="items.isChecked ? '../../../static/yuanfuxuankuang.png' : '../../../static/fuxuankuangkongyuan.png'"
 				@click="toggleCheck(index)" class="right-icon" />
 		</view>
-		<view class="fixed" @click="textPost">
+<view class="fixed" v-if="showTextPost" @click="textPost">
+</view>
 
-		</view>
 	</view>
 </template>
 <script>
+	import api from "../../../utils/api.js"
+	import dayjs from 'dayjs';
+	import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+	
+	dayjs.extend(isSameOrAfter)
 	export default {
 
 		data() {
 			return {
 				currentDate: '',
+				showTextPost: true,
 				colorList: [{
 						color: '#fff7b0',
 						text: '日常提醒'
@@ -48,31 +54,6 @@
 						text: '饮食',
 						isChecked: false
 					},
-					{
-						time: '8:00',
-						text: '喝水',
-						isChecked: false
-					},
-					{
-						time: '8:00',
-						text: '体重',
-						isChecked: false
-					},
-					{
-						time: '8:00',
-						text: '洗护',
-						isChecked: false
-					},
-					{
-						time: '8:00',
-						text: '尿便',
-						isChecked: false
-					},
-					{
-						time: '8:00',
-						text: '记事',
-						isChecked: false
-					}
 				]
 			};
 		},
@@ -82,21 +63,48 @@
 				default: () => ({})
 			}
 		},
-
+		onReady() {
+			this.getReminders()
+		},
 		watch: {
-			// 监听数据变化
-			calendarData(newVal) {
-				if (Object.keys(newVal).length) {
-					console.log('收到父组件传递的日历数据:', newVal.fulldate)
-					// 这里可以执行后续业务逻辑
-					this.currentDate = newVal.fulldate; // 更新 currentDate
-				}
-			}
+			  calendarData(newVal) {
+			    if (Object.keys(newVal).length) {
+			      this.currentDate = newVal.fulldate;
+			      const today = dayjs().format('YYYY-MM-DD');
+			      const selected = dayjs(this.currentDate).format('YYYY-MM-DD');
+				  
+			      this.showTextPost = dayjs(selected).isSameOrAfter(today); // 只显示未来和当天
+				  console.log(this.showTextPost,'999999')
+			      this.getReminders();
+			    }
+			  },
+			// // 监听数据变化
+			// calendarData(newVal) {
+			// 	if (Object.keys(newVal).length) {
+			// 		console.log('收到父组件传递的日历数据:', newVal.fulldate)
+			// 		// 这里可以执行后续业务逻辑
+			// 		this.currentDate = newVal.fulldate; // 更新 currentDate
+			// 		this.getReminders()
+			// 	}
+			// }
 		},
 
 		methods: {
+			async getReminders() {
+				try {
+					const response = await api.getReminders(this.currentDate)
+					this.iconList = response.data
+					console.log(this.iconList, '0000000000000')
+				} catch (err) {
+					console.log(err)
+					//TODO handle the exception
+				}
+			},
+			// getReminders(){
+			// 	console.log('9999999999999999')
+			// },
 			textPost() {
-				  const date = encodeURIComponent(this.currentDate);
+				const date = encodeURIComponent(this.currentDate);
 				uni.redirectTo({
 					url: `/pages/record/components/textPost?fulldate=${date}`
 				});

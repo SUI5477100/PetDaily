@@ -2,12 +2,11 @@
 	<view class="content">
 		<!-- https://www.serverzhu.com/petImg/wxLogin.png -->
 		<!-- https://www.serverzhu.com/petImg/loginIcon.png -->
-		<view class="input-container">
-			<view class="" style="width: 90%;">
+		<!-- <view class="input-container"> -->
+		<!-- 	<view class="" style="width: 90%;">
 				<u-subsection :list="listTitle" :current="current" activeColor="#f9a033" @change="sectionChange">
 				</u-subsection>
 
-				<!-- 只有当 current === 0 时，才显示输入框 -->
 				<view v-if="current === 0">
 					<uni-easyinput v-model="emailValue" placeholder="请输入邮箱" @input="input"></uni-easyinput>
 					<uni-easyinput v-model="passwordValue" placeholder="请输入密码" @input="inputPassword"></uni-easyinput>
@@ -23,16 +22,20 @@
 						确认
 					</view>
 				</view>
+			</view> -->
+
+		<!-- 这里是微信登录按钮，current === 0 时显示 -->
+		<view class="weixin" v-if="current === 0" style="" @click="handleWxLogin">
+			<u-icon size="36" name="weixin-fill" color="#fff"></u-icon>
+			<view class="" style="color: #fff;">
+				一键微信登陆
 			</view>
-
-			<!-- 这里是微信登录按钮，current === 0 时显示 -->
-			<view class="" v-if="current === 0" style="margin-top: 60rpx;" @click="handleWxLogin">
-				<view class="vx-login"></view>
-			</view>
-
-			<u-toast ref="uToast"></u-toast>
-
+			<!-- <view class="vx-login"></view> -->
 		</view>
+
+		<u-toast ref="uToast"></u-toast>
+
+		<!-- </view> -->
 
 	</view>
 	</view>
@@ -134,7 +137,7 @@
 								if (token) {
 									uni.setStorageSync('token', token);
 									uni.setStorageSync('openID', openid);
-									console.log('登录成功，Token:', token,openid);
+									console.log('登录成功，Token:', token, openid);
 									// this.getUserInfo()
 									this.goRegirect()
 								} else {
@@ -272,5 +275,19 @@
 
 	.record-book:active {
 		background-color: #eac34c;
+	}
+
+	.weixin {
+		width: 65%;
+		height: 100rpx;
+		border-radius: 100rpx;
+		background-color: #1ec700;
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+	}
+
+	.weixin:active {
+		background-color: #1eb600;
 	}
 </style>

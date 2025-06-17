@@ -21,7 +21,7 @@
 			</view>
 			<view class="m40 w230">
 				<view style="margin: 0rpx 20rpx;">
-					<input class="text-center" @input="updateFoodAmount" @click.stop v-model="inputValue"></input>
+					<input class="text-center" @input="updateFoodAmount" @click.stop v-model="inputValue">
 				</view>
 				<view style="margin-right: 20rpx;"> {{foodUnit}}</view>
 				<view> > </view>

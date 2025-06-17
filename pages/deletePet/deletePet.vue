@@ -6,14 +6,18 @@
 				删除宠物
 			</view>
 			<view class="uni-list">
+			<checkbox-group @change="checkboxChange">
+			  <label class="uni-list-cell uni-list-cell-pd" v-for="item in items" :key="item.id">
+			    <checkbox color="#FFCC33" :value="item.id.toString()" />
+			
+			    <view style="display: flex;align-items: center;" @click.stop="getPetIndex(item.id)">
+			      <img :src="item.pet_pic" class="pet-img" />
+			      <view>{{ item.name }}</view>
+			    </view>
+			  </label>
+			</checkbox-group>
 
-				<checkbox-group @change="checkboxChange">
-					<label class="uni-list-cell uni-list-cell-pd" v-for="item in items" :key="item.id">
-						<checkbox color="#FFCC33" :value="item.id" />
-						<img :src="item.pet_pic" class="pet-img" />
-						<view>{{item.name}}</view>
-					</label>
-				</checkbox-group>
+
 			</view>
 
 			<view class="saveBtn" @click="clickBtn">
@@ -26,9 +30,9 @@
 			<!-- <u-button @click="show = false" >打开</u-button> -->
 		</view>
 		<view class="empty-container" v-else>
-			
+
 			<img src="https://www.serverzhu.com/petImg/img_default_empty.png" style="width: 590rpx ;height: 481rpx;">
-<view class="" style=" color: #ffac5e; font-size: 36rpx;font-weight: 600;">
+			<view class="" style=" color: #ffac5e; font-size: 36rpx;font-weight: 600;">
 				还没有宠物哦 ( ˘･з･)
 			</view>
 		</view>
@@ -48,7 +52,7 @@
 				}, ],
 				show: false,
 				title: '删除宠物',
-				content: 'uView的目标是成为uni-app生态最优秀的UI框架'
+				content: ''
 			}
 		},
 		onReady() {
@@ -61,7 +65,18 @@
 					url: '/pages/master/master'
 				});
 			},
+			getPetIndex(id) {
+				console.log(id)
+				this.goUpdatePetPage(id)
+			},
+			goUpdatePetPage(id) {
+				console.log(id)
+				uni.redirectTo({
+					url: `../petInfo/petInfo?id=${id}`
+				});
+			},
 			checkboxChange(e) {
+				console.log('00000000000')
 				var items = this.items,
 					values = e.detail.value;
 				this.selectPet = values

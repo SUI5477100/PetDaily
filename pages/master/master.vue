@@ -20,7 +20,7 @@
 					</view>
 				</view>
 				<!-- 动态 -->
-				<view class="dynamic-box">
+				<!-- <view class="dynamic-box">
 					<view class="dynamic">
 						<view class="dynamic-count">
 							326
@@ -40,7 +40,7 @@
 							点赞
 						</view>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!-- 我的宠物 -->
@@ -100,13 +100,28 @@
 			</view>
 		</view>
 		<!-- 养宠小助手 -->
-		<view class="assistant">
+		<view class="assistant" @click="getMyPost">
+			<img src="https://www.serverzhu.com/petImg/tiezi.png" style="width: 60rpx;height: 60rpx;margin: 0rpx 20rpx;"
+				alt="" />
+			<view class="assistant-title">
+				我的帖子
+			</view>
+		</view>
+		<view class="assistant" @click="getMyPost">
+			<img src="https://pet-daily-zm.oss-cn-beijing.aliyuncs.com/petImg/%E8%AF%84%E8%AE%BA.png" style="width: 60rpx;height: 60rpx;margin: 0rpx 20rpx;"
+				alt="" />
+			<view class="assistant-title">
+				我的聊天
+			</view>
+		</view>
+		<view class="assistant" @click="chatgpt">
 			<img src="https://www.serverzhu.com/help.png" style="width: 60rpx;height: 60rpx;margin: 0rpx 20rpx;"
 				alt="" />
 			<view class="assistant-title">
 				养宠小助手
 			</view>
 		</view>
+
 		<!-- 客服中心 -->
 		<!-- <view class="assistant"> -->
 
@@ -157,6 +172,11 @@
 					url: '../updateInfo/updateInfo'
 				});
 			},
+			getMyPost(){
+				uni.redirectTo({
+					url: '/pages/pet/myPost'
+				});
+			},
 			goAddPetPage() {
 				// console.log('111111111')
 				uni.redirectTo({
@@ -173,6 +193,11 @@
 				console.log('9999')
 				uni.redirectTo({
 					url: `../deletePet/deletePet`
+				});
+			},
+			chatgpt(){
+				uni.redirectTo({
+					url: `/pages/agent/agent`
 				});
 			},
 			// 获取用户头像昵称
@@ -263,9 +288,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-weight: 600;
-		font-size: 36rpx;
-		height: 50%;
+		font-weight: 700;
+		font-size: 44rpx;
+		height: 100%;
 	}
 
 	.dynamic-box {

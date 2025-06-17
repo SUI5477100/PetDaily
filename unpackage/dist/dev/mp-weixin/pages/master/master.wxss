@@ -47,9 +47,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
-  font-size: 36rpx;
-  height: 50%;
+  font-weight: 700;
+  font-size: 44rpx;
+  height: 100%;
 }
 .dynamic-box.data-v-5acf08f4 {
   height: 25%;

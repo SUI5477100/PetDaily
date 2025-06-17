@@ -1,10 +1,19 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/firstPage/firstPage",
 			"style": {
 				"navigationStyle": "custom"
 			}
-		}, {
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom", //移除顶部标题导航栏
+				"disableScroll": true
+			}
+		},
+		{
 			"path": "pages/master/master",
 			"style": {
 				"navigationBarBackgroundColor": "#ffeeac",
@@ -14,7 +23,6 @@
 				// "navigationStyle": "custom"
 			}
 		},
-
 		{
 			"path": "pages/record/record",
 			"style": {
@@ -22,22 +30,11 @@
 			}
 		}, //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationStyle": "custom", //移除顶部标题导航栏
-				"disableScroll": true
-			}
-		},
-
-
-		{
 			"path": "pages/pet/pet",
 			"style": {
 				"navigationStyle": "custom"
 			}
 		},
-
-
 		{
 			"path": "pages/index/components/petInfo",
 			"style": {
@@ -72,8 +69,8 @@
 		{
 			"path": "pages/record/components/picturesTextPost",
 			"style": {
-			"navigationStyle": "custom",
-			"disableScroll": true
+				"navigationStyle": "custom",
+				"disableScroll": true
 			}
 		},
 		{
@@ -142,38 +139,90 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-		}, {
+		},
+		{
 			"path": "pages/loginPage/loginPage",
 			"style": {
-
 				"navigationStyle": "custom"
 			}
-
-		}, {
+		},
+		{
 			"path": "pages/updateInfo/updateInfo",
 			"style": {
 				"navigationStyle": "custom",
 				"disableScroll": true
 			}
-
-		}, {
+		},
+		{
 			"path": "pages/deletePet/deletePet",
 			"style": {
 				"navigationStyle": "custom"
 			}
-
-		}, {
+		},
+		{
 			"path": "pages/pet/petPost",
 			"style": {
-
 				"navigationStyle": "custom"
 			}
-
+		},
+		{
+			"path": "pages/agent/agent",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/ledger/ledger",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/addLedger/addLedger",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/uCharts/uCharts",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/pet/myPost",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/chatList/chatList",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#fffce0"
 	},
@@ -182,8 +231,8 @@
 		"selectedColor": "#ffa15e", // 选中时文字和图标颜色
 		"backgroundColor": "#ffffff", // Tab栏背景色
 		"borderStyle": "black", // Tab栏顶部边框颜色，可选值："black" | "white"
-
-		"list": [{
+		"list": [
+			{
 				"pagePath": "pages/index/index",
 				"text": "首页",
 				"iconPath": "static/tabbar/home.png",
@@ -212,7 +261,8 @@
 	"uniIdRouter": {},
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0,
-		"list": [{
+		"list": [
+			{
 				"name": "1.开屏页", //模式名称
 				"path": "pages/firstPage/firstPage", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
@@ -260,6 +310,46 @@
 			{
 				"name": "10.帖子详情",
 				"path": "pages/pet/petPost",
+				"query": ""
+			},
+			{
+				"name": "10.帖子详情",
+				"path": "pages/pet/petPost",
+				"query": ""
+			},
+			{
+				"name": "11.智能体聊天",
+				"path": "pages/agent/agent",
+				"query": ""
+			},
+			{
+				"name": "12.记账本",
+				"path": "pages/ledger/ledger",
+				"query": ""
+			},
+			{
+				"name": "13.添加花销",
+				"path": "pages/addLedger/addLedger",
+				"query": ""
+			},
+			{
+				"name": "14.饼图",
+				"path": "pages/uCharts/uCharts",
+				"query": ""
+			},
+			{
+				"name": "15.我的帖子",
+				"path": "pages/pet/myPost",
+				"query": ""
+			},
+			{
+				"name": "16.聊天列表",
+				"path": "pages/chatList/chatList",
+				"query": ""
+			},
+			{
+				"name": "17.聊天",
+				"path": "pages/chat/chat",
 				"query": ""
 			}
 		]

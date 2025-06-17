@@ -38,7 +38,9 @@ view.data-v-3732d7af, scroll-view.data-v-3732d7af, swiper-item.data-v-3732d7af {
   position: relative;
 }
 .u-tag.data-v-3732d7af {
+
   display: flex;
+
   flex-direction: row;
   align-items: center;
   border-style: solid;
@@ -176,7 +178,9 @@ view.data-v-3732d7af, scroll-view.data-v-3732d7af, swiper-item.data-v-3732d7af {
   right: 10px;
   border-radius: 100px;
   background-color: #C6C7CB;
+
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -195,4 +199,3 @@ view.data-v-3732d7af, scroll-view.data-v-3732d7af, swiper-item.data-v-3732d7af {
   width: 25px;
   height: 25px;
 }
-

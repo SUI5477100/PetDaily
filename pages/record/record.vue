@@ -25,9 +25,9 @@
 			<view v-show="activeSlot===2" class="record-items">
 				<tipsItems :calendarData="calendarData"></tipsItems>
 			</view>
-			<view v-if="activeSlot===1" class="record-book" @click="logbook">
+			<!-- <view v-if="activeSlot===1" class="record-book" @click="logbook">
 				小宠的记录本
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>

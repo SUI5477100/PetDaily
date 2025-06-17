@@ -36,9 +36,10 @@ view.data-v-15816aae, scroll-view.data-v-15816aae, swiper-item.data-v-15816aae {
 }
 .u-link.data-v-15816aae {
   line-height: 1;
+
   display: flex;
+
   flex-direction: row;
   flex-wrap: wrap;
   flex: 1;
 }
-

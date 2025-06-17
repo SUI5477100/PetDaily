@@ -43,7 +43,7 @@
 			</view>
 		</view>
 
-		<view class="button-text w90" @click="toggleRemind('bottom')">
+		<!-- <view class="button-text w90" @click="toggleRemind('bottom')">
 			<view style="margin-left: 20rpx;">重复</view>
 			<view class="center">
 				<view style="margin-right: 20rpx;">
@@ -51,7 +51,7 @@
 				</view>
 				>
 			</view>
-		</view>
+		</view> -->
 		<view class="button-add" @click="saveAll">
 			保存
 		</view>
@@ -91,7 +91,7 @@
 		<u-datetime-picker :show="show" v-model="time" mode="time" ref="popupTime" @confirm="closeTime"
 			@cancel="cancelTime"></u-datetime-picker>
 		<!-- 提醒弹框 -->
-		<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
+	<!-- 	<uni-popup ref="popupRemind" background-color="#fff" @change="change" :show="show">
 			<view class="popup-content">
 				<view style="display: flex;justify-content: space-between; align-items: center;">
 					<uni-section title="重复" type="line"></uni-section>
@@ -101,7 +101,7 @@
 				</view>
 				<uni-indexed-list :options="list" :show-select="true" @click="bindClick" />
 			</view>
-		</uni-popup>
+		</uni-popup> -->
 
 	</view>
 </template>
@@ -239,10 +239,10 @@
 				this.$refs.popup.open(type)
 			},
 			// 重复弹框
-			toggleRemind(type) {
-				this.type = type
-				this.$refs.popupRemind.open(type)
-			},
+			// toggleRemind(type) {
+			// 	this.type = type
+			// 	this.$refs.popupRemind.open(type)
+			// },
 			// 重复天数转换
 			bindClick(e) {
 				console.log('点击item，返回数据' + JSON.stringify(e));

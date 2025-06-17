@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="title">
-			<view>hi 铲屎官</view>
+			<view style="font-weight: 600;font-size: 40rpx;margin-bottom: 10rpx;">hi 铲屎官</view>
 			<view>欢迎来到宠日迹</view>
 		</view>
 		<!-- 宠物信息 -->
@@ -11,15 +11,15 @@
 			<!-- 记事本-具体详情 -->
 			<view class="detail-left">
 				<view class="detail-left-y">
-					<view class="detail-text">● 喂饭</view>
-					<view class="detail-text">● 喂饭</view>
+					<view class="detail-text">【每日Tips】驱虫分为体内和体外两种。体内驱虫建议每3个月一次，体外驱虫视环境和季节而定，夏季频率可适当提高。</view>
+					<!-- <view class="detail-text">● 喂饭</view> -->
 				</view>
 				<img class="corner-image" src="https://www.serverzhu.com/petImg/clouds.png" alt="" />
 			</view>
 			<view class="detail-right">
 				<!-- 记录 -->
-				<view class="record">
-					<view class="record-left">
+				<view class="record"  @click="recordPage">
+					<view class="record-left" >
 						<view class="record-title">
 							记录本
 						</view>
@@ -30,13 +30,13 @@
 					<img src="https://www.serverzhu.com/petImg/recordPet.png" style="width: 44%;" class="record-right" />
 				</view>
 				<!-- 提醒 -->
-				<view class="record">
+				<view class="record" @click="goLedger">
 					<view class="record-left">
 						<view class="record-title">
-							提醒
+							花销
 						</view>
 						<view class="record-text">
-							更好的照顾小宠
+							更好的记录消费
 						</view>
 					</view>
 					<img src="https://www.serverzhu.com/petImg/tips.png" style="width: 38%;" class="record-right" />
@@ -76,13 +76,24 @@
 			return {
 				// title: 'Hello',
 				// petDetail: null
-				showInfo: 1 //判断是否添加宠物了
+				// showInfo: 1 //判断是否添加宠物了
 			};
 		},
 		onLoad() {
 			// this.fetchPetDetail();
 		},
 		methods: {
+			recordPage() {
+				console.log('9999')
+				uni.redirectTo({
+					url: `/pages/record/recordItems/logbook`
+				});
+			},
+			goLedger(){
+				uni.redirectTo({
+					url: `/pages/ledger/ledger`
+				});
+			}
 			// fetchPetDetail() {
 			// 	api.getPetDetail()
 			// 		.then(data => {

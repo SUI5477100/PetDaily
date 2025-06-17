@@ -35,11 +35,15 @@ view.data-v-02546599, scroll-view.data-v-02546599, swiper-item.data-v-02546599 {
   align-content: flex-start;
 }
 .u-album.data-v-02546599 {
+
   display: flex;
+
   flex-direction: column;
 }
 .u-album__row.data-v-02546599 {
+
   display: flex;
+
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -53,9 +57,10 @@ view.data-v-02546599, scroll-view.data-v-02546599, swiper-item.data-v-02546599 {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-
